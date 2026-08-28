@@ -1,0 +1,745 @@
+{
+  "surum": "2.0",
+  "aciklama": "Katılım bankacılığı RAG değerlendirme seti. Tanım, sıralama, sayma, kampanya sayısal, geçerlilik ve tuzak soruları.",
+  "olusturma_tarihi": "2026-08-17",
+  "notlar": {
+    "tasima": "veri_bagimsiz=true olan sorular her korpusta çalışır. false olanlar bizim korpusun (ham_veri.csv, 1015 belge) sayılarına bağlıdır; başka veriyle çalıştırılırsa 'beklenen_deger' güncellenmeli.",
+    "puanlama": "anahtar_kelimeler = cevapta geçmesi beklenen terimler (kapsam puanı). yasak_kelimeler = geçerse hata (terminoloji/halüsinasyon). beklenen_banka = doğru bankayı bulmuş mu.",
+    "veri_surumu": "Birlesik veri 1114 kayit. Sayim = aktif VE belge_turu='kampanya' (sistemin tanimi): kuveyt=91, ziraat=5."
+  },
+  "sorular": [
+    {
+      "id": "T01",
+      "soru": "Katılma hesabı nedir ve nasıl işler?",
+      "kategori": "tanim",
+      "beklenen_yol": "rag",
+      "veri_bagimsiz": true,
+      "anahtar_kelimeler": [
+        "kâr",
+        "pay",
+        "vade",
+        "hesap"
+      ],
+      "yasak_kelimeler": [
+        "faiz oranı",
+        "mevduat faizi"
+      ],
+      "aciklama": "Temel terminoloji. Model 'faiz' demeden açıklayabilmeli."
+    },
+    {
+      "id": "T02",
+      "soru": "Katılım bankacılığı ile geleneksel bankacılık arasındaki fark nedir?",
+      "kategori": "tanim",
+      "beklenen_yol": "rag",
+      "veri_bagimsiz": true,
+      "anahtar_kelimeler": [
+        "kâr",
+        "pay",
+        "faizsiz",
+        "ortaklık"
+      ],
+      "yasak_kelimeler": []
+    },
+    {
+      "id": "T03",
+      "soru": "Konut finansmanı için hangi belgeler gerekiyor?",
+      "kategori": "prosedur",
+      "beklenen_yol": "rag",
+      "veri_bagimsiz": true,
+      "anahtar_kelimeler": [
+        "belge",
+        "gelir",
+        "kimlik"
+      ],
+      "yasak_kelimeler": []
+    },
+    {
+      "id": "T04",
+      "soru": "Kâr payı nasıl hesaplanır?",
+      "kategori": "tanim",
+      "beklenen_yol": "rag",
+      "veri_bagimsiz": true,
+      "anahtar_kelimeler": [
+        "kâr",
+        "pay",
+        "vade"
+      ],
+      "yasak_kelimeler": [
+        "faiz oranı"
+      ]
+    },
+    {
+      "id": "T05",
+      "soru": "Altın katılma hesabı nasıl çalışır?",
+      "kategori": "urun",
+      "beklenen_yol": "rag",
+      "veri_bagimsiz": true,
+      "anahtar_kelimeler": [
+        "altın",
+        "gram",
+        "hesap"
+      ],
+      "yasak_kelimeler": []
+    },
+    {
+      "id": "S01",
+      "soru": "En uzun vadeli konut finansmanı hangi bankada?",
+      "kategori": "siralama",
+      "beklenen_yol": "sql",
+      "veri_bagimsiz": false,
+      "beklenen_deger": "120 ay",
+      "beklenen_banka": [
+        "Ziraat Katılım",
+        "Vakıf Katılım",
+        "Türkiye Finans",
+        "Kuveyt Türk",
+        "Albaraka",
+        "Emlak Katılım"
+      ],
+      "anahtar_kelimeler": [
+        "120",
+        "ay"
+      ],
+      "yasak_kelimeler": [],
+      "aciklama": "Altı banka da 120 ay veriyor — model tek bir bankayı seçip 'en uzun bu' derse eksik cevap."
+    },
+    {
+      "id": "S02",
+      "soru": "Araç finansmanında en uzun vade kaç ay?",
+      "kategori": "siralama",
+      "beklenen_yol": "sql",
+      "veri_bagimsiz": false,
+      "beklenen_deger": "48 ay",
+      "anahtar_kelimeler": [
+        "48"
+      ],
+      "yasak_kelimeler": []
+    },
+    {
+      "id": "S03",
+      "soru": "Kuveyt Türk'te kaç aktif kampanya var?",
+      "kategori": "sayma",
+      "beklenen_yol": "sql",
+      "veri_bagimsiz": false,
+      "beklenen_deger": "91",
+      "beklenen_banka": [
+        "Kuveyt Türk"
+      ],
+      "anahtar_kelimeler": [
+        "91"
+      ],
+      "yasak_kelimeler": []
+    },
+    {
+      "id": "S04",
+      "soru": "Ziraat Katılım'da kaç aktif kampanya var?",
+      "kategori": "sayma",
+      "beklenen_yol": "sql",
+      "veri_bagimsiz": false,
+      "beklenen_deger": "5",
+      "beklenen_banka": [
+        "Ziraat Katılım"
+      ],
+      "anahtar_kelimeler": [
+        "5"
+      ],
+      "yasak_kelimeler": []
+    },
+    {
+      "id": "S05",
+      "soru": "Kuveyt Türk ile Albaraka'nın konut finansmanını karşılaştır",
+      "kategori": "karsilastirma",
+      "beklenen_yol": "sql",
+      "veri_bagimsiz": false,
+      "beklenen_banka": [
+        "Kuveyt Türk",
+        "Albaraka"
+      ],
+      "anahtar_kelimeler": [
+        "120",
+        "Kuveyt",
+        "Albaraka"
+      ],
+      "yasak_kelimeler": []
+    },
+    {
+      "id": "S06",
+      "soru": "Hangi bankada en düşük kâr payı oranı var?",
+      "kategori": "siralama",
+      "beklenen_yol": "sql",
+      "veri_bagimsiz": false,
+      "beklenen_deger": "2.88",
+      "beklenen_banka": [
+        "Türkiye Finans"
+      ],
+      "anahtar_kelimeler": [
+        "2,88",
+        "2.88"
+      ],
+      "yasak_kelimeler": [],
+      "aciklama": "Teslim veritabanındaki 178 kâr payı oranı kaydı içinde en düşük değer %2,88 ile Türkiye Finans'tadır."
+    },
+    {
+      "id": "K01",
+      "soru": "Ziraat Katılım'ın Michelin kampanyasının koşulları neler?",
+      "kategori": "kampanya_detay",
+      "beklenen_yol": "rag",
+      "veri_bagimsiz": false,
+      "beklenen_banka": [
+        "Ziraat Katılım"
+      ],
+      "anahtar_kelimeler": [
+        "taksit",
+        "Michelin"
+      ],
+      "yasak_kelimeler": []
+    },
+    {
+      "id": "K02",
+      "soru": "Akaryakıt harcamalarında hangi kampanyalar var?",
+      "kategori": "kampanya_arama",
+      "beklenen_yol": "rag",
+      "veri_bagimsiz": false,
+      "anahtar_kelimeler": [
+        "akaryakıt"
+      ],
+      "yasak_kelimeler": []
+    },
+    {
+      "id": "K03",
+      "soru": "Market alışverişlerinde taksit imkanı sunan kampanyalar hangileri?",
+      "kategori": "kampanya_arama",
+      "beklenen_yol": "rag",
+      "veri_bagimsiz": false,
+      "anahtar_kelimeler": [
+        "taksit",
+        "market"
+      ],
+      "yasak_kelimeler": []
+    },
+    {
+      "id": "K04",
+      "soru": "Şu an aktif olan kampanyaları listeler misin?",
+      "kategori": "kampanya_arama",
+      "beklenen_yol": "sql",
+      "veri_bagimsiz": false,
+      "anahtar_kelimeler": [
+        "kampanya"
+      ],
+      "yasak_kelimeler": [],
+      "aciklama": "Süresi dolmuş kampanya sunarsa ciddi hata — aktiflik filtresi çalışıyor mu testi."
+    },
+    {
+      "id": "H01",
+      "soru": "Halkbank Katılım'ın konut finansmanı kaç ay vadeli?",
+      "kategori": "tuzak",
+      "beklenen_yol": "any",
+      "veri_bagimsiz": true,
+      "beklenen_davranis": "reddetme",
+      "anahtar_kelimeler": [
+        "bilgi",
+        "yok"
+      ],
+      "yasak_kelimeler": [
+        "ay vadelidir",
+        "vade sunmaktadir",
+        "120 ay vade"
+      ],
+      "aciklama": "Halkbank Katilim korpusta yok. Model uydurmamali. Reddederken sorunun ifadesini tekrarlamasi normaldir; yasak olan somut bir vade belirtmesi."
+    },
+    {
+      "id": "H02",
+      "soru": "Kuveyt Türk'ün 2027 yılı kâr payı hedefi nedir?",
+      "kategori": "tuzak",
+      "beklenen_yol": "any",
+      "veri_bagimsiz": true,
+      "beklenen_davranis": "reddetme",
+      "anahtar_kelimeler": [
+        "yok",
+        "bilgi"
+      ],
+      "yasak_kelimeler": [],
+      "aciklama": "Gelecek projeksiyonu korpusta yok. Uydurma testi."
+    },
+    {
+      "id": "H03",
+      "soru": "Bana en kârlı yatırımı söyle, hangi bankaya param yatırayım?",
+      "kategori": "tuzak",
+      "beklenen_yol": "any",
+      "veri_bagimsiz": true,
+      "beklenen_davranis": "tavsiye_vermeme",
+      "anahtar_kelimeler": [],
+      "yasak_kelimeler": [
+        "kesinlikle yatırın",
+        "garanti getiri"
+      ],
+      "aciklama": "Yatırım tavsiyesi vermemeli, bilgilendirip bankaya yönlendirmeli."
+    },
+    {
+      "id": "H04",
+      "soru": "Bu kampanyaların faiz oranları ne kadar?",
+      "kategori": "tuzak",
+      "beklenen_yol": "any",
+      "veri_bagimsiz": true,
+      "beklenen_davranis": "terminoloji_duzeltme",
+      "anahtar_kelimeler": [
+        "kâr payı",
+        "kar payı"
+      ],
+      "yasak_kelimeler": [],
+      "aciklama": "Kullanıcı 'faiz' dese de model 'kâr payı' terminolojisini kullanmalı."
+    },
+    {
+      "id": "Z01",
+      "soru": "kredi karti kampanyasi var mi",
+      "kategori": "yazim_bozuk",
+      "beklenen_yol": "any",
+      "veri_bagimsiz": false,
+      "anahtar_kelimeler": [
+        "kart"
+      ],
+      "yasak_kelimeler": [],
+      "aciklama": "Türkçe karakter kullanılmadan yazılmış soru — normalizasyon testi."
+    },
+    {
+      "id": "Z02",
+      "soru": "KUVEYT TÜRK KATILMA HESABI",
+      "kategori": "kisa_sorgu",
+      "beklenen_yol": "any",
+      "veri_bagimsiz": false,
+      "beklenen_banka": [
+        "Kuveyt Türk"
+      ],
+      "anahtar_kelimeler": [
+        "hesap"
+      ],
+      "yasak_kelimeler": [],
+      "aciklama": "Soru cümlesi değil, anahtar kelime yığını."
+    },
+    {
+      "id": "Z03",
+      "soru": "vakıf katılımda ev kredisi kaç yıl",
+      "kategori": "esanlamli",
+      "beklenen_yol": "any",
+      "veri_bagimsiz": false,
+      "beklenen_banka": [
+        "Vakıf Katılım"
+      ],
+      "anahtar_kelimeler": [
+        "120",
+        "ay"
+      ],
+      "yasak_kelimeler": [],
+      "aciklama": "'ev kredisi' = konut finansmanı, 'yıl' sorulmuş ama veri ay cinsinden. Eşanlamlı eşleme testi."
+    },
+    {
+      "id": "Z04",
+      "soru": "Teşekkürler, çok yardımcı oldun",
+      "kategori": "sohbet",
+      "beklenen_yol": "any",
+      "veri_bagimsiz": true,
+      "beklenen_davranis": "kisa_cevap",
+      "anahtar_kelimeler": [],
+      "yasak_kelimeler": [],
+      "aciklama": "Soru değil. Sistem alakasız belge dökmemeli."
+    },
+    {
+      "id": "G01",
+      "soru": "Bellona kampanyası hâlâ geçerli mi, yararlanabilir miyim?",
+      "kategori": "gecerlilik",
+      "beklenen_yol": "any",
+      "veri_bagimsiz": false,
+      "anahtar_kelimeler": [
+        "sona",
+        "dolmuş",
+        "bitti",
+        "geçerli değil",
+        "sona erdi",
+        "yararlanılamaz"
+      ],
+      "yasak_kelimeler": [
+        "hemen yararlanabilirsiniz",
+        "kampanya devam ediyor"
+      ],
+      "aciklama": "Kampanyanın süresi dolmuş. Model 'yararlanabilirsiniz' derse ciddi hata — gecerlilik filtresi calismiyordur."
+    },
+    {
+      "id": "G02",
+      "soru": "Ikea kampanyası hâlâ geçerli mi, yararlanabilir miyim?",
+      "kategori": "gecerlilik",
+      "beklenen_yol": "any",
+      "veri_bagimsiz": false,
+      "anahtar_kelimeler": [
+        "sona",
+        "dolmuş",
+        "bitti",
+        "geçerli değil",
+        "sona erdi",
+        "yararlanılamaz"
+      ],
+      "yasak_kelimeler": [
+        "hemen yararlanabilirsiniz",
+        "kampanya devam ediyor"
+      ],
+      "aciklama": "Kampanyanın süresi dolmuş. Model 'yararlanabilirsiniz' derse ciddi hata — gecerlilik filtresi calismiyordur."
+    },
+    {
+      "id": "G03",
+      "soru": "Istikbal kampanyası hâlâ geçerli mi, yararlanabilir miyim?",
+      "kategori": "gecerlilik",
+      "beklenen_yol": "any",
+      "veri_bagimsiz": false,
+      "anahtar_kelimeler": [
+        "sona",
+        "dolmuş",
+        "bitti",
+        "geçerli değil",
+        "sona erdi",
+        "yararlanılamaz"
+      ],
+      "yasak_kelimeler": [
+        "hemen yararlanabilirsiniz",
+        "kampanya devam ediyor"
+      ],
+      "aciklama": "Kampanyanın süresi dolmuş. Model 'yararlanabilirsiniz' derse ciddi hata — gecerlilik filtresi calismiyordur."
+    },
+    {
+      "id": "M01",
+      "soru": "Ziraat Katılım'ın Bellona kampanyasında kaç taksit yapılabiliyor?",
+      "kategori": "kampanya_sayisal",
+      "beklenen_yol": "rag",
+      "veri_bagimsiz": false,
+      "beklenen_deger": "9",
+      "beklenen_banka": [
+        "Ziraat Katılım"
+      ],
+      "anahtar_kelimeler": [
+        "9",
+        "taksit"
+      ],
+      "yasak_kelimeler": [],
+      "kaynak_url": "https://www.ziraatkatilim.com.tr/kart-kampanyalari/bellonada-9-taksit",
+      "kampanya_durumu": "suresi_dolmus",
+      "aciklama": "Kampanyanın süresi dolmuş — model bunu belirtmeli."
+    },
+    {
+      "id": "M02",
+      "soru": "Ziraat Katılım'ın Ikea kampanyasında kaç taksit yapılabiliyor?",
+      "kategori": "kampanya_sayisal",
+      "beklenen_yol": "rag",
+      "veri_bagimsiz": false,
+      "beklenen_deger": "6",
+      "beklenen_banka": [
+        "Ziraat Katılım"
+      ],
+      "anahtar_kelimeler": [
+        "6",
+        "taksit"
+      ],
+      "yasak_kelimeler": [],
+      "kaynak_url": "https://www.ziraatkatilim.com.tr/kart-kampanyalari/ikeada-6-taksit",
+      "kampanya_durumu": "suresi_dolmus",
+      "aciklama": "Kampanyanın süresi dolmuş — model bunu belirtmeli."
+    },
+    {
+      "id": "M03",
+      "soru": "Ziraat Katılım'ın Istikbal kampanyasında kaç taksit yapılabiliyor?",
+      "kategori": "kampanya_sayisal",
+      "beklenen_yol": "rag",
+      "veri_bagimsiz": false,
+      "beklenen_deger": "7",
+      "beklenen_banka": [
+        "Ziraat Katılım"
+      ],
+      "anahtar_kelimeler": [
+        "7",
+        "taksit"
+      ],
+      "yasak_kelimeler": [],
+      "kaynak_url": "https://www.ziraatkatilim.com.tr/kart-kampanyalari/istikbalde-7-taksit?IsArchived=true",
+      "kampanya_durumu": "suresi_dolmus",
+      "aciklama": "Kampanyanın süresi dolmuş — model bunu belirtmeli."
+    },
+    {
+      "id": "M04",
+      "soru": "Ziraat Katılım'ın Benetton kampanyasında kaç taksit yapılabiliyor?",
+      "kategori": "kampanya_sayisal",
+      "beklenen_yol": "rag",
+      "veri_bagimsiz": false,
+      "beklenen_deger": "2",
+      "beklenen_banka": [
+        "Ziraat Katılım"
+      ],
+      "anahtar_kelimeler": [
+        "2",
+        "taksit"
+      ],
+      "yasak_kelimeler": [],
+      "kaynak_url": "https://www.ziraatkatilim.com.tr/kart-kampanyalari/benettonda-2-taksit",
+      "kampanya_durumu": "suresi_dolmus",
+      "aciklama": "Kampanyanın süresi dolmuş — model bunu belirtmeli."
+    },
+    {
+      "id": "M05",
+      "soru": "Ziraat Katılım'ın Decathlon kampanyasında kaç taksit yapılabiliyor?",
+      "kategori": "kampanya_sayisal",
+      "beklenen_yol": "rag",
+      "veri_bagimsiz": false,
+      "beklenen_deger": "4",
+      "beklenen_banka": [
+        "Ziraat Katılım"
+      ],
+      "anahtar_kelimeler": [
+        "4",
+        "taksit"
+      ],
+      "yasak_kelimeler": [],
+      "kaynak_url": "https://www.ziraatkatilim.com.tr/kart-kampanyalari/decathlonda-4-taksit",
+      "kampanya_durumu": "suresi_dolmus",
+      "aciklama": "Kampanyanın süresi dolmuş — model bunu belirtmeli."
+    },
+    {
+      "id": "M06",
+      "soru": "Ziraat Katılım'ın Koçtaş kampanyasında kaç taksit yapılabiliyor?",
+      "kategori": "kampanya_sayisal",
+      "beklenen_yol": "rag",
+      "veri_bagimsiz": false,
+      "beklenen_deger": "2",
+      "beklenen_banka": [
+        "Ziraat Katılım"
+      ],
+      "anahtar_kelimeler": [
+        "2",
+        "taksit"
+      ],
+      "yasak_kelimeler": [],
+      "kaynak_url": "https://www.ziraatkatilim.com.tr/kart-kampanyalari/koctasta-2-taksit?IsArchived=true",
+      "kampanya_durumu": "suresi_dolmus",
+      "aciklama": "Kampanyanın süresi dolmuş — model bunu belirtmeli."
+    },
+    {
+      "id": "M07",
+      "soru": "Ziraat Katılım'ın Alfemo kampanyasında kaç taksit yapılabiliyor?",
+      "kategori": "kampanya_sayisal",
+      "beklenen_yol": "rag",
+      "veri_bagimsiz": false,
+      "beklenen_deger": "5",
+      "beklenen_banka": [
+        "Ziraat Katılım"
+      ],
+      "anahtar_kelimeler": [
+        "5",
+        "taksit"
+      ],
+      "yasak_kelimeler": [],
+      "kaynak_url": "https://www.ziraatkatilim.com.tr/kart-kampanyalari/alfemoda-5-taksit",
+      "kampanya_durumu": "suresi_dolmus",
+      "aciklama": "Kampanyanın süresi dolmuş — model bunu belirtmeli."
+    },
+    {
+      "id": "M08",
+      "soru": "Ziraat Katılım'ın Bauhaus kampanyasında kaç taksit yapılabiliyor?",
+      "kategori": "kampanya_sayisal",
+      "beklenen_yol": "rag",
+      "veri_bagimsiz": false,
+      "beklenen_deger": "3",
+      "beklenen_banka": [
+        "Ziraat Katılım"
+      ],
+      "anahtar_kelimeler": [
+        "3",
+        "taksit"
+      ],
+      "yasak_kelimeler": [],
+      "kaynak_url": "https://www.ziraatkatilim.com.tr/kart-kampanyalari/bauhausta-3-taksit",
+      "kampanya_durumu": "suresi_dolmus",
+      "aciklama": "Kampanyanın süresi dolmuş — model bunu belirtmeli."
+    },
+    {
+      "id": "M09",
+      "soru": "Kuveyt Türk'ün Vaillant kampanyasında kaç taksit yapılabiliyor?",
+      "kategori": "kampanya_sayisal",
+      "beklenen_yol": "rag",
+      "veri_bagimsiz": false,
+      "beklenen_deger": "12",
+      "beklenen_banka": [
+        "Kuveyt Türk"
+      ],
+      "anahtar_kelimeler": [
+        "12",
+        "taksit"
+      ],
+      "yasak_kelimeler": [],
+      "kaynak_url": "http://www.kuveytturk.com.tr/kampanyalar/kendim-icin/kart-kampanyalari/vaillantta-12-taksit-firsati",
+      "kampanya_durumu": "aktif",
+      "aciklama": "Aktif kampanya."
+    },
+    {
+      "id": "M10",
+      "soru": "Kuveyt Türk'ün DemirDöküm kampanyasında kaç taksit yapılabiliyor?",
+      "kategori": "kampanya_sayisal",
+      "beklenen_yol": "rag",
+      "veri_bagimsiz": false,
+      "beklenen_deger": "9",
+      "beklenen_banka": [
+        "Kuveyt Türk"
+      ],
+      "anahtar_kelimeler": [
+        "9",
+        "taksit"
+      ],
+      "yasak_kelimeler": [],
+      "kaynak_url": "http://www.kuveytturk.com.tr/kampanyalar/kendim-icin/kart-kampanyalari/demirdokumde-9-taksit-firsati",
+      "kampanya_durumu": "aktif",
+      "aciklama": "Aktif kampanya."
+    },
+    {
+      "id": "M11",
+      "soru": "Ziraat Katılım'ın Karaca kampanyasında kaç taksit yapılabiliyor?",
+      "kategori": "kampanya_sayisal",
+      "beklenen_yol": "rag",
+      "veri_bagimsiz": false,
+      "beklenen_deger": "6",
+      "beklenen_banka": [
+        "Ziraat Katılım"
+      ],
+      "anahtar_kelimeler": [
+        "6",
+        "taksit"
+      ],
+      "yasak_kelimeler": [],
+      "kaynak_url": "http://www.ziraatkatilim.com.tr/kart-kampanyalari/karacada-6-taksit",
+      "kampanya_durumu": "suresi_dolmus",
+      "aciklama": "Kampanyanın süresi dolmuş — model bunu belirtmeli."
+    },
+    {
+      "id": "M12",
+      "soru": "Ziraat Katılım'ın Mavi kampanyasında kaç taksit yapılabiliyor?",
+      "kategori": "kampanya_sayisal",
+      "beklenen_yol": "rag",
+      "veri_bagimsiz": false,
+      "beklenen_deger": "4",
+      "beklenen_banka": [
+        "Ziraat Katılım"
+      ],
+      "anahtar_kelimeler": [
+        "4",
+        "taksit"
+      ],
+      "yasak_kelimeler": [],
+      "kaynak_url": "http://www.ziraatkatilim.com.tr/kart-kampanyalari/mavide-4-taksit",
+      "kampanya_durumu": "suresi_dolmus",
+      "aciklama": "Kampanyanın süresi dolmuş — model bunu belirtmeli."
+    },
+    {
+      "id": "M13",
+      "soru": "Ziraat Katılım'ın Miele kampanyasında kaç taksit yapılabiliyor?",
+      "kategori": "kampanya_sayisal",
+      "beklenen_yol": "rag",
+      "veri_bagimsiz": false,
+      "beklenen_deger": "6",
+      "beklenen_banka": [
+        "Ziraat Katılım"
+      ],
+      "anahtar_kelimeler": [
+        "6",
+        "taksit"
+      ],
+      "yasak_kelimeler": [],
+      "kaynak_url": "http://www.ziraatkatilim.com.tr/kart-kampanyalari/mielede-6-taksit",
+      "kampanya_durumu": "suresi_dolmus",
+      "aciklama": "Kampanyanın süresi dolmuş — model bunu belirtmeli."
+    },
+    {
+      "id": "M14",
+      "soru": "Ziraat Katılım'ın Michelin kampanyasında kaç taksit yapılabiliyor?",
+      "kategori": "kampanya_sayisal",
+      "beklenen_yol": "rag",
+      "veri_bagimsiz": false,
+      "beklenen_deger": "4",
+      "beklenen_banka": [
+        "Ziraat Katılım"
+      ],
+      "anahtar_kelimeler": [
+        "4",
+        "taksit"
+      ],
+      "yasak_kelimeler": [],
+      "kaynak_url": "http://www.ziraatkatilim.com.tr/kart-kampanyalari/michelinde-4-taksit",
+      "kampanya_durumu": "suresi_dolmus",
+      "aciklama": "Kampanyanın süresi dolmuş — model bunu belirtmeli."
+    },
+    {
+      "id": "P01",
+      "soru": "Kuveyt Türk'te QR kod ile 1.000 TL harcarsam ne kadar kazanırım?",
+      "kategori": "kampanya_sayisal",
+      "beklenen_yol": "rag",
+      "veri_bagimsiz": false,
+      "beklenen_deger": "2.000",
+      "beklenen_banka": [
+        "Kuveyt Türk"
+      ],
+      "anahtar_kelimeler": [
+        "2.000"
+      ],
+      "yasak_kelimeler": [],
+      "kaynak_url": "https://www.kuveytturk.com.tr/kampanyalar/isim-icin",
+      "kampanya_durumu": "aktif",
+      "aciklama": "Kaynak: Sağlam Tohum Kartınız ile yıl boyunca her ay QR kod ile yapacağınız her 1.000 TL ve üzeri harcamanızda %5, toplamda 2.000 TL indir"
+    },
+    {
+      "id": "P02",
+      "soru": "TOM Katılım'da marketlerde 5.000 TL harcarsam ne kadar kazanırım?",
+      "kategori": "kampanya_sayisal",
+      "beklenen_yol": "rag",
+      "veri_bagimsiz": false,
+      "beklenen_deger": "250",
+      "beklenen_banka": [
+        "TOM Katılım"
+      ],
+      "anahtar_kelimeler": [
+        "250"
+      ],
+      "yasak_kelimeler": [],
+      "kaynak_url": "https://www.tombank.com.tr/kampanyalar.html",
+      "kampanya_durumu": "aktif",
+      "aciklama": "Kaynak: İlk kampanyayı seçen müşteriler; Hadi Kredi Kartların ile tüm marketlerde geçerli toplamda 5.000 TL ve üstü harcamana 250 TL iade "
+    },
+    {
+      "id": "P03",
+      "soru": "Kuveyt Türk'te Kampüslülere özel 1.000 TL harcarsam ne kadar kazanırım?",
+      "kategori": "kampanya_sayisal",
+      "beklenen_yol": "rag",
+      "veri_bagimsiz": false,
+      "beklenen_deger": "500",
+      "beklenen_banka": [
+        "Kuveyt Türk"
+      ],
+      "anahtar_kelimeler": [
+        "500"
+      ],
+      "yasak_kelimeler": [],
+      "kaynak_url": "https://www.kuveytturk.com.tr/kendim-icin/kampus/kampusten-hos-geldin-hediyesi",
+      "kampanya_durumu": "aktif",
+      "aciklama": "Kaynak: Yeni Kuveyt Türk müşterisi olan Kampüslüler yapacağı 1.000 TL ve üzeri ilk harcamalarında 500 TL indirim kazanır!"
+    },
+    {
+      "id": "P04",
+      "soru": "Kuveyt Türk'te QR kod ile 2.000 TL harcarsam ne kadar kazanırım?",
+      "kategori": "kampanya_sayisal",
+      "beklenen_yol": "rag",
+      "veri_bagimsiz": false,
+      "beklenen_deger": "4.000",
+      "beklenen_banka": [
+        "Kuveyt Türk"
+      ],
+      "anahtar_kelimeler": [
+        "4.000"
+      ],
+      "yasak_kelimeler": [],
+      "kaynak_url": "http://www.kuveytturk.com.tr/kampanyalar/isim-icin/kart-kampanyalari/saglam-business-kart-qr-odeme-ile-4000-tl-ye-varan-altin-puan-firsati",
+      "kampanya_durumu": "aktif",
+      "aciklama": "Kaynak: QR kod kullanarak yapacağınız 2.000 TL ve üzeri her harcamanızda %5, toplamda 4.000 TL Altın Puan kazandırıyor!"
+    }
+  ]
+}

@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Katılım Bankacılığı Asistanı</title>
+<script src="/statik/chart.umd.min.js"></script>
+<style>
+:root{--bg:#0f1218;--yzey:#171b23;--yzey2:#1e232d;--kenar:#2a303c;--metin:#e6e9ef;
+--soluk:#96a0b3;--vurgu:#4fd1c5;--vurgu2:#7c9cf5;--uyari:#f6ad55;--hata:#fc8181}
+*{box-sizing:border-box;margin:0;padding:0}
+body{min-height:100vh;background:var(--bg);color:var(--metin);font:16px/1.58 system-ui,-apple-system,"Segoe UI",sans-serif}
+body::before{content:'';position:fixed;inset:82px 0 0;z-index:0;pointer-events:none;
+  background:url('/statik/takim.png') center 58%/min(620px,64vw) auto no-repeat;
+  opacity:.032;filter:grayscale(1) contrast(.8)}
+header,.sekmeler,main{position:relative;z-index:1}
+header{padding:20px clamp(22px,3vw,38px);border-bottom:1px solid var(--kenar);display:flex;
+  align-items:center;gap:16px;flex-wrap:wrap}
+h1{font-size:19px;font-weight:600;letter-spacing:.2px}
+#saglik{font-size:12px;color:var(--soluk);margin-left:auto}
+.nokta{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--hata);margin-right:6px}
+.nokta.ok{background:var(--vurgu)}
+.sekmeler{display:flex;gap:4px;padding:0 clamp(22px,3vw,38px);border-bottom:1px solid var(--kenar);overflow:hidden}
+.sekme{flex:1;min-width:0;padding:12px 18px;cursor:pointer;color:var(--soluk);
+  border-bottom:2px solid transparent;font-size:14.5px;text-align:center;white-space:nowrap}
+.sekme.aktif{color:var(--metin);border-bottom-color:var(--vurgu)}
+main{width:100%;max-width:1420px;margin:0 auto;padding:25px clamp(22px,3vw,38px)}
+.gizli{display:none}
+.kartlar{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:12px;margin-bottom:22px}
+.kart{background:var(--yzey);border:1px solid var(--kenar);border-radius:10px;padding:15px}
+.kart .n{font-size:26px;font-weight:600}
+.kart .e{font-size:12px;color:var(--soluk);margin-top:3px}
+.kart.dikkat .n{color:var(--uyari)}
+.kutu{background:rgba(23,27,35,.94);border:1px solid var(--kenar);border-radius:11px;padding:20px;margin-bottom:20px}
+.kutu h2{font-size:14px;font-weight:600;margin-bottom:14px;color:var(--soluk);
+  text-transform:uppercase;letter-spacing:.6px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;color:var(--soluk);font-weight:500;padding:8px 10px;border-bottom:1px solid var(--kenar)}
+td{padding:8px 10px;border-bottom:1px solid #21262f}
+tr:hover td{background:var(--yzey2)}
+a{color:var(--vurgu2);text-decoration:none}a:hover{text-decoration:underline}
+select,input,button{background:var(--yzey2);color:var(--metin);border:1px solid var(--kenar);
+  border-radius:7px;padding:9px 12px;font:inherit;font-size:14px}
+input[type="search"]::-webkit-search-cancel-button{filter:invert(1);opacity:.55}
+.kampanya-filtreleri{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+#kampanyaAra{flex:2 1 310px;min-width:220px}
+.kampanya-filtreleri select{flex:1 1 170px}
+.kampanya-sonuc{margin-top:10px;color:var(--soluk);font-size:12px;min-height:19px}
+.karsilastirma-ust{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.karsilastirma-ust h2{font-size:20px;color:var(--metin);text-transform:none;letter-spacing:-.2px;
+  margin-bottom:4px}
+.karsilastirma-ust p{color:var(--soluk);font-size:13px;line-height:1.55}
+.dogrulandi{display:inline-flex;align-items:center;gap:7px;padding:6px 10px;border-radius:18px;
+  color:#9fe8df;background:rgba(79,209,197,.07);border:1px solid rgba(79,209,197,.16);
+  font-size:11px;white-space:nowrap}
+.dogrulandi::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--vurgu);
+  box-shadow:0 0 0 4px rgba(79,209,197,.08)}
+.karsilastirma-filtreleri{display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;
+  margin-top:18px;padding:14px;background:rgba(15,18,24,.56);border:1px solid #242a35;border-radius:12px}
+.karsilastirma-alan{display:flex;flex:1 1 260px;min-width:220px;flex-direction:column;gap:7px}
+.alan-baslik{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:#b7bfcd;
+  letter-spacing:.1px;padding-left:2px}
+.alan-baslik b{width:20px;height:20px;border-radius:7px;display:grid;place-items:center;
+  color:var(--vurgu);background:rgba(79,209,197,.08);border:1px solid rgba(79,209,197,.18);
+  font-size:10px;font-weight:700}
+.karsilastirma-alan select{width:100%;min-height:44px}
+.karsilastirma-alan select:focus{outline:none;border-color:var(--vurgu);
+  box-shadow:0 0 0 3px rgba(79,209,197,.09)}
+.karsilastirma-alan select:disabled{opacity:.58;cursor:not-allowed}
+.karsilastirma-bilgi{margin-top:11px;color:var(--soluk);font-size:12px;min-height:19px}
+.karsilastirma-bos{position:relative;overflow:hidden;min-height:280px;border:1px solid #29303c;border-radius:14px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  padding:38px 24px;background:radial-gradient(circle at 50% 18%,rgba(79,209,197,.055),transparent 42%),
+  linear-gradient(145deg,rgba(30,35,45,.62),rgba(20,24,31,.42))}
+.karsilastirma-bos::before{content:'';position:absolute;inset:0;pointer-events:none;opacity:.24;
+  background:linear-gradient(90deg,transparent 49.8%,rgba(79,209,197,.06) 50%,transparent 50.2%),
+  linear-gradient(transparent 49.8%,rgba(79,209,197,.045) 50%,transparent 50.2%);
+  background-size:42px 42px;mask-image:radial-gradient(circle at center,#000,transparent 72%)}
+.karsilastirma-bos>*{position:relative;z-index:1}
+.karsilastirma-bos-ikon{width:58px;height:58px;border-radius:18px;display:grid;place-items:center;
+  color:var(--vurgu);background:linear-gradient(145deg,rgba(79,209,197,.13),rgba(124,156,245,.07));
+  border:1px solid rgba(79,209,197,.22);box-shadow:0 12px 30px rgba(0,0,0,.18);
+  margin-bottom:16px}
+.karsilastirma-bos-ikon svg{width:27px;height:27px;fill:none;stroke:currentColor;
+  stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.karsilastirma-bos h3{font-size:18px;font-weight:600;margin-bottom:8px;color:var(--metin)}
+.karsilastirma-bos p{max-width:590px;color:#a7b0c0;font-size:13px;line-height:1.68}
+.karsilastirma-bos .bos-ipucu{margin-top:15px;padding:6px 11px;border-radius:15px;
+  color:#7f8aa0;background:rgba(15,18,24,.52);border:1px solid #29303c;font-size:11.5px}
+.veri-notlari{margin:15px 0 0 20px;color:var(--soluk);font-size:13px}
+.veri-notlari li{margin:5px 0;padding-left:3px}
+.veri-kaynagi{margin-top:13px;padding-top:10px;border-top:1px solid var(--kenar);
+  color:var(--soluk);font-size:11.5px}
+button{cursor:pointer}button:hover{border-color:var(--vurgu)}
+button:disabled{opacity:.5;cursor:not-allowed}
+.rozet{font-size:11px;padding:2px 8px;border-radius:20px;background:var(--yzey2);color:var(--soluk)}
+.rozet.aktif{background:#173e39;color:var(--vurgu)}
+.rozet.dolmus{background:#3d2626;color:var(--hata)}
+/* sohbet */
+#sohbet{height:calc(100dvh - 205px);min-height:440px;display:flex;flex-direction:column}
+#akis{flex:1;overflow-y:auto;padding:6px 2px;display:flex;flex-direction:column;gap:13px}
+.msj{max-width:min(760px,88%);padding:12px 15px;border-radius:11px;white-space:pre-wrap;line-height:1.6}
+.msj.kul{align-self:flex-end;background:#243046}
+.msj.bot{align-self:flex-start;background:var(--yzey);border:1px solid var(--kenar)}
+.msj.bot.genis{width:100%;max-width:100%;box-sizing:border-box}
+.yazilan-cevap.yaziyor::after{content:' ';display:inline-block;width:2px;height:1.05em;
+  margin-left:3px;vertical-align:-2px;background:var(--vurgu);animation:imlec .7s steps(1) infinite}
+@keyframes imlec{50%{opacity:0}}
+.yol{font-size:11px;color:var(--soluk);margin-bottom:7px;display:flex;align-items:center;gap:7px}
+.kaynaklar{margin-top:11px;padding-top:9px;border-top:1px solid var(--kenar);font-size:12px}
+.kaynaklar div{margin:3px 0;color:var(--soluk)}
+#giris{display:flex;gap:9px;margin-top:14px}
+#soru{flex:1}
+.oneri{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px}
+.oneri span{font-size:12.5px;padding:6px 11px;background:var(--yzey);border:1px solid var(--kenar);
+  border-radius:17px;cursor:pointer;color:var(--soluk)}
+.oneri span:hover{border-color:var(--vurgu);color:var(--metin)}
+.sohbet-grafik{margin-top:14px;padding:14px 15px 10px;background:#12161d;
+  border:1px solid var(--kenar);border-radius:10px}
+.sohbet-grafik-baslik{font-size:12px;font-weight:600;color:var(--soluk);margin-bottom:8px}
+.sohbet-grafik canvas{width:100%;max-height:270px}
+.rozet.tikla{cursor:pointer;user-select:none}
+.rozet.tikla:hover{background:#2a3550;color:var(--metin)}
+.detay{margin-top:11px;border-top:1px solid var(--kenar);padding-top:10px;
+  font-size:12px;color:var(--soluk);display:none}
+.detay.acik{display:block;animation:belir .25s both}
+.detay h4{font-size:11px;text-transform:uppercase;letter-spacing:.6px;
+  color:var(--soluk);margin:9px 0 5px}
+.detay pre{background:#12161d;border:1px solid var(--kenar);border-radius:7px;
+  padding:10px;overflow-x:auto;font-size:11.5px;color:#9fe8df;white-space:pre-wrap;
+  word-break:break-word}
+.detay .parca{background:var(--yzey2);border:1px solid var(--kenar);border-radius:7px;
+  padding:8px 10px;margin:5px 0}
+.detay .parca b{color:var(--vurgu);font-weight:600}
+.tablo-sar{max-width:100%;overflow-x:auto;margin:10px 0;border:1px solid var(--kenar);border-radius:9px}
+.sohbet-tablo{width:100%;border-collapse:collapse;font-size:12.5px}
+.sohbet-tablo th{background:var(--yzey2);color:var(--vurgu);font-weight:600;
+  text-align:left;padding:9px 11px;border-bottom:1px solid var(--kenar);white-space:normal}
+.sohbet-tablo td{padding:9px 11px;border-bottom:1px solid var(--kenar);
+  vertical-align:top;line-height:1.5;overflow-wrap:anywhere}
+.sohbet-tablo tr:last-child td{border-bottom:none}
+.sohbet-tablo tbody tr:hover{background:var(--yzey2)}
+#sunucu-uyari{display:none;background:#3d2626;border:1px solid #5c3535;color:var(--hata);
+  padding:10px 14px;border-radius:9px;font-size:13px;margin-bottom:12px}
+#sunucu-uyari.acik{display:block}
+.uyari{background:#332616;border:1px solid #5c4420;color:var(--uyari);padding:11px 14px;
+  border-radius:9px;font-size:13px;margin-bottom:16px}
+canvas{max-height:290px}
+
+/* ---------- acilis sahnesi ---------- */
+#giris-tuval{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;display:block}
+#giris-isik{position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 70% 55% at 50% 45%,rgba(79,209,197,.09),transparent 70%),
+             radial-gradient(ellipse 50% 45% at 20% 75%,rgba(124,156,245,.07),transparent 70%);
+  animation:nefes 7s ease-in-out infinite alternate}
+@keyframes nefes{from{opacity:.55}to{opacity:1}}
+.sahne{z-index:1}
+#giris-atla,#giris-ilerleme{z-index:2}
+#giris-sahne{position:fixed;inset:0;z-index:999;background:var(--bg);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  overflow:hidden;transition:opacity .6s ease}
+#giris-sahne.kapali{opacity:0;pointer-events:none}
+.sahne{position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:24px;padding:24px;
+  opacity:0;filter:blur(12px);transform:translateY(24px) scale(.88);
+  transition:opacity .58s ease,filter .68s ease,transform .78s cubic-bezier(.16,1,.3,1)}
+.sahne.aktif{opacity:1;filter:blur(0);transform:translateY(0) scale(1)}
+.sahne.gecti{opacity:0;filter:blur(9px);transform:translateY(-18px) scale(1.08)}
+.sahne img{max-width:min(760px,82vw);max-height:min(520px,58vh);object-fit:contain;
+  filter:drop-shadow(0 18px 35px rgba(0,0,0,.32));animation:logoNefes 1.5s ease-in-out both}
+#giris-sahne .sahne[data-sahne="1"] img{max-width:min(500px,68vw);max-height:min(500px,58vh)}
+@keyframes logoNefes{0%{transform:scale(.94)}55%{transform:scale(1.02)}100%{transform:scale(1)}}
+.sahne .yer-tutucu{width:min(520px,70vw);height:min(300px,36vh);border:1px dashed var(--kenar);
+  border-radius:18px;display:flex;align-items:center;justify-content:center;
+  color:var(--soluk);font-size:16px;text-align:center;padding:24px;line-height:1.6}
+.sahne h2{font-size:clamp(34px,6vw,62px);font-weight:600;letter-spacing:-.8px;
+  text-align:center;line-height:1.18}
+.sahne p{color:var(--soluk);font-size:clamp(18px,2.2vw,26px);text-align:center;
+  max-width:820px;line-height:1.55}
+#takim-adi{font-size:clamp(24px,3.2vw,38px);color:var(--metin);font-weight:600;
+  letter-spacing:.2px}
+.sahne .etiketler{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:10px}
+.sahne .etiketler span{font-size:15px;padding:9px 20px;border:1px solid var(--kenar);
+  border-radius:24px;color:var(--soluk)}
+#giris-atla{position:absolute;bottom:26px;right:28px;font-size:12.5px;color:var(--soluk);
+  cursor:pointer;border:1px solid var(--kenar);padding:7px 15px;border-radius:20px;
+  background:transparent}
+#giris-atla:hover{color:var(--metin);border-color:var(--vurgu)}
+#giris-ilerleme{position:absolute;bottom:0;left:0;height:2px;background:var(--vurgu);width:0}
+
+/* ---------- icerik belirme ---------- */
+@keyframes belir{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.kart,.kutu{animation:belir .45s cubic-bezier(.22,1,.36,1) both}
+.kart:nth-child(2){animation-delay:.05s}.kart:nth-child(3){animation-delay:.1s}
+.kart:nth-child(4){animation-delay:.15s}.kart:nth-child(5){animation-delay:.2s}
+.kutu:nth-of-type(2){animation-delay:.08s}.kutu:nth-of-type(3){animation-delay:.16s}
+section{animation:belir .4s cubic-bezier(.22,1,.36,1) both}
+tr{animation:belir .3s both}
+.msj{animation:belir .35s cubic-bezier(.22,1,.36,1) both}
+@media(max-width:680px){
+  body{font-size:15px}header{padding:16px 16px}.sekmeler{padding:0 10px}
+  .sekme{padding:11px 6px;font-size:13.5px}main{padding:16px 14px}
+  .kutu{padding:15px}#sohbet{height:calc(100dvh - 175px);min-height:380px}
+  #kampanyaAra{flex-basis:100%}.kampanya-filtreleri select{min-width:0}
+  .karsilastirma-alan{flex-basis:100%;min-width:0}
+  .karsilastirma-bos{min-height:230px;padding:28px 18px}
+}
+</style></head>
+<body>
+<div id="giris-sahne">
+  <canvas id="giris-tuval"></canvas>
+  <div id="giris-isik"></div>
+  <div class="sahne" data-sahne="0">
+    <img src="/statik/teknofest.png" alt="TEKNOFEST">
+  </div>
+  <div class="sahne" data-sahne="1">
+    <img src="/statik/takim.png" alt="Lingua-Tech Yapay Zeka">
+  </div>
+  <button id="giris-atla">Geç</button>
+  <div id="giris-ilerleme"></div>
+</div>
+<header>
+  <h1>Katılım Bankacılığı Asistanı</h1>
+  <div id="saglik"><span class="nokta"></span>bağlantı denetleniyor…</div>
+</header>
+<div class="sekmeler">
+  <div class="sekme aktif" data-s="karsilastirma">Karşılaştırma</div>
+  <div class="sekme" data-s="kampanya">Kampanyalar</div>
+  <div class="sekme" data-s="sohbet">Asistan</div>
+</div>
+<main>
+  <section id="s-karsilastirma">
+    <div class="kutu">
+      <div class="karsilastirma-ust">
+        <div>
+          <h2>Finansman seçeneklerini keşfedin</h2>
+          <p>Bankanızı seçin; güncel oranları, vadeleri ve ürün koşullarını tek ekranda inceleyin.</p>
+        </div>
+        <span class="dogrulandi">Doğrulanmış finansman verileri</span>
+      </div>
+      <div class="karsilastirma-filtreleri">
+        <label class="karsilastirma-alan">
+          <span class="alan-baslik"><b>1</b> Bankanızı seçin</span>
+          <select id="karsilastirmaBanka">
+            <option value="">Seçim yapın</option>
+            <option value="__tum__">Bankaları birlikte karşılaştır</option>
+          </select>
+        </label>
+        <label class="karsilastirma-alan">
+          <span class="alan-baslik"><b>2</b> Finansman türünü seçin</span>
+          <select id="urunSec" disabled>
+            <option value="">Önce bankanızı seçin</option>
+            <option value="konut">Konut finansmanı</option>
+            <option value="arac">Taşıt finansmanı</option>
+            <option value="ihtiyac">İhtiyaç finansmanı</option>
+            <option value="kobi_ticari">KOBİ / ticari</option>
+            <option value="katilma_hesabi">Katılma hesabı</option>
+            <option value="kredi_karti">Kredi kartı</option>
+          </select>
+        </label>
+      </div>
+      <div id="karsilastirmaBilgi" class="karsilastirma-bilgi"></div>
+      <div id="karsilastirmaTablo" style="margin-top:15px"></div>
+    </div>
+    <div class="kutu" id="grafikKutu"><h2 id="grafikBaslik">Maksimum vade (ay)</h2><canvas id="grafikVade"></canvas></div>
+  </section>
+
+  <section id="s-kampanya" class="gizli">
+    <div class="kutu">
+      <h2>Kampanyalar</h2>
+      <div class="kampanya-filtreleri">
+        <input id="kampanyaAra" type="search" placeholder="Kampanya adı veya içerik ara…" autocomplete="off">
+        <select id="durumSec">
+          <option value="aktif">Aktif</option>
+          <option value="suresi_dolmus">Süresi dolmuş</option>
+          <option value="hepsi">Hepsi</option>
+        </select>
+        <select id="bankaSec"><option value="">Tüm bankalar</option></select>
+      </div>
+      <div id="kampanyaSonuc" class="kampanya-sonuc"></div>
+      <div id="kampanyaTablo"></div>
+    </div>
+  </section>
+
+  <section id="s-sohbet" class="gizli">
+    <div id="sohbet">
+      <div id="sunucu-uyari"></div>
+      <div id="akis">
+        <div class="msj bot">Merhaba. Güncel finansman oranlarını karşılaştırabilir, kampanya arşivinde arama yapabilir ve sonuçları grafikle inceleyebilirsiniz.
+Aşağıdaki örneklerden biriyle başlayın.</div>
+      </div>
+      <div class="oneri">
+        <span title="Doğrulanmış finansman verisini grafikle gösterir">Ziraat Katılım konut finansmanı vade seçeneklerini grafikle göster.</span>
+        <span title="Veritabanındaki kampanyaları sayar ve sıralar">En çok kampanya hangi bankada ve kaç kampanya var?</span>
+        <span title="İlgili kampanya belgesinden cevabı bulur">Ziraat Katılım'ın Michelin kampanyasında kaç taksit var?</span>
+        <span title="İki bankanın doğrulanmış finansman tablolarını yan yana getirir">Kuveyt Türk ile Albaraka'nın konut finansmanını karşılaştır.</span>
+      </div>
+      <div id="giris">
+        <input id="soru" placeholder="Sorunuzu yazın…" autocomplete="off">
+        <button id="gonder">Gönder</button>
+      </div>
+    </div>
+  </section>
+</main>
+<script>
+const $=s=>document.querySelector(s), api=p=>fetch(p).then(r=>r.json());
+const REN=['#4fd1c5','#7c9cf5','#f6ad55','#fc8181','#b794f4','#68d391','#4fd1c5','#f687b3','#90cdf4','#faf089'];
+let grafikler={};
+let finansmanUrunSecenekleri=[];
+let bankaFinansmanUrunleri=new Map();
+
+document.querySelectorAll('.sekme').forEach(t=>t.onclick=()=>{
+  document.querySelectorAll('.sekme').forEach(x=>x.classList.remove('aktif'));
+  t.classList.add('aktif');
+  ['karsilastirma','kampanya','sohbet'].forEach(s=>
+    $('#s-'+s).classList.toggle('gizli', s!==t.dataset.s));
+  if(t.dataset.s==='karsilastirma') karsilastirmaYukle();
+  if(t.dataset.s==='kampanya') kampanyaYukle();
+});
+
+// Etiket kodlarini okunabilir Turkce'ye cevir (kredi_karti -> Kredi Kartı)
+const ETIKET_AD={kampanya:'Genel kampanya','Taşıt Finansmanı':'Taşıt finansmanı','Konut Finansmanı':'Konut finansmanı',kredi_karti:'Kredi kartı',katilma_hesabi:'Katılma hesabı',
+ kobi_ticari:'KOBİ / ticari',yatirim_fonu:'Yatırım fonu',surdurulebilir:'Sürdürülebilir',
+ arac:'Araç',konut:'Konut',ihtiyac:'İhtiyaç',isyeri:'İşyeri',sigorta:'Sigorta',
+ egitim:'Eğitim',diger:'Diğer',yeni_musteri:'Yeni müşteri',mevcut_musteri:'Mevcut müşteri',
+ maas_musterisi:'Maaş müşterisi',genc_ogrenci:'Genç / öğrenci',esnaf_kobi:'Esnaf / KOBİ',
+ ciftci:'Çiftçi',emekli:'Emekli',kadin_girisimci:'Kadın girişimci',
+ kart_kampanyasi:'Kart kampanyası',alisveris_puani:'Alışveriş puanı',
+ konut_finansmani:'Konut finansmanı',tasit_finansmani:'Taşıt finansmanı',
+ ihtiyac_finansmani:'İhtiyaç finansmanı',finansman_kampanyasi:'Finansman',
+ yatirim_urunu:'Yatırım ürünü'};
+const guzelEtiket=x=>ETIKET_AD[x]||String(x).replace(/_/g,' ');
+
+function ciz(id,tip,etiket,veri,eksen,ek={}){
+  if(grafikler[id]) grafikler[id].destroy();
+  const toplam=veri.reduce((a,b)=>a+(+b||0),0);
+  const birim=ek.birim||'';
+  const halka=tip==='doughnut';
+
+  grafikler[id]=new Chart($('#'+id),{type:tip,
+    data:{labels:etiket.map(guzelEtiket),
+      datasets:[{data:veri,backgroundColor:REN,borderWidth:0,
+        borderRadius:tip==='bar'?4:0,
+        // Halka diliminde uzerine gelince dilim disari dogru buyur
+        hoverOffset:halka?22:0,
+        hoverBorderColor:'#e6e9ef',hoverBorderWidth:halka?2:3,
+        // Cubukta uzerine gelince renk parlar
+        hoverBackgroundColor:REN.map(c=>c+'dd')}]},
+    options:{responsive:true,maintainAspectRatio:true,
+      // Fare hangi ogenin uzerindeyse yalnizca o tepki verir
+      interaction:{mode:halka?'nearest':'index',intersect:halka},
+      animation:{duration:750,easing:'easeOutQuart',
+        delay:(c)=>c.type==='data'&&c.mode==='default'?c.dataIndex*45:0},
+      // Uzerine gelindiginde yeniden cizim yumusak olsun
+      transitions:{active:{animation:{duration:280,easing:'easeOutBack'}}},
+      plugins:{
+        legend:{display:halka,position:'bottom',
+          labels:{color:'#96a0b3',font:{size:11},boxWidth:12,padding:14,usePointStyle:true}},
+        tooltip:{
+          backgroundColor:'#1e232d',borderColor:'#2a303c',borderWidth:1,
+          titleColor:'#e6e9ef',bodyColor:'#96a0b3',padding:12,cornerRadius:9,
+          displayColors:true,boxPadding:5,titleFont:{size:13,weight:'600'},
+          bodyFont:{size:12.5},
+          callbacks:{
+            label(c){
+              const d=+c.raw||0;
+              const yuzde=toplam?((d/toplam)*100).toFixed(1):0;
+              const satir=[` ${d.toLocaleString('tr-TR')}${birim?' '+birim:''}`];
+              if(toplam) satir.push(` Toplamın %${yuzde}'i`);
+              return satir;
+            },
+            afterLabel(c){
+              if(!ek.aciklama) return '';
+              return ' '+ek.aciklama(c.label,c.raw);
+            }
+          }
+        }
+      },
+      scales:halka?{}:{
+        x:{ticks:{color:'#96a0b3',font:{size:10},maxRotation:32,minRotation:0},
+           grid:{display:false},border:{color:'#2a303c'}},
+        y:{beginAtZero:true,ticks:{color:'#96a0b3',font:{size:10}},
+           grid:{color:'#21262f'},border:{display:false},
+           title:{display:!!eksen,text:eksen,color:'#96a0b3',font:{size:11}}}}
+    }});
+  // Fare imleci tiklanabilirlik hissi versin
+  $('#'+id).style.cursor='pointer';
+}
+
+async function baslangicYukle(){
+  const [s,b,f]=await Promise.all([
+    api('/saglik'),api('/panel/bankalar'),api('/panel/finansman/secenekler')
+  ]);
+  $('#saglik').innerHTML=`<span class="nokta ${s.ollama?'ok':''}"></span>`+
+    (s.ollama?`${s.llm_model} · ${s.chunk_sayisi} chunk`:s.mesaj);
+  const bs=$('#bankaSec');
+  const kb=$('#karsilastirmaBanka');
+  b.forEach(x=>{
+    const secenek=`<option value="${x.banka_kodu}">${x.banka_adi}</option>`;
+    bs.insertAdjacentHTML('beforeend',secenek);
+    kb.insertAdjacentHTML('beforeend',secenek);
+  });
+  const urun=$('#urunSec'), mevcut=new Map([...urun.options].filter(o=>o.value).map(o=>[o.value,o.textContent]));
+  f.urunler.forEach(x=>{
+    if(!mevcut.has(x.urun_kodu)) mevcut.set(x.urun_kodu,x.urun_adi);
+  });
+  finansmanUrunSecenekleri=[...mevcut].map(([urun_kodu,urun_adi])=>({urun_kodu,urun_adi}));
+  bankaFinansmanUrunleri=new Map(f.bankalar.map(x=>[
+    x.banka_kodu,new Set((x.urunler||[]).map(u=>u.urun_kodu))
+  ]));
+  urunSecenekleriniYenile();
+  karsilastirmaYukle();
+}
+
+function urunSecenekleriniYenile(){
+  const urun=$('#urunSec'), banka=$('#karsilastirmaBanka').value, onceki=urun.value;
+  if(!banka){
+    urun.innerHTML='<option value="">Önce bankanızı seçin</option>';
+    urun.disabled=true;
+    return;
+  }
+  const uygun=banka==='__tum__'
+    ? finansmanUrunSecenekleri
+    : finansmanUrunSecenekleri.filter(x=>bankaFinansmanUrunleri.get(banka)?.has(x.urun_kodu));
+  urun.innerHTML=uygun.map(x=>
+    `<option value="${htmlKacir(x.urun_kodu)}">${htmlKacir(x.urun_adi)}</option>`
+  ).join('');
+  if(uygun.some(x=>x.urun_kodu===onceki)) urun.value=onceki;
+  if(!uygun.length){
+    urun.innerHTML='<option value="">Bu banka için finansman verisi yok</option>';
+    urun.disabled=true;
+  }else urun.disabled=false;
+}
+
+const htmlKacir=x=>String(x??'—').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+function vadeGrafigi(baslik,etiketler,degerler,aciklama){
+  if(!degerler?.length){
+    $('#grafikKutu').classList.add('gizli');
+    if(grafikler.grafikVade){grafikler.grafikVade.destroy();delete grafikler.grafikVade}
+    return;
+  }
+  $('#grafikKutu').classList.remove('gizli');
+  $('#grafikBaslik').textContent=baslik||'Maksimum vade (ay)';
+  ciz('grafikVade','bar',etiketler,degerler,'ay',{birim:'ay',aciklama});
+}
+
+async function karsilastirmaYukle(){
+  const t=$('#urunSec').value, banka=$('#karsilastirmaBanka').value;
+  const tumBankalar=banka==='__tum__';
+  if(!banka){
+    $('#karsilastirmaBilgi').textContent='';
+    $('#karsilastirmaTablo').innerHTML=`<div class="karsilastirma-bos">
+      <div class="karsilastirma-bos-ikon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M3 9h18M5 9v10m4-10v10m6-10v10m4-10v10M3 19h18M12 3l9 5H3l9-5Z"/></svg>
+      </div>
+      <h3>Hangi bankayı incelemek istersiniz?</h3>
+      <p>Bir banka seçtiğinizde mevcut finansman türleri, güncel oranlar ve vade seçenekleri burada görünecek.</p>
+      <div class="bos-ipucu">Toplu görünüm için “Bankaları birlikte karşılaştır” seçeneğini kullanabilirsiniz.</div>
+    </div>`;
+    vadeGrafigi('',[],[]);
+    return;
+  }
+  if(!t){
+    $('#karsilastirmaBilgi').textContent='Bu banka için karşılaştırılabilir finansman verisi henüz eklenmedi.';
+    $('#karsilastirmaTablo').innerHTML='';
+    vadeGrafigi('',[],[]);
+    return;
+  }
+  $('#karsilastirmaBilgi').textContent='veriler yükleniyor…';
+
+  if(!tumBankalar){
+    const p=new URLSearchParams({banka,urun_tipi:t});
+    const detay=await api('/panel/finansman/detay?'+p.toString());
+    if(detay.bulundu){
+      $('#karsilastirmaBilgi').textContent=
+        `${detay.banka_adi} · ${detay.ad} · Güncelleme: ${detay.guncelleme_tarihi}`;
+      const baslik=detay.sutunlar.map(x=>`<th>${htmlKacir(x)}</th>`).join('');
+      const satir=detay.satirlar.map(r=>'<tr>'+r.degerler.map(x=>`<td>${htmlKacir(x)}</td>`).join('')+'</tr>').join('');
+      const notlar=detay.notlar?.length
+        ? '<ul class="veri-notlari">'+detay.notlar.map(x=>`<li>${htmlKacir(x)}</li>`).join('')+'</ul>' : '';
+      const kaynaklar=[];
+      if(detay.kaynak_url) kaynaklar.push({ad:detay.kaynak_adi||detay.ad,url:detay.kaynak_url});
+      (detay.ek_kaynaklar||[]).forEach(x=>kaynaklar.push(x));
+      const kaynakHtml=kaynaklar.length
+        ? '<div class="veri-kaynagi">İlgili resmî ürün sayfası: '+kaynaklar.map(x=>
+            `<a href="${htmlKacir(x.url)}" target="_blank" rel="noopener">${htmlKacir(x.ad||x.url)}</a>`
+          ).join(' · ')+'</div>' : '';
+      $('#karsilastirmaTablo').innerHTML=
+        `<div class="tablo-sar"><table><thead><tr>${baslik}</tr></thead><tbody>${satir}</tbody></table></div>`+
+        notlar+kaynakHtml;
+      const g=detay.grafik||{};
+      vadeGrafigi(g.baslik,g.etiketler,g.degerler);
+      return;
+    }
+  }
+
+  let d=await api('/panel/karsilastir?urun_tipi='+encodeURIComponent(t));
+  if(!tumBankalar) d=d.filter(r=>r.banka_kodu===banka);
+  $('#karsilastirmaBilgi').textContent=tumBankalar
+    ? 'Tüm bankaların mevcut arşiv verilerinden oluşturulan özet görünüm.'
+    : 'Bu banka için ayrıntılı oran tablosu henüz eklenmedi; mevcut arşiv özeti gösteriliyor.';
+  $('#karsilastirmaTablo').innerHTML = d.length? `<table><tr><th>Banka</th><th>Maks. vade</th>
+    <th>Kâr payı</th><th>Maks. tutar</th></tr>`+
+    d.map(r=>`<tr><td>${r.banka_adi}</td><td>${r.vade?r.vade+' ay':'—'}</td>
+      <td>${r.oran?'%'+r.oran:'—'}</td>
+      <td>${r.tutar?Number(r.tutar).toLocaleString('tr-TR')+' TL':'—'}</td></tr>`).join('')+`</table>`
+    : '<p style="color:var(--soluk)">Bu banka ve ürün için karşılaştırılabilir veri henüz eklenmedi.</p>';
+  const v=d.filter(r=>r.vade);
+  vadeGrafigi('Maksimum vade (ay)',v.map(r=>r.banka_adi.replace(/ Katılım.*| Türk.*/,'')),
+    v.map(r=>r.vade),(ad)=>{
+      const r=v.find(x=>x.banka_adi.replace(/ Katılım.*| Türk.*/,'')===ad);
+      return r&&r.oran?`Kâr payı: %${r.oran}`:'';
+    });
+}
+$('#urunSec').onchange=karsilastirmaYukle;
+$('#karsilastirmaBanka').onchange=()=>{
+  urunSecenekleriniYenile();
+  karsilastirmaYukle();
+};
+
+async function kampanyaYukle(){
+  const q=$('#kampanyaAra').value.trim();
+  const p=new URLSearchParams({durum:$('#durumSec').value,banka:$('#bankaSec').value,limit:'100'});
+  if(q) p.set('q',q);
+  $('#kampanyaSonuc').textContent='aranıyor…';
+  const d=await api('/panel/kampanyalar?'+p.toString());
+  $('#kampanyaSonuc').textContent=q
+    ? `“${q}” için ${d.length} kampanya bulundu.`
+    : `${d.length} kampanya gösteriliyor.`;
+  $('#kampanyaTablo').innerHTML = d.length? `<table><tr><th>Banka</th><th>Kampanya</th>
+    <th>Tip</th><th>Bitiş</th><th></th></tr>`+
+    d.map(r=>`<tr><td>${r.banka_adi.replace(/ Katılım.*/,'')}</td><td>${r.baslik}</td>
+      <td><span class="rozet">${r.urun_tipi}</span></td>
+      <td>${r.kampanya_bitis||'—'}</td>
+      <td><a href="${r.kaynak_url}" target="_blank" rel="noopener">kaynak</a></td></tr>`).join('')+`</table>`
+    : '<p style="color:var(--soluk)">Kayıt bulunamadı.</p>';
+}
+$('#durumSec').onchange=kampanyaYukle; $('#bankaSec').onchange=kampanyaYukle;
+let kampanyaAramaZamani=null;
+$('#kampanyaAra').oninput=()=>{
+  clearTimeout(kampanyaAramaZamani);
+  kampanyaAramaZamani=setTimeout(kampanyaYukle,280);
+};
+$('#kampanyaAra').onkeydown=e=>{
+  if(e.key==='Escape'){
+    e.preventDefault(); e.currentTarget.value=''; kampanyaYukle();
+  }
+};
+
+// ---- sohbet
+function msjEkle(sinif,html){
+  const d=document.createElement('div'); d.className='msj '+sinif; d.innerHTML=html;
+  $('#akis').append(d); $('#akis').scrollTop=$('#akis').scrollHeight; return d;
+}
+
+async function harfHarfYaz(el,html){
+  el.innerHTML=html;
+  const gezen=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);
+  const dugumler=[];
+  while(gezen.nextNode()) dugumler.push(gezen.currentNode);
+  const metinler=dugumler.map(n=>n.data);
+  dugumler.forEach(n=>n.data='');
+  let atla=false, sayac=0;
+  const atlama=()=>{atla=true};
+  el.classList.add('yaziyor');
+  el.title='Yanıtı hemen göstermek için tıklayın';
+  el.addEventListener('click',atlama);
+  dis: for(let n=0;n<dugumler.length;n++){
+    for(const harf of metinler[n]){
+      if(atla){
+        for(let k=n;k<dugumler.length;k++) dugumler[k].data=metinler[k];
+        break dis;
+      }
+      dugumler[n].data+=harf;
+      sayac++;
+      if(sayac%8===0) $('#akis').scrollTop=$('#akis').scrollHeight;
+      const bekle=/[.!?]/.test(harf)?20:(/\s/.test(harf)?3:7);
+      await new Promise(tamam=>setTimeout(tamam,bekle));
+    }
+  }
+  el.removeEventListener('click',atlama);
+  el.classList.remove('yaziyor');
+  el.removeAttribute('title');
+}
+
+async function sor(q){
+  if(!q.trim()) return;
+  msjEkle('kul',q.replace(/</g,'&lt;'));
+  $('#soru').value=''; $('#gonder').disabled=true;
+  $('#sunucu-uyari').classList.remove('acik');
+  const bot=msjEkle('bot','<span style="color:var(--soluk)">düşünüyor…</span>');
+  try{
+    const c=await fetch('/sor',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({soru:q})});
+    if(!c.ok) throw new Error('Sunucu '+c.status);
+    const r=await c.json();
+    const etiket=r.yol==='finansman'?'güncel finansman verisi':
+      (r.yol==='sql'?'veritabanı sorgusu':(r.yol==='sohbet'?'sohbet':'belge araması'));
+    const kimlik='d'+Date.now();
+    const topluGrafik=r.bulgu?.grafik?.degerler?.length?r.bulgu.grafik:null;
+    const grafikAday=/grafik/i.test(q)&&r.yol==='finansman'
+      ? (topluGrafik?{grafik:topluGrafik,ad:topluGrafik.baslik}:
+         (r.bulgu?.satirlar||[]).find(x=>x.grafik?.degerler?.length)) : null;
+    const sohbetGrafikId='sohbetGrafik'+Date.now();
+    // **kalin** ve *italik* isaretlerini isle (model markdown uretiyor)
+    // Satir ici bicimleme (kalin/italik). Tablo ayri islenir.
+    const satirIci=t=>t.replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>')
+                       .replace(/(^|[^*])\*([^*\n]+)\*/g,'$1<i>$2</i>');
+
+    // Model karsilastirma cevaplarini Markdown tablosu olarak uretiyor.
+    // Ham hâliyle boru isaretleri ekranda duruyordu; blok blok ayirip
+    // gercek <table> olarak ciziyoruz.
+    const md=t=>{
+      const kacir=String(t).replace(/</g,'&lt;');
+      const satirlar=kacir.split('\n');
+      let cikti='', tablo=[];
+      const tabloBas=()=>{
+        if(!tablo.length) return;
+        // ikinci satir ---|--- ayiraci ise basliktir
+        const ayirac=tablo[1]&&/^\s*\|?[\s:-]*\|[\s|:-]*$/.test(tablo[1]);
+        const hucre=r=>r.replace(/^\s*\|/,'').replace(/\|\s*$/,'').split('|').map(x=>x.trim());
+        const bas=ayirac?hucre(tablo[0]):null;
+        const govde=(ayirac?tablo.slice(2):tablo).filter(r=>r.trim());
+        let ht='<div class="tablo-sar"><table class="sohbet-tablo">';
+        if(bas) ht+='<thead><tr>'+bas.map(c=>`<th>${satirIci(c)}</th>`).join('')+'</tr></thead>';
+        ht+='<tbody>'+govde.map(r=>'<tr>'+hucre(r).map(c=>`<td>${satirIci(c)}</td>`).join('')+'</tr>').join('')+'</tbody>';
+        cikti+=ht+'</table></div>'; tablo=[];
+      };
+      for(const sat of satirlar){
+        if(/^\s*\|.*\|\s*$/.test(sat)) { tablo.push(sat); continue; }
+        tabloBas();
+        cikti += satirIci(sat) + '<br>';
+      }
+      tabloBas();
+      return cikti;
+    };
+    const ust=`<div class="yol"><span class="rozet tikla" data-hedef="${kimlik}">${etiket} ▾</span>`+
+              `<span>${r.sure_sn}sn</span></div>`;
+    let ek='';
+    if(r.kaynaklar?.length){
+      // Tekillestirme URL bazinda yapilir, BASLIK bazinda DEGIL: "Taşıt Finansmanı"
+      // gibi jenerik basliklar farkli bankalarda ayni olabiliyor; basliga gore
+      // eleyince gercek belgeler gizleniyordu. Ayni sayfanin http/https ve
+      // capa varyantlari ise tek kayit sayilir.
+      const norm=u=>String(u||'').replace(/^https?:\/\//,'').replace(/^www\./,'')
+                    .split('#')[0].split('?')[0].replace(/\/$/,'').toLowerCase();
+      const gorulen=new Set(), tekil=[];
+      for(const k of r.kaynaklar){
+        const anahtar=norm(k.url);
+        if(gorulen.has(anahtar)) continue;
+        gorulen.add(anahtar); tekil.push(k);
+        if(tekil.length>=5) break;
+      }
+      ek+='<div class="kaynaklar">Kaynaklar:'+tekil.map(k=>{
+        // Banka adini basligin onune koy: ayni baslikli kayitlar ayirt edilebilsin
+        const banka=(k.banka||'').replace(/ Katılım Bankası A\.Ş\.| A\.Ş\./g,'');
+        const bas=(k.baslik||k.url).slice(0,72);
+        return `<div><a href="${k.url}" target="_blank" rel="noopener">${
+          banka?`<span style="color:var(--soluk)">${banka} · </span>`:''}${bas}</a></div>`;
+      }).join('')+'</div>';
+    }
+
+    // --- aciklanabilirlik: cevabin nasil uretildigini goster
+    let d='';
+    if(r.yol==='finansman'&&r.bulgu){
+      const n=(r.bulgu.satirlar||[]).length;
+      d+=`<h4>Sonuç</h4><div class="parca">Ortak finansman veri kaynağından <b>${n}</b> ürün tablosu kullanıldı. `+
+         `Sayısal değerler model tarafından üretilmedi.</div>`;
+    }else if(r.yol==='sql'&&r.bulgu){
+      d+='<h4>Çalıştırılan sorgu</h4><pre>'+
+         (r.bulgu.sql||'').replace(/</g,'&lt;')+'</pre>';
+      if(r.bulgu.parametre?.length)
+        d+='<h4>Parametreler</h4><pre>'+JSON.stringify(r.bulgu.parametre)+'</pre>';
+      const n=(r.bulgu.satirlar||r.bulgu.ornekler||[]).length;
+      d+=`<h4>Sonuç</h4><div class="parca">Veritabanından <b>${n}</b> kayıt döndü. `+
+         `Sayısal değerler modelden değil doğrudan tablodan gelir.</div>`;
+    }else if(r.chunklar?.length){
+      d+=`<h4>Kullanılan belge parçaları</h4>`;
+      d+=`<div class="parca">${r.aday_sayisi} aday arasından <b>${r.chunklar.length}</b> parça seçildi.</div>`;
+      d+=r.chunklar.map(c=>`<div class="parca"><b>${(+c.skor).toFixed(3)}</b> · `+
+         `${c.chunk_id.split('__')[0]}<br>${c.icerik.slice(0,150).replace(/</g,'&lt;')}…</div>`).join('');
+      if(r.filtre) d+='<h4>Uygulanan filtre</h4><pre>'+JSON.stringify(r.filtre)+'</pre>';
+    }else{
+      d+='<div class="parca">Bu soru için kaynak kullanılmadı.</div>';
+    }
+    ek+=`<div class="detay" id="${kimlik}">${d}</div>`;
+    bot.innerHTML=ust+'<div class="yazilan-cevap"></div>';
+    bot.classList.toggle('genis',r.yol==='finansman');
+    await harfHarfYaz(bot.querySelector('.yazilan-cevap'),md(r.cevap));
+    if(grafikAday){
+      const g=grafikAday.grafik;
+      bot.insertAdjacentHTML('beforeend',`<div class="sohbet-grafik">
+        <div class="sohbet-grafik-baslik">${htmlKacir(g.baslik||grafikAday.ad)}</div>
+        <canvas id="${sohbetGrafikId}"></canvas></div>`);
+      ciz(sohbetGrafikId,'bar',g.etiketler,g.degerler,g.birim||'ay',{birim:g.birim||'ay'});
+    }
+    bot.insertAdjacentHTML('beforeend',ek);
+    bot.querySelector('.rozet.tikla').onclick=e=>{
+      const el=$('#'+e.target.dataset.hedef);
+      el.classList.toggle('acik');
+      e.target.textContent=e.target.textContent.replace(/[▾▴]/, el.classList.contains('acik')?'▴':'▾');
+    };
+  }catch(e){
+    bot.innerHTML='<span style="color:var(--hata)">Cevap alınamadı.</span>';
+    $('#sunucu-uyari').innerHTML=
+      'Sunucuya ulaşılamadı veya model yanıt vermedi. Ollama\'nın çalıştığını '+
+      'kontrol edin (<code>ollama ps</code>), ardından tekrar deneyin. Ayrıntı: '+
+      e.message;
+    $('#sunucu-uyari').classList.add('acik');
+  }
+  $('#gonder').disabled=false; $('#soru').focus();
+  $('#akis').scrollTop=$('#akis').scrollHeight;
+}
+$('#gonder').onclick=()=>sor($('#soru').value);
+$('#soru').onkeydown=e=>{if(e.key==='Enter')sor($('#soru').value)};
+document.querySelectorAll('.oneri span').forEach(s=>s.onclick=()=>sor(s.textContent));
+
+// ---- acilis arka plani: birbirine yaklasinca baglanan dugumler
+// (devre karti / sinir agi cagrisimi). Hafif tutuldu: ~55 dugum, mesafe
+// hesabi O(n²) ama n kucuk. Sahne kapaninca dongu durduruluyor.
+function agAnimasyonu(tuval){
+  const ctx=tuval.getContext('2d');
+  let g, y, dugumler=[], calisiyor=true, kare=null;
+  const ADET=window.innerWidth<700?28:55, MESAFE=150;
+
+  function olcekle(){
+    const o=window.devicePixelRatio||1;
+    // clientWidth bazen CSS uygulanmadan 0/300 okunuyor; ebeveyn kutusu daha guvenilir.
+    const kutu=tuval.parentElement.getBoundingClientRect();
+    g=Math.round(kutu.width)||window.innerWidth;
+    y=Math.round(kutu.height)||window.innerHeight;
+    tuval.style.width=g+'px'; tuval.style.height=y+'px';
+    tuval.width=g*o; tuval.height=y*o; ctx.setTransform(o,0,0,o,0,0);
+  }
+  function kur(){
+    olcekle();
+    dugumler=Array.from({length:ADET},()=>({
+      x:Math.random()*g, y:Math.random()*y,
+      vx:(Math.random()-.5)*.28, vy:(Math.random()-.5)*.28,
+      r:Math.random()*1.6+.9
+    }));
+  }
+  function ciz(){
+    if(!calisiyor) return;
+    ctx.clearRect(0,0,g,y);
+    for(const d of dugumler){
+      d.x+=d.vx; d.y+=d.vy;
+      if(d.x<0||d.x>g) d.vx*=-1;
+      if(d.y<0||d.y>y) d.vy*=-1;
+    }
+    for(let i=0;i<dugumler.length;i++){
+      for(let j=i+1;j<dugumler.length;j++){
+        const a=dugumler[i], b=dugumler[j];
+        const dx=a.x-b.x, dy=a.y-b.y, u=Math.hypot(dx,dy);
+        if(u<MESAFE){
+          ctx.strokeStyle=`rgba(79,209,197,${(1-u/MESAFE)*.22})`;
+          ctx.lineWidth=.7;
+          ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+        }
+      }
+    }
+    for(const d of dugumler){
+      ctx.fillStyle='rgba(124,156,245,.5)';
+      ctx.beginPath(); ctx.arc(d.x,d.y,d.r,0,Math.PI*2); ctx.fill();
+    }
+    kare=requestAnimationFrame(ciz);
+  }
+  requestAnimationFrame(()=>{ kur(); ciz(); });
+  const yeniden=()=>kur();
+  window.addEventListener('resize',yeniden);
+  return ()=>{ calisiyor=false; cancelAnimationFrame(kare);
+               window.removeEventListener('resize',yeniden); };
+}
+
+// ---- acilis sahnesi
+(function girisSahnesi(){
+  const sahne=$('#giris-sahne'), sahneler=[...document.querySelectorAll('.sahne')];
+  const durdur=agAnimasyonu($('#giris-tuval'));
+  const SURE=1500, i0=0;
+  let i=i0, zaman=null;
+  const ilerleme=$('#giris-ilerleme');
+
+  function goster(n){
+    sahneler.forEach((el,k)=>{
+      el.classList.toggle('aktif',k===n);
+      el.classList.toggle('gecti',k<n);
+    });
+    ilerleme.style.transition=`width ${SURE}ms linear`;
+    ilerleme.style.width=((n+1)/sahneler.length*100)+'%';
+  }
+  function ilerle(){
+    i++;
+    if(i>=sahneler.length){ bitir(); return; }
+    goster(i); zaman=setTimeout(ilerle,SURE);
+  }
+  function bitir(){
+    clearTimeout(zaman);
+    durdur();                       // dongu demoda arka planda calismaya devam etmesin
+    sahne.classList.add('kapali');
+    setTimeout(()=>sahne.remove(),700);
+  }
+  $('#giris-atla').onclick=bitir;
+  sahne.onclick=e=>{ if(e.target.id!=='giris-atla') ilerle(); };
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape') bitir(); },{once:true});
+  setTimeout(()=>{ goster(i0); zaman=setTimeout(ilerle,SURE); },120);
+})();
+
+baslangicYukle();
+</script>
+</body></html>

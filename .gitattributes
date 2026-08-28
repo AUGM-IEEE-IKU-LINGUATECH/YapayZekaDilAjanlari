@@ -1,0 +1,16 @@
+* text=auto
+
+*.py text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.json text eol=lf
+*.jsonl text eol=lf
+*.csv text eol=lf
+
+*.db binary
+*.sqlite3 binary
+*.bin binary
+*.pickle binary
+*.png binary
+*.pptx binary
+*.pdf binary

@@ -1,0 +1,22 @@
+# ortam / önbellek
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# loglar
+sunucu*.log
+*.log
+
+# geliştirme sırasında oluşan test indexleri (esas index: veri/chroma)
+veri/chroma_*/
+chroma_debug*/
+
+# işletim sistemi
+.DS_Store
+Thumbs.db
+
+# yerel çalışma ve Office geçici dosyaları
+tmp/
+~$*
+*.tmp

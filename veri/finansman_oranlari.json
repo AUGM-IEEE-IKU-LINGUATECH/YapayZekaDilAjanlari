@@ -1,0 +1,2286 @@
+{
+  "surum": 2,
+  "guncelleme_tarihi": "2026-08-27",
+  "aciklama": "Elle doğrulanmış yapılandırılmış finansman oranları. Arayüz ve asistan için ortak, çevrimdışı ana veri kaynağıdır.",
+  "kaynak_politikasi": "Görsel dosyalar saklanmaz veya RAG dizinine eklenmez; ürünlerde yalnızca ilgili bankanın resmî sayfa bağlantısı tutulur.",
+  "bankalar": {
+    "albaraka": {
+      "banka_adi": "Albaraka Türk Katılım Bankası A.Ş.",
+      "urunler": {
+        "konut": {
+          "ad": "Konut Finansmanı",
+          "sutunlar": [
+            "Tutar Aralığı",
+            "Vade Aralığı",
+            "Aylık Kâr Payı Oranı (%)",
+            "Not / Koşul"
+          ],
+          "satirlar": [
+            {
+              "degerler": ["0 – 1.000.000 TL", "1 – 12 Ay", "%2,87", "Dijitale Özel / Başlangıç Oranı"],
+              "tutar_min": 0,
+              "tutar_max": 1000000,
+              "vade_min": 1,
+              "vade_max": 12,
+              "kar_payi_min": 2.87,
+              "kar_payi_max": 2.87
+            },
+            {
+              "degerler": ["0 – 1.000.000 TL", "13 – 60 Ay", "%2,95", "Standart Konut Oranı"],
+              "tutar_min": 0,
+              "tutar_max": 1000000,
+              "vade_min": 13,
+              "vade_max": 60,
+              "kar_payi_min": 2.95,
+              "kar_payi_max": 2.95
+            },
+            {
+              "degerler": ["0 – 1.000.000 TL", "61 – 120 Ay", "%3,05 – %3,19", "Uzun Vade Dilimi"],
+              "tutar_min": 0,
+              "tutar_max": 1000000,
+              "vade_min": 61,
+              "vade_max": 120,
+              "kar_payi_min": 3.05,
+              "kar_payi_max": 3.19
+            },
+            {
+              "degerler": ["1.000.001 – 5.000.000 TL", "1 – 60 Ay", "%2,99", "Yüksek Tutar / Orta Vade"],
+              "tutar_min": 1000001,
+              "tutar_max": 5000000,
+              "vade_min": 1,
+              "vade_max": 60,
+              "kar_payi_min": 2.99,
+              "kar_payi_max": 2.99
+            },
+            {
+              "degerler": ["1.000.001 – 5.000.000 TL", "61 – 120 Ay", "%3,15 – %3,20", "Üst Tutar / Maksimum Vade"],
+              "tutar_min": 1000001,
+              "tutar_max": 5000000,
+              "vade_min": 61,
+              "vade_max": 120,
+              "kar_payi_min": 3.15,
+              "kar_payi_max": 3.20
+            },
+            {
+              "degerler": ["5.000.001 TL ve üzeri", "1 – 120 Ay", "%3,25", "Lüks Konut Kapsamı"],
+              "tutar_min": 5000001,
+              "tutar_max": null,
+              "vade_min": 1,
+              "vade_max": 120,
+              "kar_payi_min": 3.25,
+              "kar_payi_max": 3.25
+            }
+          ],
+          "notlar": [
+            "Maksimum vade 120 ay (10 yıl).",
+            "Maksimum tutar ekspertiz değerine ve enerji sınıfına bağlıdır: 5 milyon TL'ye kadar A sınıfı konutlarda değerin %90'ına kadar, 5–7 milyon TL arasında %80; 10 milyon TL üzerinde kademeli azalan oranlar uygulanır.",
+            "BSMV ve KKDF'den muaftır."
+          ],
+          "grafik": {
+            "baslik": "Vade üst sınırı (ay)",
+            "etiketler": ["0–1 Mn / 1–12", "0–1 Mn / 13–60", "0–1 Mn / 61–120", "1–5 Mn / 1–60", "1–5 Mn / 61–120", "5 Mn+ / 1–120"],
+            "degerler": [12, 60, 120, 60, 120, 120]
+          },
+          "kaynak_adi": "Albaraka Türk Konut Finansmanı",
+          "kaynak_url": "https://www.albaraka.com.tr/tr/bireysel/finansmanlar/konut-finansmani/konut-finansmani"
+        },
+        "ihtiyac": {
+          "ad": "İhtiyaç Finansmanı",
+          "sutunlar": [
+            "Tutar Aralığı",
+            "İzin Verilen Maks. Vade",
+            "Vade Dilimi",
+            "Aylık Kâr Payı Oranı (%)"
+          ],
+          "satirlar": [
+            {
+              "degerler": ["0 – 125.000 TL", "36 Ay", "1 – 12 Ay", "%4,19"],
+              "tutar_min": 0,
+              "tutar_max": 125000,
+              "izin_maks_vade": 36,
+              "vade_min": 1,
+              "vade_max": 12,
+              "kar_payi_min": 4.19,
+              "kar_payi_max": 4.19
+            },
+            {
+              "degerler": ["0 – 125.000 TL", "36 Ay", "13 – 36 Ay", "%4,39"],
+              "tutar_min": 0,
+              "tutar_max": 125000,
+              "izin_maks_vade": 36,
+              "vade_min": 13,
+              "vade_max": 36,
+              "kar_payi_min": 4.39,
+              "kar_payi_max": 4.39
+            },
+            {
+              "degerler": ["125.001 – 250.000 TL", "24 Ay", "1 – 12 Ay", "%4,29"],
+              "tutar_min": 125001,
+              "tutar_max": 250000,
+              "izin_maks_vade": 24,
+              "vade_min": 1,
+              "vade_max": 12,
+              "kar_payi_min": 4.29,
+              "kar_payi_max": 4.29
+            },
+            {
+              "degerler": ["125.001 – 250.000 TL", "24 Ay", "13 – 24 Ay", "%4,45"],
+              "tutar_min": 125001,
+              "tutar_max": 250000,
+              "izin_maks_vade": 24,
+              "vade_min": 13,
+              "vade_max": 24,
+              "kar_payi_min": 4.45,
+              "kar_payi_max": 4.45
+            },
+            {
+              "degerler": ["250.001 TL ve üzeri", "12 Ay", "1 – 12 Ay", "%4,59"],
+              "tutar_min": 250001,
+              "tutar_max": null,
+              "izin_maks_vade": 12,
+              "vade_min": 1,
+              "vade_max": 12,
+              "kar_payi_min": 4.59,
+              "kar_payi_max": 4.59
+            }
+          ],
+          "notlar": [
+            "125.000 TL'ye kadar maksimum vade 36 ay; 125.001–250.000 TL arasında 24 ay; 250.001 TL ve üzerinde 12 aydır.",
+            "Maksimum tutar genellikle müşteri geliri ve Findeks kredi notuna göre 500.000–1.000.000 TL üst sınırla kullandırılır."
+          ],
+          "grafik": {
+            "baslik": "İzin verilen maksimum vade (ay)",
+            "etiketler": ["0–125 Bin TL", "125–250 Bin TL", "250 Bin TL+"],
+            "degerler": [36, 24, 12]
+          },
+          "kaynak_adi": "Albaraka Türk İhtiyaç Finansmanı",
+          "kaynak_url": "https://www.albaraka.com.tr/tr/bireysel/finansmanlar/ihtiyac"
+        },
+        "arac": {
+          "ad": "Taşıt Finansmanı",
+          "sutunlar": [
+            "Araç Değer Aralığı (Kasko / Fatura)",
+            "Maks. Finansman Oranı (%)",
+            "Maks. Vade",
+            "Aylık Kâr Payı Oranı (%)"
+          ],
+          "satirlar": [
+            {
+              "degerler": ["0 – 400.000 TL", "%70 (Maks. 280.000 TL)", "48 Ay", "%3,25 – %3,45"],
+              "tutar_min": 0,
+              "tutar_max": 400000,
+              "finansman_orani": 70,
+              "maks_finansman_tutari": 280000,
+              "vade_max": 48,
+              "kar_payi_min": 3.25,
+              "kar_payi_max": 3.45
+            },
+            {
+              "degerler": ["400.001 – 800.000 TL", "%50 (Maks. 400.000 TL)", "36 Ay", "%3,35 – %3,55"],
+              "tutar_min": 400001,
+              "tutar_max": 800000,
+              "finansman_orani": 50,
+              "maks_finansman_tutari": 400000,
+              "vade_max": 36,
+              "kar_payi_min": 3.35,
+              "kar_payi_max": 3.55
+            },
+            {
+              "degerler": ["800.001 – 1.200.000 TL", "%30 (Maks. 360.000 TL)", "24 Ay", "%3,45 – %3,65"],
+              "tutar_min": 800001,
+              "tutar_max": 1200000,
+              "finansman_orani": 30,
+              "maks_finansman_tutari": 360000,
+              "vade_max": 24,
+              "kar_payi_min": 3.45,
+              "kar_payi_max": 3.65
+            },
+            {
+              "degerler": ["1.200.001 – 2.000.000 TL", "%20 (Maks. 400.000 TL)", "12 Ay", "%3,60 – %3,80"],
+              "tutar_min": 1200001,
+              "tutar_max": 2000000,
+              "finansman_orani": 20,
+              "maks_finansman_tutari": 400000,
+              "vade_max": 12,
+              "kar_payi_min": 3.60,
+              "kar_payi_max": 3.80
+            },
+            {
+              "degerler": ["2.000.001 TL ve üzeri", "%0 (Kullandırılmaz)", "0 Ay", "—"],
+              "tutar_min": 2000001,
+              "tutar_max": null,
+              "finansman_orani": 0,
+              "maks_finansman_tutari": 0,
+              "vade_max": 0,
+              "kar_payi_min": null,
+              "kar_payi_max": null
+            }
+          ],
+          "notlar": [
+            "400.000 TL altındaki araçlar için maksimum vade 48 ay; araç değeri arttıkça sırasıyla 36, 24 ve 12 aya düşer.",
+            "Maksimum finansman tutarı, araç değerinin ilgili basamağındaki yüzde oranı kadardır.",
+            "İkinci el araçlarda araç yaşı ile vade süresi toplamı en fazla 8–10 yılı geçemez."
+          ],
+          "grafik": {
+            "baslik": "Araç değerine göre maksimum vade (ay)",
+            "etiketler": ["0–400 Bin", "400–800 Bin", "800 Bin–1,2 Mn", "1,2–2 Mn", "2 Mn+"],
+            "degerler": [48, 36, 24, 12, 0]
+          },
+          "kaynak_adi": "Albaraka Türk Taşıt Finansmanı",
+          "kaynak_url": "https://www.albaraka.com.tr/tr/bireysel/finansmanlar/tasit-finansmani/tasit-finansmani"
+        },
+        "bes_teminatli": {
+          "ad": "BES Teminatlı Finansman",
+          "sutunlar": [
+            "Finansman Türü",
+            "Tutar Aralığı",
+            "Maksimum Vade",
+            "Aylık Kâr Payı Oranı (%)"
+          ],
+          "satirlar": [
+            {
+              "degerler": ["BES Teminatlı Finansman", "BES birikim tutarının %70–%80'i", "36 Ay", "%3,10 – %3,30"],
+              "tutar_min": null,
+              "tutar_max": null,
+              "vade_max": 36,
+              "kar_payi_min": 3.10,
+              "kar_payi_max": 3.30
+            }
+          ],
+          "notlar": [],
+          "grafik": {
+            "baslik": "Maksimum vade (ay)",
+            "etiketler": ["BES Teminatlı"],
+            "degerler": [36]
+          },
+          "kaynak_adi": "Albaraka Türk BES Teminatlı Finansman",
+          "kaynak_url": "https://www.albaraka.com.tr/tr/bireysel/finansmanlar/birikimlerinizi-koruyan-bes-teminatli-finansman-albarakada"
+        },
+        "dijital_pratik": {
+          "ad": "Dijital Pratik Finansman Kart",
+          "sutunlar": [
+            "Finansman Türü",
+            "Tutar Aralığı",
+            "Maksimum Vade",
+            "Aylık Kâr Payı Oranı (%)"
+          ],
+          "satirlar": [
+            {
+              "degerler": ["Dijital Pratik Finansman Kart", "10.000 – 100.000 TL", "12 – 24 Ay", "%3,89 – %4,15"],
+              "tutar_min": 10000,
+              "tutar_max": 100000,
+              "vade_min": 12,
+              "vade_max": 24,
+              "kar_payi_min": 3.89,
+              "kar_payi_max": 4.15
+            }
+          ],
+          "notlar": [],
+          "grafik": {
+            "baslik": "Vade üst sınırı (ay)",
+            "etiketler": ["Dijital Pratik"],
+            "degerler": [24]
+          },
+          "kaynak_adi": "Albaraka Türk Dijital Pratik Finansman Kart",
+          "kaynak_url": "https://www.albaraka.com.tr/tr/kampanyalar/detay/dijital-musterilere-ozel-pratik-finansman-kart"
+        }
+      }
+    },
+    "dunya_katilim": {
+      "banka_adi": "Dünya Katılım Bankası A.Ş.",
+      "urunler": {
+        "konut": {
+          "ad": "Konut Finansmanı",
+          "sutunlar": [
+            "Konut Değer Aralığı",
+            "İlk Ev Finansman Oranı (A-B / C / Diğer)",
+            "2. Ev Finansman Oranı (A-B / C / Diğer)",
+            "Azami Vade",
+            "Aylık Kâr Payı Oranı (%)"
+          ],
+          "satirlar": [
+            {
+              "degerler": ["0 – 5.000.000 TL", "%90 / %80 / %70", "%22,5 / %20 / %17,5", "120 Ay", "%3,39 (Standart / Başlangıç)"],
+              "tutar_min": 0,
+              "tutar_max": 5000000,
+              "ilk_ev_finansman_oranlari": [90, 80, 70],
+              "ikinci_ev_finansman_oranlari": [22.5, 20, 17.5],
+              "vade_max": 120,
+              "kar_payi_min": 3.39,
+              "kar_payi_max": 3.39
+            },
+            {
+              "degerler": ["5.000.001 – 7.000.000 TL", "%80 / %70 / %60", "%20 / %17,5 / %15", "120 Ay", "%3,39 – %3,49"],
+              "tutar_min": 5000001,
+              "tutar_max": 7000000,
+              "ilk_ev_finansman_oranlari": [80, 70, 60],
+              "ikinci_ev_finansman_oranlari": [20, 17.5, 15],
+              "vade_max": 120,
+              "kar_payi_min": 3.39,
+              "kar_payi_max": 3.49
+            },
+            {
+              "degerler": ["7.000.001 – 10.000.000 TL", "%70 / %60 / %50", "%17,5 / %15 / %12,5", "120 Ay", "%3,45 – %3,55"],
+              "tutar_min": 7000001,
+              "tutar_max": 10000000,
+              "ilk_ev_finansman_oranlari": [70, 60, 50],
+              "ikinci_ev_finansman_oranlari": [17.5, 15, 12.5],
+              "vade_max": 120,
+              "kar_payi_min": 3.45,
+              "kar_payi_max": 3.55
+            },
+            {
+              "degerler": ["10.000.001 – 20.000.000 TL", "%50 / %40 / %30", "%12,5 / %10 / %7,5", "120 Ay", "%3,55 – %3,65"],
+              "tutar_min": 10000001,
+              "tutar_max": 20000000,
+              "ilk_ev_finansman_oranlari": [50, 40, 30],
+              "ikinci_ev_finansman_oranlari": [12.5, 10, 7.5],
+              "vade_max": 120,
+              "kar_payi_min": 3.55,
+              "kar_payi_max": 3.65
+            },
+            {
+              "degerler": ["20.000.001 TL ve üzeri", "%40 / %30 / %20", "%10 / %7,5 / %5", "120 Ay", "%3,69"],
+              "tutar_min": 20000001,
+              "tutar_max": null,
+              "ilk_ev_finansman_oranlari": [40, 30, 20],
+              "ikinci_ev_finansman_oranlari": [10, 7.5, 5],
+              "vade_max": 120,
+              "kar_payi_min": 3.69,
+              "kar_payi_max": 3.69
+            }
+          ],
+          "notlar": [
+            "Finansman oranı ve finanse edilebilir azami tutar; konutun enerji sınıfına (A-B, C veya diğer) ve ilk ya da ikinci ev olmasına göre belirlenir.",
+            "Maksimum vade 120 ay (10 yıl).",
+            "Maksimum tutar, konut ekspertiz değerinin enerji sınıfına göre %90'ına kadardır."
+          ],
+          "grafik": {
+            "baslik": "Konut değerine göre azami vade (ay)",
+            "etiketler": ["0–5 Mn", "5–7 Mn", "7–10 Mn", "10–20 Mn", "20 Mn+"],
+            "degerler": [120, 120, 120, 120, 120]
+          },
+          "kaynak_adi": "Dünya Katılım Konut Finansmanı",
+          "kaynak_url": "https://dunyakatilim.com.tr/kendim-icin/finansmanlar/konut-finansmanlari/konut-finansmani"
+        },
+        "arac": {
+          "ad": "Taşıt Finansmanı",
+          "sutunlar": [
+            "Fatura / Kasko Değeri Aralığı",
+            "Azami Finansman Oranı (%)",
+            "Maksimum Finansman Tutarı",
+            "Azami Vade",
+            "Aylık Kâr Payı Oranı (%)"
+          ],
+          "satirlar": [
+            {
+              "degerler": ["0 – 400.000 TL", "%70", "Değer × %70 (Maks. 280.000 TL)", "48 Ay", "%3,39"],
+              "tutar_min": 0,
+              "tutar_max": 400000,
+              "finansman_orani": 70,
+              "maks_finansman_tutari": 280000,
+              "vade_max": 48,
+              "kar_payi_min": 3.39,
+              "kar_payi_max": 3.39
+            },
+            {
+              "degerler": ["400.001 – 800.000 TL", "%50", "Değer × %50 (Maks. 400.000 TL)", "36 Ay", "%3,39 – %3,49"],
+              "tutar_min": 400001,
+              "tutar_max": 800000,
+              "finansman_orani": 50,
+              "maks_finansman_tutari": 400000,
+              "vade_max": 36,
+              "kar_payi_min": 3.39,
+              "kar_payi_max": 3.49
+            },
+            {
+              "degerler": ["800.001 – 1.200.000 TL", "%30", "Değer × %30 (Maks. 360.000 TL)", "24 Ay", "%3,49 – %3,59"],
+              "tutar_min": 800001,
+              "tutar_max": 1200000,
+              "finansman_orani": 30,
+              "maks_finansman_tutari": 360000,
+              "vade_max": 24,
+              "kar_payi_min": 3.49,
+              "kar_payi_max": 3.59
+            },
+            {
+              "degerler": ["1.200.001 – 2.000.000 TL", "%20", "Değer × %20 (Maks. 400.000 TL)", "12 Ay", "%3,59 – %3,69"],
+              "tutar_min": 1200001,
+              "tutar_max": 2000000,
+              "finansman_orani": 20,
+              "maks_finansman_tutari": 400000,
+              "vade_max": 12,
+              "kar_payi_min": 3.59,
+              "kar_payi_max": 3.69
+            },
+            {
+              "degerler": ["2.000.001 TL ve üzeri", "%0", "Kredi kullandırılmaz", "0 Ay", "—"],
+              "tutar_min": 2000001,
+              "tutar_max": null,
+              "finansman_orani": 0,
+              "maks_finansman_tutari": 0,
+              "vade_max": 0,
+              "kar_payi_min": null,
+              "kar_payi_max": null
+            }
+          ],
+          "notlar": [
+            "Azami vade ve finanse edilebilecek maksimum tutar, sıfır kilometre araçlarda fatura; ikinci el araçlarda kasko değeri üzerinden hesaplanır.",
+            "400.000 TL altındaki araçlarda maksimum vade 48 ay; 400.001–800.000 TL için 36 ay; 800.001–1.200.000 TL için 24 ay; 1.200.001–2.000.000 TL için 12 aydır.",
+            "İkinci el binek araçlarda yaş sınırı 12'dir."
+          ],
+          "grafik": {
+            "baslik": "Araç değerine göre azami vade (ay)",
+            "etiketler": ["0–400 Bin", "400–800 Bin", "800 Bin–1,2 Mn", "1,2–2 Mn", "2 Mn+"],
+            "degerler": [48, 36, 24, 12, 0]
+          },
+          "kaynak_adi": "Dünya Katılım Araç Finansmanı",
+          "kaynak_url": "https://dunyakatilim.com.tr/kendim-icin/finansmanlar/arac-finansmanlari/arac-finansmani"
+        },
+        "ihtiyac": {
+          "ad": "İhtiyaç Finansmanı",
+          "sutunlar": [
+            "Finansman Tutar Aralığı",
+            "Yasal Maksimum Vade",
+            "Vade Dilimi",
+            "Aylık Kâr Payı Oranı (%)"
+          ],
+          "satirlar": [
+            {
+              "degerler": ["0 – 125.000 TL", "36 Ay", "1 – 12 Ay", "%3,39"],
+              "tutar_min": 0,
+              "tutar_max": 125000,
+              "izin_maks_vade": 36,
+              "vade_min": 1,
+              "vade_max": 12,
+              "kar_payi_min": 3.39,
+              "kar_payi_max": 3.39
+            },
+            {
+              "degerler": ["0 – 125.000 TL", "36 Ay", "13 – 36 Ay", "%3,59 – %3,89"],
+              "tutar_min": 0,
+              "tutar_max": 125000,
+              "izin_maks_vade": 36,
+              "vade_min": 13,
+              "vade_max": 36,
+              "kar_payi_min": 3.59,
+              "kar_payi_max": 3.89
+            },
+            {
+              "degerler": ["125.001 – 250.000 TL", "24 Ay", "1 – 12 Ay", "%3,59"],
+              "tutar_min": 125001,
+              "tutar_max": 250000,
+              "izin_maks_vade": 24,
+              "vade_min": 1,
+              "vade_max": 12,
+              "kar_payi_min": 3.59,
+              "kar_payi_max": 3.59
+            },
+            {
+              "degerler": ["125.001 – 250.000 TL", "24 Ay", "13 – 24 Ay", "%3,89 – %4,19"],
+              "tutar_min": 125001,
+              "tutar_max": 250000,
+              "izin_maks_vade": 24,
+              "vade_min": 13,
+              "vade_max": 24,
+              "kar_payi_min": 3.89,
+              "kar_payi_max": 4.19
+            },
+            {
+              "degerler": ["250.001 – 500.000 TL", "12 Ay", "1 – 12 Ay", "%4,19 – %4,39"],
+              "tutar_min": 250001,
+              "tutar_max": 500000,
+              "izin_maks_vade": 12,
+              "vade_min": 1,
+              "vade_max": 12,
+              "kar_payi_min": 4.19,
+              "kar_payi_max": 4.39
+            }
+          ],
+          "notlar": [
+            "Finansman tutarı arttıkça BDDK düzenlemesi gereği yasal azami vade kısalır.",
+            "Enerya Doğalgaz / İhtiyaç Finansmanı özel ürününde aylık kâr payı oranı %3,99 ve azami vade 36 aydır.",
+            "Bireysel müşteriler için üst limit genellikle 500.000 TL'dir."
+          ],
+          "grafik": {
+            "baslik": "Yasal maksimum vade (ay)",
+            "etiketler": ["0–125 Bin TL", "125–250 Bin TL", "250–500 Bin TL"],
+            "degerler": [36, 24, 12]
+          },
+          "kaynak_adi": "Dünya Katılım İhtiyaç Finansmanı",
+          "kaynak_url": "https://dunyakatilim.com.tr/kendim-icin/finansmanlar/ihtiyac-finansmani",
+          "ek_kaynaklar": [
+            {
+              "ad": "Dünya Katılım Enerya İhtiyaç Finansmanı",
+              "url": "https://dunyakatilim.com.tr/kendim-icin/finansmanlar/ihtiyac-finansmanlari/enerya-ihtiyac-finansmani"
+            }
+          ]
+        }
+      }
+    },
+    "kuveyt_turk": {
+      "banka_adi": "Kuveyt Türk Katılım Bankası A.Ş.",
+      "urunler": {
+        "konut": {
+          "ad": "Konut, Arsa ve İş Yeri Finansmanları",
+          "sutunlar": [
+            "Finansman Türü",
+            "Tutar / Maksimum Finansman",
+            "Azami Vade",
+            "Aylık Kâr Payı Oranı (%)",
+            "Not / Kriter"
+          ],
+          "satirlar": [
+            {
+              "degerler": ["İlk Evim Konut Finansmanı", "0 – 5.000.000 TL", "120 Ay", "%2,79 – %2,89", "Kendisi ve ailesi adına konut olmayanlar; %90'a kadar finansman"],
+              "tutar_min": 0,
+              "tutar_max": 5000000,
+              "finansman_orani_max": 90,
+              "vade_max": 120,
+              "kar_payi_min": 2.79,
+              "kar_payi_max": 2.89
+            },
+            {
+              "degerler": ["İlk Evim Konut Finansmanı", "5.000.001 – 10.000.000 TL", "120 Ay", "%2,89 – %2,99", "Ekspertiz ve enerji sınıfına göre kademeli azalan oran"],
+              "tutar_min": 5000001,
+              "tutar_max": 10000000,
+              "vade_max": 120,
+              "kar_payi_min": 2.89,
+              "kar_payi_max": 2.99
+            },
+            {
+              "degerler": ["Standart Konut Finansmanı", "0 – 5.000.000 TL", "120 Ay", "%2,89 – %2,99", "Mevcut evi olanlar için 2. ev alımlarında geçerli"],
+              "tutar_min": 0,
+              "tutar_max": 5000000,
+              "vade_max": 120,
+              "kar_payi_min": 2.89,
+              "kar_payi_max": 2.99
+            },
+            {
+              "degerler": ["Standart Konut Finansmanı", "5.000.001 TL ve üzeri", "120 Ay", "%3,05 – %3,19", "3 ay ödeme erteleme seçeneği mevcut"],
+              "tutar_min": 5000001,
+              "tutar_max": null,
+              "vade_max": 120,
+              "kar_payi_min": 3.05,
+              "kar_payi_max": 3.19
+            },
+            {
+              "degerler": ["Arsa Finansmanı", "Ekspertiz değerinin %50'si", "60 Ay", "%3,19 – %3,45", "Minimum %50 peşinat; imarlı arsalar için"],
+              "finansman_orani": 50,
+              "vade_max": 60,
+              "kar_payi_min": 3.19,
+              "kar_payi_max": 3.45
+            },
+            {
+              "degerler": ["İş Yeri Finansmanı", "Ekspertiz değerinin %50'si", "60 Ay", "%3,19 – %3,49", "Ofis, dükkân, depo vb. ticari gayrimenkuller"],
+              "finansman_orani": 50,
+              "vade_max": 60,
+              "kar_payi_min": 3.19,
+              "kar_payi_max": 3.49
+            }
+          ],
+          "notlar": [
+            "Konut finansmanlarında maksimum vade 120 ay (10 yıl).",
+            "A ve B enerji sınıfı ilk konutlarda ekspertiz değerinin %90'ına, C sınıfında %80'ine kadar finansman sağlanabilir; ikinci ev alımlarında oranlar %22,5–%10 aralığındadır.",
+            "Arsa ve iş yeri finansmanlarında azami vade 60 aydır."
+          ],
+          "grafik": {
+            "baslik": "Finansman türüne göre azami vade (ay)",
+            "etiketler": ["İlk Evim 0–5 Mn", "İlk Evim 5–10 Mn", "Standart 0–5 Mn", "Standart 5 Mn+", "Arsa", "İş Yeri"],
+            "degerler": [120, 120, 120, 120, 60, 60]
+          },
+          "kaynak_adi": "Kuveyt Türk Konut Finansmanları",
+          "kaynak_url": "https://www.kuveytturk.com.tr/kendim-icin/finansmanlar/konut-finansmanlari"
+        },
+        "arac": {
+          "ad": "Araç Finansmanları",
+          "sutunlar": [
+            "Finansman Türü",
+            "Araç Fatura / Kasko Değeri",
+            "Maks. Finansman Oranı",
+            "Azami Vade",
+            "Aylık Kâr Payı Oranı (%)"
+          ],
+          "satirlar": [
+            {
+              "degerler": ["TOGG Finansmanı (Kampanyalı)", "Kampanya tutarı", "Belirlenen kampanya tutarı", "12 Ay", "%0,00 (Vade farksız / Kampanyalı)"],
+              "vade_max": 12,
+              "kar_payi_min": 0.0,
+              "kar_payi_max": 0.0
+            },
+            {
+              "degerler": ["TOGG Finansmanı (Standart)", "Araç değerine göre", "BDDK baremleri", "48 Ay", "%2,89 – %2,99"],
+              "vade_max": 48,
+              "kar_payi_min": 2.89,
+              "kar_payi_max": 2.99
+            },
+            {
+              "degerler": ["Genel Taşıt (0 km ve 2. el)", "0 – 400.000 TL", "%70 (Maks. 280.000 TL)", "48 Ay", "%3,19 – %3,39"],
+              "tutar_min": 0,
+              "tutar_max": 400000,
+              "finansman_orani": 70,
+              "maks_finansman_tutari": 280000,
+              "vade_max": 48,
+              "kar_payi_min": 3.19,
+              "kar_payi_max": 3.39
+            },
+            {
+              "degerler": ["Genel Taşıt (0 km ve 2. el)", "400.001 – 800.000 TL", "%50 (Maks. 400.000 TL)", "36 Ay", "%3,29 – %3,45"],
+              "tutar_min": 400001,
+              "tutar_max": 800000,
+              "finansman_orani": 50,
+              "maks_finansman_tutari": 400000,
+              "vade_max": 36,
+              "kar_payi_min": 3.29,
+              "kar_payi_max": 3.45
+            },
+            {
+              "degerler": ["Genel Taşıt (0 km ve 2. el)", "800.001 – 1.200.000 TL", "%30 (Maks. 360.000 TL)", "24 Ay", "%3,39 – %3,55"],
+              "tutar_min": 800001,
+              "tutar_max": 1200000,
+              "finansman_orani": 30,
+              "maks_finansman_tutari": 360000,
+              "vade_max": 24,
+              "kar_payi_min": 3.39,
+              "kar_payi_max": 3.55
+            },
+            {
+              "degerler": ["Genel Taşıt (0 km ve 2. el)", "1.200.001 – 2.000.000 TL", "%20 (Maks. 400.000 TL)", "12 Ay", "%3,55 – %3,69"],
+              "tutar_min": 1200001,
+              "tutar_max": 2000000,
+              "finansman_orani": 20,
+              "maks_finansman_tutari": 400000,
+              "vade_max": 12,
+              "kar_payi_min": 3.55,
+              "kar_payi_max": 3.69
+            },
+            {
+              "degerler": ["Genel Taşıt", "2.000.001 TL ve üzeri", "%0 (Kullandırılmaz)", "0 Ay", "—"],
+              "tutar_min": 2000001,
+              "tutar_max": null,
+              "finansman_orani": 0,
+              "maks_finansman_tutari": 0,
+              "vade_max": 0,
+              "kar_payi_min": null,
+              "kar_payi_max": null
+            }
+          ],
+          "notlar": [
+            "Maksimum vade 0–5 yaş araçlarda 48 ay, 6–10 yaş araçlarda 36 aydır.",
+            "İkinci el araç yaş sınırı en fazla 10'dur.",
+            "Taşıt finansmanında 3 aya kadar ödeme erteleme seçeneği bulunmaktadır."
+          ],
+          "grafik": {
+            "baslik": "Finansman türüne ve araç değerine göre azami vade (ay)",
+            "etiketler": ["TOGG Kampanyalı", "TOGG Standart", "0–400 Bin", "400–800 Bin", "800 Bin–1,2 Mn", "1,2–2 Mn", "2 Mn+"],
+            "degerler": [12, 48, 48, 36, 24, 12, 0]
+          },
+          "kaynak_adi": "Kuveyt Türk Araç Finansmanları",
+          "kaynak_url": "https://www.kuveytturk.com.tr/kendim-icin/finansmanlar/arac-finansmanlari"
+        },
+        "alisveris": {
+          "ad": "Alışveriş Finansmanı",
+          "sutunlar": [
+            "Ürün / Tutar Kategorisi",
+            "Tutar Aralığı",
+            "Azami Vade",
+            "Aylık Kâr Payı Oranı (%)"
+          ],
+          "satirlar": [
+            {
+              "degerler": ["Genel Alışveriş Finansmanı", "0 – 125.000 TL", "36 Ay", "%3,29 – %3,59 (Anlaşmaya göre %0)"],
+              "tutar_min": 0,
+              "tutar_max": 125000,
+              "vade_max": 36,
+              "kar_payi_min": 3.29,
+              "kar_payi_max": 3.59,
+              "kampanyali_kar_payi_min": 0.0
+            },
+            {
+              "degerler": ["Genel Alışveriş Finansmanı", "125.001 – 250.000 TL", "24 Ay", "%3,49 – %3,69"],
+              "tutar_min": 125001,
+              "tutar_max": 250000,
+              "vade_max": 24,
+              "kar_payi_min": 3.49,
+              "kar_payi_max": 3.69
+            },
+            {
+              "degerler": ["Genel Alışveriş Finansmanı", "250.001 TL üzeri", "12 Ay", "%3,69 – %3,89"],
+              "tutar_min": 250001,
+              "tutar_max": null,
+              "vade_max": 12,
+              "kar_payi_min": 3.69,
+              "kar_payi_max": 3.89
+            },
+            {
+              "degerler": ["Cep Telefonu (Fiyat ≤ 20.000 TL)", "0 – 20.000 TL", "12 Ay", "%3,29 – %3,59"],
+              "tutar_min": 0,
+              "tutar_max": 20000,
+              "vade_max": 12,
+              "kar_payi_min": 3.29,
+              "kar_payi_max": 3.59
+            },
+            {
+              "degerler": ["Cep Telefonu (Fiyat > 20.000 TL)", "20.001 TL ve üzeri", "3 Ay", "%3,29 – %3,59"],
+              "tutar_min": 20001,
+              "tutar_max": null,
+              "vade_max": 3,
+              "kar_payi_min": 3.29,
+              "kar_payi_max": 3.59
+            },
+            {
+              "degerler": ["Tablet Bilgisayar", "Tüm tutarlar", "6 Ay", "%3,29 – %3,59"],
+              "vade_max": 6,
+              "kar_payi_min": 3.29,
+              "kar_payi_max": 3.59
+            },
+            {
+              "degerler": ["Bilgisayar / Laptop", "Tüm tutarlar", "12 Ay", "%3,29 – %3,59"],
+              "vade_max": 12,
+              "kar_payi_min": 3.29,
+              "kar_payi_max": 3.59
+            }
+          ],
+          "notlar": [
+            "Anlaşmalı e-ticaret sitelerinde ve bayilerde kredi kartı limitini bloke etmeden dijital olarak kullanılabilir.",
+            "Cep telefonlarında fiyat 20.000 TL'ye kadar 12 ay, 20.000 TL'nin üzerinde 3 ay; tabletlerde 6 ay, bilgisayarlarda 12 ay azami vade uygulanır."
+          ],
+          "grafik": {
+            "baslik": "Tutar ve ürün kategorisine göre azami vade (ay)",
+            "etiketler": ["0–125 Bin", "125–250 Bin", "250 Bin+", "Telefon ≤20 Bin", "Telefon >20 Bin", "Tablet", "Bilgisayar"],
+            "degerler": [36, 24, 12, 12, 3, 6, 12]
+          },
+          "kaynak_adi": "Kuveyt Türk Alışveriş Finansmanları",
+          "kaynak_url": "https://www.kuveytturk.com.tr/kendim-icin/finansmanlar/alisveris-finansmanlari"
+        },
+        "ihtiyac": {
+          "ad": "Hac-Umre ve Eğitim Finansmanları",
+          "sutunlar": [
+            "Finansman Türü",
+            "Tutar Aralığı",
+            "Azami Vade",
+            "Aylık Kâr Payı Oranı (%)",
+            "Kampanya / Avantaj"
+          ],
+          "satirlar": [
+            {
+              "degerler": ["Hac ve Umre Finansmanı (Kampanya)", "Diyanet / Acente Bedeli", "3 Ay", "%0,00 (Vade farksız)", "Belirli dönemlerde %60 tutara kadar 3 taksit vade farksız"],
+              "vade_max": 3,
+              "kar_payi_min": 0.0,
+              "kar_payi_max": 0.0,
+              "finansman_orani_max": 60
+            },
+            {
+              "degerler": ["Hac ve Umre Finansmanı (Standart)", "Diyanet / Acente Bedeli", "36 Ay", "%3,39 – %3,69", "36 aya varan eşit taksitli ödeme"],
+              "vade_max": 36,
+              "kar_payi_min": 3.39,
+              "kar_payi_max": 3.69
+            },
+            {
+              "degerler": ["Eğitim Finansmanı (Sağlam Kart)", "1.000 TL ve üzeri harcama", "2 – 5 Ay", "%0,00 (Vade farksız)", "Sağlam Kart ile eğitim/kırtasiyede ücretsiz sonradan taksitlendirme"],
+              "tutar_min": 1000,
+              "tutar_max": null,
+              "vade_min": 2,
+              "vade_max": 5,
+              "kar_payi_min": 0.0,
+              "kar_payi_max": 0.0
+            },
+            {
+              "degerler": ["Eğitim Finansmanı (Taksitli)", "0 – 50.000 TL", "36 Ay", "%3,29 – %3,59", "Okul / Üniversite faturaları karşılığı doğrudan ödeme"],
+              "tutar_min": 0,
+              "tutar_max": 50000,
+              "vade_max": 36,
+              "kar_payi_min": 3.29,
+              "kar_payi_max": 3.59
+            },
+            {
+              "degerler": ["Eğitim Finansmanı (Taksitli)", "50.001 TL ve üzeri", "24 Ay", "%3,49 – %3,69", "Fatura karşılığı kurum hesabına aktarım"],
+              "tutar_min": 50001,
+              "tutar_max": null,
+              "vade_max": 24,
+              "kar_payi_min": 3.49,
+              "kar_payi_max": 3.69
+            }
+          ],
+          "notlar": [
+            "Eğitim ve Hac-Umre finansmanlarında genel üst vade 36 aydır; 50.000 TL üzeri eğitim harcamalarında azami vade 24 aydır.",
+            "Maksimum tutar, kurum faturası veya Diyanet sözleşme tutarı kadardır."
+          ],
+          "grafik": {
+            "baslik": "Finansman türüne göre azami vade (ay)",
+            "etiketler": ["Hac-Umre Kampanya", "Hac-Umre Standart", "Eğitim Sağlam Kart", "Eğitim 0–50 Bin", "Eğitim 50 Bin+"],
+            "degerler": [3, 36, 5, 36, 24]
+          },
+          "kaynak_adi": "Kuveyt Türk İhtiyaç Finansmanları",
+          "kaynak_url": "https://www.kuveytturk.com.tr/kendim-icin/finansmanlar/ihtiyac-finansmanlari"
+        }
+      }
+    },
+    "emlak_katilim": {
+      "banka_adi": "Türkiye Emlak Katılım Bankası A.Ş.",
+      "urunler": {
+        "konut": {
+          "ad": "Konut, Arsa ve İş Yeri Finansmanları",
+          "sutunlar": [
+            "Finansman Türü",
+            "Tutar Aralığı",
+            "Azami Vade",
+            "Aylık Kâr Payı Oranı (%)",
+            "Not / Kural"
+          ],
+          "satirlar": [
+            {
+              "degerler": ["Yeni Konut Finansmanı", "0 – 1.000.000 TL", "60 Ay", "%2,79 – %2,89", "Kampanyalı / Başlangıç oranı"],
+              "tutar_min": 0,
+              "tutar_max": 1000000,
+              "vade_max": 60,
+              "kar_payi_min": 2.79,
+              "kar_payi_max": 2.89
+            },
+            {
+              "degerler": ["Yeni Konut Finansmanı", "0 – 5.000.000 TL", "120 Ay", "%2,89 – %2,99", "İlk ev alımlarında %90'a varan finansman"],
+              "tutar_min": 0,
+              "tutar_max": 5000000,
+              "finansman_orani_max": 90,
+              "vade_max": 120,
+              "kar_payi_min": 2.89,
+              "kar_payi_max": 2.99
+            },
+            {
+              "degerler": ["Yeni Konut Finansmanı", "5.000.001 – 10.000.000 TL", "120 Ay", "%2,99 – %3,15", "Enerji sınıfına göre kademeli azalan oran"],
+              "tutar_min": 5000001,
+              "tutar_max": 10000000,
+              "vade_max": 120,
+              "kar_payi_min": 2.99,
+              "kar_payi_max": 3.15
+            },
+            {
+              "degerler": ["2. El Konut Finansmanı", "0 – 5.000.000 TL", "120 Ay", "%2,95 – %3,09", "Ekspertiz değerine göre finanse edilir"],
+              "tutar_min": 0,
+              "tutar_max": 5000000,
+              "vade_max": 120,
+              "kar_payi_min": 2.95,
+              "kar_payi_max": 3.09
+            },
+            {
+              "degerler": ["Çevreci Konut Finansmanı", "Tüm tutarlar", "120 Ay", "%2,75 – %2,85", "A ve B enerji sınıfı konutlar için indirimli oran"],
+              "vade_max": 120,
+              "kar_payi_min": 2.75,
+              "kar_payi_max": 2.85
+            },
+            {
+              "degerler": ["Kentsel Dönüşüm Finansmanı", "Bakanlık limitleri", "120 Ay", "%0,79 – %1,49 (Sübvansiyonlu)", "Çevre, Şehircilik ve İklim Değişikliği Bakanlığı destekli"],
+              "vade_max": 120,
+              "kar_payi_min": 0.79,
+              "kar_payi_max": 1.49
+            },
+            {
+              "degerler": ["Arsa ve İş Yeri Finansmanı", "Ekspertiz değerinin en fazla %50'si", "60 Ay", "%3,19 – %3,49", "Arsa ve iş yeri alımları için"],
+              "finansman_orani_max": 50,
+              "vade_max": 60,
+              "kar_payi_min": 3.19,
+              "kar_payi_max": 3.49
+            }
+          ],
+          "notlar": [
+            "Konut finansmanlarında maksimum vade 120 ay (10 yıl).",
+            "A ve B enerji sınıfı ilk konutlarda ekspertiz değerinin %90'ına, C sınıfında %80'ine kadar; ikinci ev alımlarında %22,5–%5 aralığında finansman uygulanır.",
+            "Arsa ve iş yeri finansmanında azami vade 60 ay, finansman oranı ekspertiz değerinin en fazla %50'sidir.",
+            "Ürün kodu: GMENKULKONUTYENI."
+          ],
+          "grafik": {
+            "baslik": "Finansman türüne göre azami vade (ay)",
+            "etiketler": ["Yeni Konut 0–1 Mn", "Yeni Konut 0–5 Mn", "Yeni Konut 5–10 Mn", "2. El Konut", "Çevreci Konut", "Kentsel Dönüşüm", "Arsa / İş Yeri"],
+            "degerler": [60, 120, 120, 120, 120, 120, 60]
+          },
+          "kaynak_adi": "Emlak Katılım Konut Finansmanı",
+          "kaynak_url": "https://www.emlakkatilim.com.tr/tr/bireysel/finansmanlar/konut-finansmani"
+        },
+        "arac": {
+          "ad": "Taşıt Finansmanları",
+          "sutunlar": [
+            "Araç Fatura / Kasko Değeri",
+            "Azami Finansman Oranı (%)",
+            "Maksimum Finansman Tutarı",
+            "Azami Vade",
+            "Aylık Kâr Payı Oranı (%)"
+          ],
+          "satirlar": [
+            {
+              "degerler": ["0 – 400.000 TL", "%70", "Fatura/Kasko × %70 (Maks. 280.000 TL)", "48 Ay", "%3,19 – %3,39"],
+              "tutar_min": 0,
+              "tutar_max": 400000,
+              "finansman_orani": 70,
+              "maks_finansman_tutari": 280000,
+              "vade_max": 48,
+              "kar_payi_min": 3.19,
+              "kar_payi_max": 3.39
+            },
+            {
+              "degerler": ["400.001 – 800.000 TL", "%50", "Fatura/Kasko × %50 (Maks. 400.000 TL)", "36 Ay", "%3,29 – %3,45"],
+              "tutar_min": 400001,
+              "tutar_max": 800000,
+              "finansman_orani": 50,
+              "maks_finansman_tutari": 400000,
+              "vade_max": 36,
+              "kar_payi_min": 3.29,
+              "kar_payi_max": 3.45
+            },
+            {
+              "degerler": ["800.001 – 1.200.000 TL", "%30", "Fatura/Kasko × %30 (Maks. 360.000 TL)", "24 Ay", "%3,39 – %3,55"],
+              "tutar_min": 800001,
+              "tutar_max": 1200000,
+              "finansman_orani": 30,
+              "maks_finansman_tutari": 360000,
+              "vade_max": 24,
+              "kar_payi_min": 3.39,
+              "kar_payi_max": 3.55
+            },
+            {
+              "degerler": ["1.200.001 – 2.000.000 TL", "%20", "Fatura/Kasko × %20 (Maks. 400.000 TL)", "12 Ay", "%3,55 – %3,69"],
+              "tutar_min": 1200001,
+              "tutar_max": 2000000,
+              "finansman_orani": 20,
+              "maks_finansman_tutari": 400000,
+              "vade_max": 12,
+              "kar_payi_min": 3.55,
+              "kar_payi_max": 3.69
+            },
+            {
+              "degerler": ["2.000.001 TL ve üzeri", "%0", "Kredi kullandırılmaz", "0 Ay", "—"],
+              "tutar_min": 2000001,
+              "tutar_max": null,
+              "finansman_orani": 0,
+              "maks_finansman_tutari": 0,
+              "vade_max": 0,
+              "kar_payi_min": null,
+              "kar_payi_max": null
+            },
+            {
+              "degerler": ["Çevreci Araç (Elektrikli / Hibrit; BDDK baremleri)", "BDDK baremlerine göre", "Fatura/Kasko ve BDDK baremlerine göre", "12 – 48 Ay", "%2,99 – %3,19"],
+              "vade_min": 12,
+              "vade_max": 48,
+              "kar_payi_min": 2.99,
+              "kar_payi_max": 3.19
+            }
+          ],
+          "notlar": [
+            "Azami finansman tutarı ve vade sıfır araçlarda fatura, ikinci el araçlarda kasko değeri üzerinden BDDK baremlerine göre belirlenir.",
+            "400.000 TL altı araçlarda 48 ay; 400.001–800.000 TL arasında 36 ay; 800.001–1.200.000 TL arasında 24 ay; 1.200.001–2.000.000 TL arasında 12 ay azami vade uygulanır.",
+            "Çevreci Araç Finansmanı'nda elektrikli ve hibrit araçlara %2,99–%3,19 bandında indirimli tabela kâr payı oranı uygulanır."
+          ],
+          "grafik": {
+            "baslik": "Araç değerine göre azami vade (ay)",
+            "etiketler": ["0–400 Bin", "400–800 Bin", "800 Bin–1,2 Mn", "1,2–2 Mn", "2 Mn+", "Çevreci Araç"],
+            "degerler": [48, 36, 24, 12, 0, 48]
+          },
+          "kaynak_adi": "Emlak Katılım Taşıt Finansmanı",
+          "kaynak_url": "https://www.emlakkatilim.com.tr/tr/bireysel/finansmanlar/tasit-finansmani"
+        },
+        "ihtiyac": {
+          "ad": "İhtiyaç Finansmanı",
+          "sutunlar": [
+            "Finansman Tutar Aralığı",
+            "Yasal Maksimum Vade",
+            "Vade Dilimi",
+            "Aylık Kâr Payı Oranı (%)"
+          ],
+          "satirlar": [
+            {
+              "degerler": ["0 – 50.000 TL", "36 Ay", "1 – 12 Ay", "%3,49"],
+              "tutar_min": 0,
+              "tutar_max": 50000,
+              "izin_maks_vade": 36,
+              "vade_min": 1,
+              "vade_max": 12,
+              "kar_payi_min": 3.49,
+              "kar_payi_max": 3.49
+            },
+            {
+              "degerler": ["0 – 50.000 TL", "36 Ay", "13 – 36 Ay", "%3,69 – %3,89"],
+              "tutar_min": 0,
+              "tutar_max": 50000,
+              "izin_maks_vade": 36,
+              "vade_min": 13,
+              "vade_max": 36,
+              "kar_payi_min": 3.69,
+              "kar_payi_max": 3.89
+            },
+            {
+              "degerler": ["50.001 – 125.000 TL", "36 Ay", "1 – 36 Ay", "%3,69 – %3,99"],
+              "tutar_min": 50001,
+              "tutar_max": 125000,
+              "izin_maks_vade": 36,
+              "vade_min": 1,
+              "vade_max": 36,
+              "kar_payi_min": 3.69,
+              "kar_payi_max": 3.99
+            },
+            {
+              "degerler": ["125.001 – 250.000 TL", "24 Ay", "1 – 24 Ay", "%3,99 – %4,19"],
+              "tutar_min": 125001,
+              "tutar_max": 250000,
+              "izin_maks_vade": 24,
+              "vade_min": 1,
+              "vade_max": 24,
+              "kar_payi_min": 3.99,
+              "kar_payi_max": 4.19
+            },
+            {
+              "degerler": ["250.001 – 500.000 TL", "12 Ay", "1 – 12 Ay", "%4,19 – %4,39"],
+              "tutar_min": 250001,
+              "tutar_max": 500000,
+              "izin_maks_vade": 12,
+              "vade_min": 1,
+              "vade_max": 12,
+              "kar_payi_min": 4.19,
+              "kar_payi_max": 4.39
+            }
+          ],
+          "notlar": [
+            "Emlak Katılım sistem notu gereği 50.000 TL üzerindeki standart ihtiyaç finansmanlarında genellikle en fazla 24 ay vade önerilir; yasal BDDK üst sınırları ayrıca uygulanır.",
+            "Bireysel müşteriler için üst limit genellikle 500.000 TL'dir.",
+            "Finansman doğrudan nakit verilmez; satın alınan mal veya hizmetin faturası karşılığında satıcı firmaya ödenir.",
+            "Ürün kodu: EVOFISGERECLERI."
+          ],
+          "grafik": {
+            "baslik": "Tutar ve vade dilimine göre üst sınır (ay)",
+            "etiketler": ["0–50 Bin / 1–12", "0–50 Bin / 13–36", "50–125 Bin", "125–250 Bin", "250–500 Bin"],
+            "degerler": [12, 36, 36, 24, 12]
+          },
+          "kaynak_adi": "Emlak Katılım İhtiyaç Finansmanı",
+          "kaynak_url": "https://www.emlakkatilim.com.tr/tr/bireysel/finansmanlar/ihtiyac-finansmani"
+        }
+      }
+    },
+    "vakif_katilim": {
+      "banka_adi": "Vakıf Katılım Bankası A.Ş.",
+      "urunler": {
+        "konut": {
+          "ad": "Konut Finansmanı (Sıfır ve 2. El Konut)",
+          "sutunlar": [
+            "Vade Aralığı",
+            "Tutar Aralığı",
+            "Aylık Kâr Payı Oranı (%)",
+            "Not / Koşul"
+          ],
+          "satirlar": [
+            {
+              "degerler": ["1 – 36 Ay", "0 – 5.000.000 TL", "%3,11", "Kısa Vade Dilimi"],
+              "tutar_min": 0,
+              "tutar_max": 5000000,
+              "vade_min": 1,
+              "vade_max": 36,
+              "kar_payi_min": 3.11,
+              "kar_payi_max": 3.11
+            },
+            {
+              "degerler": ["37 – 60 Ay", "0 – 5.000.000 TL", "%2,94", "Standart Konut Oranı"],
+              "tutar_min": 0,
+              "tutar_max": 5000000,
+              "vade_min": 37,
+              "vade_max": 60,
+              "kar_payi_min": 2.94,
+              "kar_payi_max": 2.94
+            },
+            {
+              "degerler": ["61 – 120 Ay", "0 – 5.000.000 TL", "%2,94", "Uzun Vade / Avantajlı Dilim"],
+              "tutar_min": 0,
+              "tutar_max": 5000000,
+              "vade_min": 61,
+              "vade_max": 120,
+              "kar_payi_min": 2.94,
+              "kar_payi_max": 2.94
+            },
+            {
+              "degerler": ["1 – 120 Ay", "5.000.001 – 10.000.000 TL", "%2,99 – %3,09", "Orta–Üst Segment Konutlar"],
+              "tutar_min": 5000001,
+              "tutar_max": 10000000,
+              "vade_min": 1,
+              "vade_max": 120,
+              "kar_payi_min": 2.99,
+              "kar_payi_max": 3.09
+            },
+            {
+              "degerler": ["1 – 120 Ay", "10.000.001 TL ve üzeri", "%3,15 – %3,25", "Lüks Konut Kapsamı"],
+              "tutar_min": 10000001,
+              "tutar_max": null,
+              "vade_min": 1,
+              "vade_max": 120,
+              "kar_payi_min": 3.15,
+              "kar_payi_max": 3.25
+            }
+          ],
+          "notlar": [
+            "Maksimum vade 120 ay (10 yıl).",
+            "İlk ev alımlarında A/B enerji sınıfı konutlarda ekspertiz değerinin %90'ına, C sınıfında %80'ine, diğer enerji sınıflarında %70'ine kadar finansman uygulanır.",
+            "İkinci ev alımlarında finansman oranı ekspertiz değerinin %22,5'i ile %5'i arasında sınırlandırılır.",
+            "İlk konut alımlarında BSMV ve KKDF muafiyeti uygulanır."
+          ],
+          "grafik": {
+            "baslik": "Vade dilimi üst sınırı (ay)",
+            "etiketler": ["0–5 Mn / 1–36", "0–5 Mn / 37–60", "0–5 Mn / 61–120", "5–10 Mn", "10 Mn+"],
+            "degerler": [36, 60, 120, 120, 120]
+          },
+          "kaynak_adi": "Vakıf Katılım Konut Finansmanı",
+          "kaynak_url": "https://www.vakifkatilim.com.tr/tr/kendim-icin/finansmanlar/konut-finansmani"
+        },
+        "arac": {
+          "ad": "Taşıt Finansmanı (0 Km ve 2. El Araç)",
+          "sutunlar": [
+            "Araç Fatura / Kasko Değer Aralığı",
+            "Azami Finansman Oranı (%)",
+            "Maksimum Finansman Tutarı",
+            "Azami Vade",
+            "Aylık Kâr Payı Oranı (%)"
+          ],
+          "satirlar": [
+            {
+              "degerler": ["0 – 400.000 TL", "%70", "Değer × %70 (Maks. 280.000 TL)", "48 Ay", "%3,14"],
+              "tutar_min": 0,
+              "tutar_max": 400000,
+              "finansman_orani": 70,
+              "maks_finansman_tutari": 280000,
+              "vade_max": 48,
+              "kar_payi_min": 3.14,
+              "kar_payi_max": 3.14
+            },
+            {
+              "degerler": ["400.001 – 800.000 TL", "%50", "Değer × %50 (Maks. 400.000 TL)", "36 Ay", "%3,14 – %3,24"],
+              "tutar_min": 400001,
+              "tutar_max": 800000,
+              "finansman_orani": 50,
+              "maks_finansman_tutari": 400000,
+              "vade_max": 36,
+              "kar_payi_min": 3.14,
+              "kar_payi_max": 3.24
+            },
+            {
+              "degerler": ["800.001 – 1.200.000 TL", "%30", "Değer × %30 (Maks. 360.000 TL)", "24 Ay", "%3,24 – %3,34"],
+              "tutar_min": 800001,
+              "tutar_max": 1200000,
+              "finansman_orani": 30,
+              "maks_finansman_tutari": 360000,
+              "vade_max": 24,
+              "kar_payi_min": 3.24,
+              "kar_payi_max": 3.34
+            },
+            {
+              "degerler": ["1.200.001 – 2.000.000 TL", "%20", "Değer × %20 (Maks. 400.000 TL)", "12 Ay", "%3,34"],
+              "tutar_min": 1200001,
+              "tutar_max": 2000000,
+              "finansman_orani": 20,
+              "maks_finansman_tutari": 400000,
+              "vade_max": 12,
+              "kar_payi_min": 3.34,
+              "kar_payi_max": 3.34
+            },
+            {
+              "degerler": ["2.000.001 TL ve üzeri", "%0", "Finansman kullandırılmaz", "0 Ay", "—"],
+              "tutar_min": 2000001,
+              "tutar_max": null,
+              "finansman_orani": 0,
+              "maks_finansman_tutari": 0,
+              "vade_max": 0,
+              "kar_payi_min": null,
+              "kar_payi_max": null
+            }
+          ],
+          "notlar": [
+            "Azami finansman tutarı ve vade sıfır kilometre araçlarda fatura bedeli, ikinci el araçlarda kasko değeri üzerinden belirlenir.",
+            "400.000 TL'ye kadar 48 ay, 400.001–800.000 TL arasında 36 ay, 800.001–1.200.000 TL arasında 24 ay, 1.200.001–2.000.000 TL arasında 12 ay azami vade uygulanır."
+          ],
+          "grafik": {
+            "baslik": "Araç değerine göre azami vade (ay)",
+            "etiketler": ["0–400 Bin", "400–800 Bin", "800 Bin–1,2 Mn", "1,2–2 Mn", "2 Mn+"],
+            "degerler": [48, 36, 24, 12, 0]
+          },
+          "kaynak_adi": "Vakıf Katılım Taşıt Finansmanı",
+          "kaynak_url": "https://www.vakifkatilim.com.tr/tr/kendim-icin/finansmanlar/tasit-finansmani"
+        },
+        "ihtiyac": {
+          "ad": "İhtiyaç Finansmanı (Bireysel İhtiyaç, Eğitim, Hac–Umre)",
+          "sutunlar": [
+            "Finansman Tutar Aralığı",
+            "Yasal Maksimum Vade",
+            "Vade Dilimi",
+            "Aylık Kâr Payı Oranı (%)"
+          ],
+          "satirlar": [
+            {
+              "degerler": ["0 – 125.000 TL", "36 Ay", "1 – 12 Ay", "%3,99"],
+              "tutar_min": 0,
+              "tutar_max": 125000,
+              "izin_maks_vade": 36,
+              "vade_min": 1,
+              "vade_max": 12,
+              "kar_payi_min": 3.99,
+              "kar_payi_max": 3.99
+            },
+            {
+              "degerler": ["0 – 125.000 TL", "36 Ay", "13 – 36 Ay", "%3,99 – %4,09"],
+              "tutar_min": 0,
+              "tutar_max": 125000,
+              "izin_maks_vade": 36,
+              "vade_min": 13,
+              "vade_max": 36,
+              "kar_payi_min": 3.99,
+              "kar_payi_max": 4.09
+            },
+            {
+              "degerler": ["125.001 – 250.000 TL", "24 Ay", "1 – 12 Ay", "%4,09"],
+              "tutar_min": 125001,
+              "tutar_max": 250000,
+              "izin_maks_vade": 24,
+              "vade_min": 1,
+              "vade_max": 12,
+              "kar_payi_min": 4.09,
+              "kar_payi_max": 4.09
+            },
+            {
+              "degerler": ["125.001 – 250.000 TL", "24 Ay", "13 – 24 Ay", "%4,19"],
+              "tutar_min": 125001,
+              "tutar_max": 250000,
+              "izin_maks_vade": 24,
+              "vade_min": 13,
+              "vade_max": 24,
+              "kar_payi_min": 4.19,
+              "kar_payi_max": 4.19
+            },
+            {
+              "degerler": ["250.001 – 500.000 TL", "12 Ay", "1 – 12 Ay", "%4,29"],
+              "tutar_min": 250001,
+              "tutar_max": 500000,
+              "izin_maks_vade": 12,
+              "vade_min": 1,
+              "vade_max": 12,
+              "kar_payi_min": 4.29,
+              "kar_payi_max": 4.29
+            }
+          ],
+          "notlar": [
+            "0–125.000 TL arasında azami vade 36 ay; 125.001–250.000 TL arasında 24 ay; 250.001 TL ve üzerinde 12 aydır.",
+            "Bireysel müşteriler için üst sınır, müşteri gelir durumuna bağlı olarak genellikle 500.000 TL'dir.",
+            "Finansman doğrudan nakit verilmez; fatura karşılığı murabaha prensibiyle mal veya hizmet bedeli satıcıya ödenir."
+          ],
+          "grafik": {
+            "baslik": "Tutar ve vade dilimine göre üst sınır (ay)",
+            "etiketler": ["0–125 Bin / 1–12", "0–125 Bin / 13–36", "125–250 Bin / 1–12", "125–250 Bin / 13–24", "250–500 Bin"],
+            "degerler": [12, 36, 12, 24, 12]
+          },
+          "kaynak_adi": "Vakıf Katılım İhtiyaç Finansmanı",
+          "kaynak_url": "https://www.vakifkatilim.com.tr/tr/kendim-icin/finansmanlar/ihtiyac-finansmani"
+        },
+        "arsa_isyeri": {
+          "ad": "Arsa ve İş Yeri Finansmanı",
+          "sutunlar": [
+            "Finansman Türü",
+            "Maksimum Finansman Oranı",
+            "Azami Vade",
+            "Aylık Kâr Payı Oranı (%)"
+          ],
+          "satirlar": [
+            {
+              "degerler": ["Arsa Finansmanı", "Ekspertiz Değerinin %50'si", "60 Ay", "%3,25 – %3,49"],
+              "finansman_turu": "arsa",
+              "finansman_orani": 50,
+              "vade_min": 1,
+              "vade_max": 60,
+              "kar_payi_min": 3.25,
+              "kar_payi_max": 3.49
+            },
+            {
+              "degerler": ["İş Yeri Finansmanı", "Ekspertiz Değerinin %50'si", "60 – 84 Ay", "%3,19 – %3,39"],
+              "finansman_turu": "isyeri",
+              "finansman_orani": 50,
+              "vade_min": 60,
+              "vade_max": 84,
+              "kar_payi_min": 3.19,
+              "kar_payi_max": 3.39
+            }
+          ],
+          "notlar": [
+            "Arsa finansmanı yalnızca imarlı arsalar için geçerlidir; minimum peşinat oranı %50'dir.",
+            "İş yeri finansmanı dükkân, ofis, mağaza ve büro gibi ticari gayrimenkul alımları içindir."
+          ],
+          "grafik": {
+            "baslik": "Finansman türüne göre azami vade (ay)",
+            "etiketler": ["Arsa", "İş Yeri"],
+            "degerler": [60, 84]
+          },
+          "kaynak_adi": "Vakıf Katılım Arsa Finansmanı",
+          "kaynak_url": "https://www.vakifkatilim.com.tr/tr/kendim-icin/finansmanlar/arsa-finansmani",
+          "ek_kaynaklar": [
+            {
+              "ad": "Vakıf Katılım İş Yeri Finansmanı",
+              "url": "https://www.vakifkatilim.com.tr/tr/kendim-icin/finansmanlar/is-yeri-finansmani"
+            }
+          ]
+        }
+      }
+    },
+    "adil_katilim": {
+      "banka_adi": "Adil Katılım Bankası A.Ş.",
+      "urunler": {
+        "ticari_finansman_ucretleri": {
+          "ad": "Ticari Finansman Ücretleri",
+          "sutunlar": [
+            "Bölüm",
+            "İşlem / Kredi Türü",
+            "Para Cinsi",
+            "Azami Oran / Yasal Formül",
+            "Açıklama / Kriter"
+          ],
+          "satirlar": [
+            {
+              "degerler": [
+                "Tahsis ve Kullandırım",
+                "Finansman Tahsis Ücreti",
+                "TL",
+                "%0,20",
+                "Yenilenen limit tutarının %0,20'sidir. GİB Mali Veri Entegrasyonu kullanılması hâlinde oluşan üçüncü taraf ücret ve vergiler ayrıca tahsil edilir. (BSMV hariç)"
+              ],
+              "bolum": "tahsis_kullandirim",
+              "para_cinsi": "TL",
+              "azami_oran": 0.20
+            },
+            {
+              "degerler": [
+                "Tahsis ve Kullandırım",
+                "Finansman Kullandırım Ücreti",
+                "TL",
+                "%1,10",
+                "Kullandırılan finansman tutarı üzerinden tahsil edilir. Vadesi 1 yıldan kısa finansmanlarda azami ücret, vade gün sayısı esas alınarak oransal indirilir. (BSMV hariç)"
+              ],
+              "bolum": "tahsis_kullandirim",
+              "para_cinsi": "TL",
+              "azami_oran": 1.10
+            },
+            {
+              "degerler": [
+                "Finansman Riski ve Yapılandırma",
+                "Yapılandırma, Temdit / Ödeme Planı ve Kâr Payı Değişikliği Ücreti",
+                "TL",
+                "%5,00",
+                "Mevcut kredi riski devam eden nakdi veya gayrinakdi kredilerde teminat, vade, ödeme planı, oran ve benzeri koşullar değiştirilerek gerçekleştirilen yeniden yapılandırma işlemlerinde tahsil edilir. (BSMV hariç)"
+              ],
+              "bolum": "risk_yapilandirma",
+              "para_cinsi": "TL",
+              "azami_oran": 5.00
+            },
+            {
+              "degerler": [
+                "Finansman Riski ve Yapılandırma",
+                "Taahhüt / Taahhüde Uymama Ücreti",
+                "TL",
+                "%5,00",
+                "Müşterinin kredi taahhüt şartlarını yerine getirmemesi durumunda tahsil edilir. (BSMV hariç)"
+              ],
+              "bolum": "risk_yapilandirma",
+              "para_cinsi": "TL",
+              "azami_oran": 5.00
+            },
+            {
+              "degerler": [
+                "Ara / Kısmi Ödeme",
+                "Türk Lirası Krediler",
+                "TL",
+                "(Yıllık Bileşik Kâr Payı Oranı × %5) + (Kalan Ağırlıklı Ortalama Vade × %0,20)",
+                "01.07.2024 ve sonrası kullandırımlarda geçerlidir. BSMV hariçtir."
+              ],
+              "bolum": "ara_kismi_odeme",
+              "para_cinsi": "TL",
+              "gecerlilik_baslangici": "2024-07-01",
+              "formul": "(Yıllık Bileşik Kâr Payı Oranı × %5) + (Kalan Ağırlıklı Ortalama Vade × %0,20)"
+            },
+            {
+              "degerler": [
+                "Ara / Kısmi Ödeme",
+                "Döviz / Dövize Endeksli Krediler",
+                "YP",
+                "%3,00 + (Kalan Ağırlıklı Ortalama Vade × %0,10)",
+                "06.01.2025 ve sonrası kullandırımlarda geçerlidir. BSMV hariçtir."
+              ],
+              "bolum": "ara_kismi_odeme",
+              "para_cinsi": "YP",
+              "gecerlilik_baslangici": "2025-01-06",
+              "formul": "%3,00 + (Kalan Ağırlıklı Ortalama Vade × %0,10)"
+            },
+            {
+              "degerler": [
+                "Nakdi Finansman Erken Kapama",
+                "Türk Lirası Krediler",
+                "TL",
+                "(Yıllık Bileşik Kâr Payı Oranı × %5) + (Kalan Ağırlıklı Ortalama Vade × %0,20)",
+                "Erken ödenen anapara tutarı üzerinden hesaplanır. BSMV hariçtir."
+              ],
+              "bolum": "erken_kapama",
+              "para_cinsi": "TL",
+              "formul": "(Yıllık Bileşik Kâr Payı Oranı × %5) + (Kalan Ağırlıklı Ortalama Vade × %0,20)"
+            },
+            {
+              "degerler": [
+                "Nakdi Finansman Erken Kapama",
+                "Döviz / Dövize Endeksli Krediler",
+                "YP",
+                "%3,00 + (Kalan Ağırlıklı Ortalama Vade × %0,10)",
+                "Erken ödenen anapara tutarı üzerinden hesaplanır. BSMV hariçtir."
+              ],
+              "bolum": "erken_kapama",
+              "para_cinsi": "YP",
+              "formul": "%3,00 + (Kalan Ağırlıklı Ortalama Vade × %0,10)"
+            }
+          ],
+          "notlar": [
+            "Tahsis, kullandırım, yapılandırma ve taahhüde uymama oranları azami oranlardır.",
+            "Ara/kısmi ödeme ve erken kapama ücretlerinde Türk lirası ile yabancı para finansmanları için farklı yasal formüller uygulanır.",
+            "Tablodaki ücret ve formüller BSMV hariçtir."
+          ],
+          "kaynak_adi": "Adil Katılım Ücret Bilgilendirme Formu",
+          "kaynak_url": "https://www.adilkatilim.com.tr/assets/pdfs/Adil%20Kat%C4%B1l%C4%B1m_%C3%9Ccret%20bilgilendirme%20formu.pdf"
+        }
+      }
+    },
+    "hayat_finans": {
+      "banka_adi": "Hayat Finans Katılım Bankası A.Ş.",
+      "urunler": {
+        "ihtiyac": {
+          "ad": "İhtiyaç Finansmanı (Bana Bunu Al)",
+          "sutunlar": [
+            "Vade (Ay)",
+            "Aylık Kâr Payı Oranı (%)",
+            "Tahsis Ücreti (%)",
+            "Aylık Toplam Maliyet Oranı (%)",
+            "Yıllık Toplam Maliyet Oranı (%)"
+          ],
+          "satirlar": [
+            {
+              "degerler": ["6 Ay", "%4,25", "%0 (Masrafsız)", "%5,53", "%90,66"],
+              "vade_min": 1,
+              "vade_max": 6,
+              "kar_payi_min": 4.25,
+              "kar_payi_max": 4.25,
+              "tahsis_ucreti_orani": 0,
+              "aylik_toplam_maliyet_orani": 5.53,
+              "yillik_toplam_maliyet_orani": 90.66
+            },
+            {
+              "degerler": ["12 Ay", "%4,25", "%0 (Masrafsız)", "%5,53", "%90,66"],
+              "vade_min": 1,
+              "vade_max": 12,
+              "kar_payi_min": 4.25,
+              "kar_payi_max": 4.25,
+              "tahsis_ucreti_orani": 0,
+              "aylik_toplam_maliyet_orani": 5.53,
+              "yillik_toplam_maliyet_orani": 90.66
+            },
+            {
+              "degerler": ["18 Ay", "%4,25", "%0 (Masrafsız)", "%5,53", "%90,77"],
+              "vade_min": 1,
+              "vade_max": 18,
+              "kar_payi_min": 4.25,
+              "kar_payi_max": 4.25,
+              "tahsis_ucreti_orani": 0,
+              "aylik_toplam_maliyet_orani": 5.53,
+              "yillik_toplam_maliyet_orani": 90.77
+            }
+          ],
+          "notlar": [
+            "Maliyet tablosu 10.000 TL finansman tutarı baz alınarak hesaplanmıştır.",
+            "Aylık ve yıllık toplam maliyet oranlarına KKDF, BSMV, yasal vergiler ve tahsis ücreti dahildir.",
+            "Ürünün maksimum vadesi 18 aydır.",
+            "Kredi tahsis ücreti alınmamaktadır; tahsis masrafı %0'dır."
+          ],
+          "grafik": {
+            "baslik": "Maliyet tablosundaki vade seçenekleri (ay)",
+            "etiketler": ["6 Ay", "12 Ay", "18 Ay"],
+            "degerler": [6, 12, 18]
+          },
+          "kaynak_adi": "Hayat Finans Bana Bunu Al",
+          "kaynak_url": "https://hayatfinans.com.tr/krediler/bana-bunu-al",
+          "ek_kaynaklar": [
+            {
+              "ad": "Hayat Finans Ürün ve Hizmet Ücretleri",
+              "url": "https://hayatfinans.com.tr/urun-ve-hizmet-ucretleri"
+            }
+          ]
+        }
+      }
+    },
+    "tom_katilim": {
+      "banka_adi": "T.O.M. Katılım Bankası A.Ş.",
+      "urunler": {
+        "alisveris": {
+          "ad": "Veresiye ve Taksitli Alışveriş Kredileri",
+          "sutunlar": [
+            "Kayıt Türü",
+            "Ürün / Kredi Tutarı",
+            "Vade / Plan",
+            "Kâr Oranı (%)",
+            "Ücret / Ödeme Tutarları",
+            "Maliyet Oranı (%)",
+            "Kullanım ve Tahsilat"
+          ],
+          "satirlar": [
+            {
+              "degerler": [
+                "Yasal tavan oranları",
+                "Veresiye Alışveriş Kredisi",
+                "0–6 / 7–12 / 13–24 / 25–36 Ay",
+                "Her vade diliminde %9,00",
+                "—",
+                "—",
+                "Genel tüketici/alışveriş kredilerinde azami vade 36 aydır."
+              ],
+              "kayit_turu": "yasal_tavan",
+              "vade_min": 0,
+              "vade_max": 36,
+              "kar_payi_max": 9.00
+            },
+            {
+              "degerler": [
+                "Yasal tavan oranları",
+                "Taksitli Alışveriş Kredisi",
+                "0–6 / 7–12 / 13–24 / 25–36 Ay",
+                "Her vade diliminde %9,00",
+                "—",
+                "—",
+                "Genel tüketici/alışveriş kredilerinde azami vade 36 aydır."
+              ],
+              "kayit_turu": "yasal_tavan",
+              "vade_min": 0,
+              "vade_max": 36,
+              "kar_payi_max": 9.00
+            },
+            {
+              "degerler": [
+                "Örnek maliyet",
+                "Veresiye Alışveriş Kredisi — 1.000 TL",
+                "60 Gün Sonra Ödemeli",
+                "Başlangıç aylık %3,99",
+                "Taksit: 1.103,74 TL · Tahsis: 5,75 TL · Toplam: 1.109,49 TL",
+                "Aylık %7,2105 · Yıllık %86,5264",
+                "Tahsis ücreti binde 5 + BSMV'dir; komisyon ve yasal vergiler maliyet oranlarına dahildir."
+              ],
+              "kayit_turu": "ornek_maliyet",
+              "kredi_tutari": 1000,
+              "kar_payi_min": 3.99,
+              "erteleme_gun": 60,
+              "taksit_tutari": 1103.74,
+              "tahsis_ucreti": 5.75,
+              "toplam_geri_odeme": 1109.49,
+              "aylik_maliyet_orani": 7.2105,
+              "yillik_maliyet_orani": 86.5264
+            },
+            {
+              "degerler": [
+                "Ürün işleyişi",
+                "Veresiye Alışveriş Kredisi",
+                "Azami 36 Ay (genellikle 60 gün ertelemeli)",
+                "%3,99 – %9,00",
+                "Seçilen ödeme gününde otomatik tahsil",
+                "—",
+                "Anlaşmalı noktalarda (A101, English Home, EVE vb.) ‘şimdi al, 2 ay sonra öde’ modeli; Hadi veya TOM Bank hesap bakiyesinden tahsil edilir."
+              ],
+              "kayit_turu": "urun_isleyisi",
+              "vade_max": 36,
+              "erteleme_gun": 60,
+              "kar_payi_min": 3.99,
+              "kar_payi_max": 9.00
+            },
+            {
+              "degerler": [
+                "Ürün işleyişi",
+                "Taksitli Alışveriş Kredisi",
+                "Azami 36 Ay",
+                "%3,99 – %9,00",
+                "Aylık taksitlerle ödeme; erken kapama yapılabilir",
+                "—",
+                "Mağaza ve e-ticaret harcamalarını aylık eşit taksitlere bölme imkânı; ödemeler Hadi bakiyesi üzerinden yapılır."
+              ],
+              "kayit_turu": "urun_isleyisi",
+              "vade_max": 36,
+              "kar_payi_min": 3.99,
+              "kar_payi_max": 9.00
+            }
+          ],
+          "notlar": [
+            "Veresiye ve Taksitli Alışveriş Kredilerinde 0–6, 7–12, 13–24 ve 25–36 ay vade dilimlerinin yasal aylık azami kâr oranı %9,00'dur.",
+            "BDDK mevzuatına göre genel tüketici/alışveriş kredilerinde azami vade 36 aydır.",
+            "1.000 TL'lik Veresiye örneği 60 gün sonra ödemeli plan ve aylık %3,99 başlangıç kâr oranı üzerinden hazırlanmıştır."
+          ],
+          "grafik": {
+            "baslik": "Ürün türüne göre azami vade (ay)",
+            "etiketler": ["Veresiye Alışveriş", "Taksitli Alışveriş"],
+            "degerler": [36, 36]
+          },
+          "kaynak_adi": "TOM Bank Veresiye Alışveriş Kredisi",
+          "kaynak_url": "https://www.tombank.com.tr/veresiye.html",
+          "ek_kaynaklar": [
+            {
+              "ad": "TOM Bank Taksitli Alışveriş Kredisi",
+              "url": "https://www.tombank.com.tr/taksitle.html"
+            }
+          ]
+        }
+      }
+    },
+    "ziraat_katilim": {
+      "banka_adi": "Ziraat Katılım Bankası A.Ş.",
+      "urunler": {
+        "konut": {
+          "ad": "Konut Finansmanı (Ev / Konut Kredisi)",
+          "sutunlar": [
+            "Tutar Aralığı",
+            "Vade Aralığı",
+            "Aylık Kâr Payı Oranı (%)",
+            "Not / Koşul"
+          ],
+          "satirlar": [
+            {
+              "degerler": ["0 – 1.000.000 TL", "1 – 12 Ay", "%2,87 – %3,05", "Dijitale Özel / Başlangıç Oranı"],
+              "tutar_min": 0,
+              "tutar_max": 1000000,
+              "vade_min": 1,
+              "vade_max": 12,
+              "kar_payi_min": 2.87,
+              "kar_payi_max": 3.05
+            },
+            {
+              "degerler": ["0 – 1.000.000 TL", "13 – 60 Ay", "%2,95 – %3,15", "Standart Konut"],
+              "tutar_min": 0,
+              "tutar_max": 1000000,
+              "vade_min": 13,
+              "vade_max": 60,
+              "kar_payi_min": 2.95,
+              "kar_payi_max": 3.15
+            },
+            {
+              "degerler": ["0 – 1.000.000 TL", "61 – 120 Ay", "%3,05 – %3,25", "Uzun Vade Dilimi"],
+              "tutar_min": 0,
+              "tutar_max": 1000000,
+              "vade_min": 61,
+              "vade_max": 120,
+              "kar_payi_min": 3.05,
+              "kar_payi_max": 3.25
+            },
+            {
+              "degerler": ["1.000.001 – 5.000.000 TL", "1 – 60 Ay", "%2,99 – %3,20", "Yüksek Tutar / Orta Vade"],
+              "tutar_min": 1000001,
+              "tutar_max": 5000000,
+              "vade_min": 1,
+              "vade_max": 60,
+              "kar_payi_min": 2.99,
+              "kar_payi_max": 3.20
+            },
+            {
+              "degerler": ["1.000.001 – 5.000.000 TL", "61 – 120 Ay", "%3,15 – %3,35", "Üst Tutar / Maksimum Vade"],
+              "tutar_min": 1000001,
+              "tutar_max": 5000000,
+              "vade_min": 61,
+              "vade_max": 120,
+              "kar_payi_min": 3.15,
+              "kar_payi_max": 3.35
+            },
+            {
+              "degerler": ["5.000.001 TL ve üzeri", "1 – 120 Ay", "%3,25 – %3,50", "Lüks Konut Kapsamı"],
+              "tutar_min": 5000001,
+              "tutar_max": null,
+              "vade_min": 1,
+              "vade_max": 120,
+              "kar_payi_min": 3.25,
+              "kar_payi_max": 3.50
+            }
+          ],
+          "notlar": [
+            "Maksimum vade 120 ay (10 yıl).",
+            "Maksimum tutar ekspertiz değerine ve enerji sınıfına bağlıdır: 5 milyon TL'ye kadar birinci el A sınıfı konutlarda değerin %90'ına kadar; 5–10 milyon TL arasında %70–%80; 10 milyon TL üzerinde kademeli azalan oranlar uygulanır.",
+            "İkinci el konutlarda BDDK finansman sınırları uygulanır.",
+            "Gerçek kişi konut alımlarında KKDF ve BSMV muafiyeti bulunur.",
+            "Satın alınan gayrimenkul üzerine birinci dereceden ipotek tesis edilir."
+          ],
+          "grafik": {
+            "baslik": "Tutar ve vade dilimine göre azami vade (ay)",
+            "etiketler": ["0–1 Mn / 1–12", "0–1 Mn / 13–60", "0–1 Mn / 61–120", "1–5 Mn / 1–60", "1–5 Mn / 61–120", "5 Mn+"],
+            "degerler": [12, 60, 120, 60, 120, 120]
+          },
+          "kaynak_adi": "Ziraat Katılım Konut Finansmanı",
+          "kaynak_url": "https://www.ziraatkatilimozelbankacilik.com.tr/finansman-urunleri/konut-finansmani"
+        },
+        "arac": {
+          "ad": "Taşıt Finansmanı (0 KM ve 2. El Araç)",
+          "sutunlar": [
+            "Fatura / Kasko Değeri",
+            "Vade Aralığı",
+            "Aylık Kâr Payı Oranı (%)",
+            "Not / Koşul"
+          ],
+          "satirlar": [
+            {
+              "degerler": ["0 – 400.000 TL", "1 – 48 Ay", "%3,45 – %3,75", "Azami Finansman Oranı: %70"],
+              "tutar_min": 0,
+              "tutar_max": 400000,
+              "vade_min": 1,
+              "vade_max": 48,
+              "kar_payi_min": 3.45,
+              "kar_payi_max": 3.75,
+              "finansman_orani": 70
+            },
+            {
+              "degerler": ["400.001 – 800.000 TL", "1 – 36 Ay", "%3,55 – %3,85", "Azami Finansman Oranı: %50"],
+              "tutar_min": 400001,
+              "tutar_max": 800000,
+              "vade_min": 1,
+              "vade_max": 36,
+              "kar_payi_min": 3.55,
+              "kar_payi_max": 3.85,
+              "finansman_orani": 50
+            },
+            {
+              "degerler": ["800.001 – 1.200.000 TL", "1 – 24 Ay", "%3,65 – %3,95", "Azami Finansman Oranı: %30"],
+              "tutar_min": 800001,
+              "tutar_max": 1200000,
+              "vade_min": 1,
+              "vade_max": 24,
+              "kar_payi_min": 3.65,
+              "kar_payi_max": 3.95,
+              "finansman_orani": 30
+            },
+            {
+              "degerler": ["1.200.001 – 2.000.000 TL", "1 – 12 Ay", "%3,75 – %4,10", "Azami Finansman Oranı: %20"],
+              "tutar_min": 1200001,
+              "tutar_max": 2000000,
+              "vade_min": 1,
+              "vade_max": 12,
+              "kar_payi_min": 3.75,
+              "kar_payi_max": 4.10,
+              "finansman_orani": 20
+            },
+            {
+              "degerler": ["2.000.001 TL ve üzeri", "1 – 12 Ay", "%3,90 – %4,25", "Kısıtlı Finansman (%0 – %20)"],
+              "tutar_min": 2000001,
+              "tutar_max": null,
+              "vade_min": 1,
+              "vade_max": 12,
+              "kar_payi_min": 3.90,
+              "kar_payi_max": 4.25,
+              "finansman_orani_min": 0,
+              "finansman_orani_max": 20
+            }
+          ],
+          "notlar": [
+            "Azami vade fatura veya kasko değerine göre 12–48 ay arasında değişir; yerli üretim elektrikli araçlarda yasal sınırlar içinde esneklik uygulanabilir.",
+            "İkinci el taşıtlarda araç yaşı ile vadenin toplamı en fazla 8–10 yıl olabilir; uygulamada araç için genellikle 5–8 yaş sınırı aranır.",
+            "Kâr payı üzerinden %15 KKDF ve %15 BSMV uygulanır.",
+            "Araç rehni ile zorunlu trafik ve kasko sigortası teminat olarak alınır."
+          ],
+          "grafik": {
+            "baslik": "Fatura / kasko değerine göre azami vade (ay)",
+            "etiketler": ["0–400 Bin", "400–800 Bin", "800 Bin–1,2 Mn", "1,2–2 Mn", "2 Mn+"],
+            "degerler": [48, 36, 24, 12, 12]
+          },
+          "kaynak_adi": "Ziraat Katılım Taşıt Finansmanı",
+          "kaynak_url": "https://www.ziraatkatilimozelbankacilik.com.tr/finansman-urunleri/tasit-finansmanlari/tasit-finansmani"
+        },
+        "ihtiyac": {
+          "ad": "İhtiyaç Finansmanı (Bireysel / Mal-Hizmet Alımı)",
+          "sutunlar": [
+            "Tutar Aralığı",
+            "Vade Aralığı",
+            "Aylık Kâr Payı Oranı (%)",
+            "Not / Koşul"
+          ],
+          "satirlar": [
+            {
+              "degerler": ["0 – 50.000 TL", "1 – 36 Ay", "%3,79 – %4,15", "Maksimum 36 Ay / Hızlı Onay"],
+              "tutar_min": 0,
+              "tutar_max": 50000,
+              "vade_min": 1,
+              "vade_max": 36,
+              "kar_payi_min": 3.79,
+              "kar_payi_max": 4.15
+            },
+            {
+              "degerler": ["50.001 – 100.000 TL", "1 – 24 Ay", "%3,89 – %4,25", "Maksimum 24 Ay / Orta Tutar"],
+              "tutar_min": 50001,
+              "tutar_max": 100000,
+              "vade_min": 1,
+              "vade_max": 24,
+              "kar_payi_min": 3.89,
+              "kar_payi_max": 4.25
+            },
+            {
+              "degerler": ["100.001 TL ve üzeri", "1 – 12 Ay", "%3,99 – %4,45", "Maksimum 12 Ay / Üst Tutar"],
+              "tutar_min": 100001,
+              "tutar_max": null,
+              "vade_min": 1,
+              "vade_max": 12,
+              "kar_payi_min": 3.99,
+              "kar_payi_max": 4.45
+            },
+            {
+              "degerler": ["Maaş Müşterisi / Dijital", "1 – 36 Ay", "%3,65 – %3,95", "Avantajlı Kâr Payı"],
+              "musteri_tipi": "maas_dijital",
+              "tutar_min": null,
+              "tutar_max": null,
+              "vade_min": 1,
+              "vade_max": 36,
+              "kar_payi_min": 3.65,
+              "kar_payi_max": 3.95
+            }
+          ],
+          "notlar": [
+            "BDDK vade sınırı 50.000 TL'ye kadar 36 ay, 50.001–100.000 TL arasında 24 ay, 100.000 TL üzerinde 12 aydır.",
+            "Azami finansman tutarı gelir belgesi, kredi notu ve belgelenmiş ihtiyaç (fatura veya proforma) dikkate alınarak belirlenir.",
+            "Kâr payı üzerinden %15 KKDF ve %15 BSMV uygulanır.",
+            "Finansman tahsis ücreti %0,5'tir; hayat sigortası primi yaşa ve finansman tutarına göre değişir."
+          ],
+          "grafik": {
+            "baslik": "Tutar / müşteri tipine göre azami vade (ay)",
+            "etiketler": ["0–50 Bin", "50–100 Bin", "100 Bin+", "Maaş / Dijital"],
+            "degerler": [36, 24, 12, 36]
+          },
+          "kaynak_adi": "Ziraat Katılım İhtiyaç Finansmanı",
+          "kaynak_url": "https://www.ziraatkatilimozelbankacilik.com.tr/finansman-urunleri/ihtiyac-finansmani"
+        }
+      }
+    },
+    "turkiye_finans": {
+      "banka_adi": "Türkiye Finans Katılım Bankası A.Ş.",
+      "urunler": {
+        "ihtiyac": {
+          "ad": "İhtiyaç Finansmanı (Sigortalı / Sigortasız)",
+          "sutunlar": [
+            "Vade Aralığı",
+            "Tutar Kısıtı (BDDK)",
+            "Sigortalı Aylık Kâr Oranı (%)",
+            "Sigortasız Aylık Kâr Oranı (%)"
+          ],
+          "satirlar": [
+            {
+              "degerler": ["1 – 3 Ay", "125.000 TL'ye kadar", "%4,20", "%6,10"],
+              "tutar_min": 0,
+              "tutar_max": 125000,
+              "vade_min": 1,
+              "vade_max": 3,
+              "kar_payi_sigortali": 4.20,
+              "kar_payi_sigortasiz": 6.10
+            },
+            {
+              "degerler": ["4 – 12 Ay", "125.000 TL'ye kadar", "%4,15", "%6,05"],
+              "tutar_min": 0,
+              "tutar_max": 125000,
+              "vade_min": 4,
+              "vade_max": 12,
+              "kar_payi_sigortali": 4.15,
+              "kar_payi_sigortasiz": 6.05
+            },
+            {
+              "degerler": ["13 – 18 Ay", "125.000 TL'ye kadar", "%4,10", "%6,00"],
+              "tutar_min": 0,
+              "tutar_max": 125000,
+              "vade_min": 13,
+              "vade_max": 18,
+              "kar_payi_sigortali": 4.10,
+              "kar_payi_sigortasiz": 6.00
+            },
+            {
+              "degerler": ["19 – 24 Ay", "125.001 – 250.000 TL arası", "%4,05", "%5,95"],
+              "tutar_min": 125001,
+              "tutar_max": 250000,
+              "vade_min": 19,
+              "vade_max": 24,
+              "kar_payi_sigortali": 4.05,
+              "kar_payi_sigortasiz": 5.95
+            },
+            {
+              "degerler": ["25 – 35 Ay", "125.000 TL'ye kadar", "%4,00", "%5,90"],
+              "tutar_min": 0,
+              "tutar_max": 125000,
+              "vade_min": 25,
+              "vade_max": 35,
+              "kar_payi_sigortali": 4.00,
+              "kar_payi_sigortasiz": 5.90
+            },
+            {
+              "degerler": ["36 Ay (Örnek Görsel)", "100.000 TL (Maks. 125.000 TL)", "%3,80", "%5,70"],
+              "tutar_min": 100000,
+              "tutar_max": 125000,
+              "vade_min": 36,
+              "vade_max": 36,
+              "kar_payi_sigortali": 3.80,
+              "kar_payi_sigortasiz": 5.70
+            }
+          ],
+          "notlar": [
+            "0–125.000 TL arasında azami vade 36 ay; 125.001–250.000 TL arasında 24 ay; 250.001 TL ve üzerinde 12 aydır.",
+            "Oranlar sigortalı ve sigortasız kullanıma göre ayrı uygulanır."
+          ],
+          "grafik": {
+            "baslik": "Oran tablosundaki vade üst sınırı (ay)",
+            "etiketler": ["1–3", "4–12", "13–18", "19–24", "25–35", "36"],
+            "degerler": [3, 12, 18, 24, 35, 36]
+          },
+          "kaynak_adi": "Türkiye Finans İhtiyaç Finansmanı",
+          "kaynak_url": "https://www.turkiyefinans.com.tr/tr-tr/bireysel/ihtiyac-finansmani/Sayfalar/ihtiyac-finansmani.aspx"
+        },
+        "arac": {
+          "ad": "Taşıt ve Motosiklet Finansmanı",
+          "sutunlar": [
+            "Kayıt Türü",
+            "Vade / Araç Değer Aralığı",
+            "Sigortalı Kâr Payı Oranı (%)",
+            "Sigortasız Kâr Payı Oranı (%)",
+            "Azami Finansman Oranı / Tutarı",
+            "Azami Vade"
+          ],
+          "satirlar": [
+            {
+              "degerler": ["Vade oranı", "1 – 6 Ay", "%3,67", "%4,27", "—", "6 Ay"],
+              "vade_min": 1,
+              "vade_max": 6,
+              "kar_payi_sigortali": 3.67,
+              "kar_payi_sigortasiz": 4.27
+            },
+            {
+              "degerler": ["Vade oranı", "7 – 12 Ay", "%3,63", "%4,23", "—", "12 Ay"],
+              "vade_min": 7,
+              "vade_max": 12,
+              "kar_payi_sigortali": 3.63,
+              "kar_payi_sigortasiz": 4.23
+            },
+            {
+              "degerler": ["Vade oranı", "13 – 18 Ay", "%3,56", "%4,16", "—", "18 Ay"],
+              "vade_min": 13,
+              "vade_max": 18,
+              "kar_payi_sigortali": 3.56,
+              "kar_payi_sigortasiz": 4.16
+            },
+            {
+              "degerler": ["Vade oranı", "19 – 24 Ay", "%3,52", "%4,12", "—", "24 Ay"],
+              "vade_min": 19,
+              "vade_max": 24,
+              "kar_payi_sigortali": 3.52,
+              "kar_payi_sigortasiz": 4.12
+            },
+            {
+              "degerler": ["Vade oranı", "25 – 36 Ay", "%3,48", "%4,08", "—", "36 Ay"],
+              "vade_min": 25,
+              "vade_max": 36,
+              "kar_payi_sigortali": 3.48,
+              "kar_payi_sigortasiz": 4.08
+            },
+            {
+              "degerler": ["Vade oranı", "37 – 48 Ay", "%3,42", "%4,02", "—", "48 Ay"],
+              "vade_min": 37,
+              "vade_max": 48,
+              "kar_payi_sigortali": 3.42,
+              "kar_payi_sigortasiz": 4.02
+            },
+            {
+              "degerler": ["BDDK değer ve finansman limiti", "0 – 400.000 TL", "—", "—", "%70 (Maks. 280.000 TL)", "48 Ay"],
+              "tutar_min": 0,
+              "tutar_max": 400000,
+              "finansman_orani": 70,
+              "maks_finansman_tutari": 280000,
+              "vade_max": 48
+            },
+            {
+              "degerler": ["BDDK değer ve finansman limiti", "400.001 – 800.000 TL", "—", "—", "%50 (Maks. 400.000 TL)", "36 Ay"],
+              "tutar_min": 400001,
+              "tutar_max": 800000,
+              "finansman_orani": 50,
+              "maks_finansman_tutari": 400000,
+              "vade_max": 36
+            },
+            {
+              "degerler": ["BDDK değer ve finansman limiti", "800.001 – 1.200.000 TL", "—", "—", "%30 (Maks. 360.000 TL)", "24 Ay"],
+              "tutar_min": 800001,
+              "tutar_max": 1200000,
+              "finansman_orani": 30,
+              "maks_finansman_tutari": 360000,
+              "vade_max": 24
+            },
+            {
+              "degerler": ["BDDK değer ve finansman limiti", "1.200.001 – 2.000.000 TL", "—", "—", "%20 (Maks. 400.000 TL)", "12 Ay"],
+              "tutar_min": 1200001,
+              "tutar_max": 2000000,
+              "finansman_orani": 20,
+              "maks_finansman_tutari": 400000,
+              "vade_max": 12
+            },
+            {
+              "degerler": ["BDDK değer ve finansman limiti", "2.000.001 TL ve üzeri", "—", "—", "%0 — Kredi kullandırılmaz", "0 Ay"],
+              "tutar_min": 2000001,
+              "tutar_max": null,
+              "finansman_orani": 0,
+              "maks_finansman_tutari": 0,
+              "vade_max": 0
+            }
+          ],
+          "notlar": [
+            "Taşıt ve motosiklet finansmanında azami tutar ve vade, sıfır kilometre araçlarda nihai fatura; ikinci el araçlarda kasko değeri üzerinden belirlenir.",
+            "Sigortalı ve sigortasız kâr payı oranları ayrı uygulanır."
+          ],
+          "grafik": {
+            "baslik": "Araç değerine göre azami vade (ay)",
+            "etiketler": ["0–400 Bin", "400–800 Bin", "800 Bin–1,2 Mn", "1,2–2 Mn", "2 Mn+"],
+            "degerler": [48, 36, 24, 12, 0]
+          },
+          "kaynak_adi": "Türkiye Finans Taşıt Finansmanı",
+          "kaynak_url": "https://www.turkiyefinans.com.tr/tr-tr/bireysel/tasit-finansmani/Sayfalar/Tasit-Finansmani.aspx"
+        },
+        "konut": {
+          "ad": "Konut Finansmanı (İlk Evim / Mevcut Konutu Olanlar)",
+          "sutunlar": [
+            "Vade Aralığı",
+            "İlk Evim (Sigortalı) (%)",
+            "İlk Evim (Sigortasız) (%)",
+            "2. Ev / Mevcut Evi Olan (Sigortalı) (%)",
+            "2. Ev (Sigortasız) (%)"
+          ],
+          "satirlar": [
+            {
+              "degerler": ["1 – 3 Ay", "%3,64", "%4,10", "%3,64", "%4,10"],
+              "vade_min": 1,
+              "vade_max": 3,
+              "ilk_ev_sigortali": 3.64,
+              "ilk_ev_sigortasiz": 4.10,
+              "ikinci_ev_sigortali": 3.64,
+              "ikinci_ev_sigortasiz": 4.10
+            },
+            {
+              "degerler": ["4 – 6 Ay", "%3,59", "%4,05", "%3,59", "%4,05"],
+              "vade_min": 4,
+              "vade_max": 6,
+              "ilk_ev_sigortali": 3.59,
+              "ilk_ev_sigortasiz": 4.05,
+              "ikinci_ev_sigortali": 3.59,
+              "ikinci_ev_sigortasiz": 4.05
+            },
+            {
+              "degerler": ["7 – 12 Ay", "%3,52", "%3,98", "%3,52", "%3,98"],
+              "vade_min": 7,
+              "vade_max": 12,
+              "ilk_ev_sigortali": 3.52,
+              "ilk_ev_sigortasiz": 3.98,
+              "ikinci_ev_sigortali": 3.52,
+              "ikinci_ev_sigortasiz": 3.98
+            },
+            {
+              "degerler": ["13 – 18 Ay", "%3,49", "%3,95", "%3,49", "%3,95"],
+              "vade_min": 13,
+              "vade_max": 18,
+              "ilk_ev_sigortali": 3.49,
+              "ilk_ev_sigortasiz": 3.95,
+              "ikinci_ev_sigortali": 3.49,
+              "ikinci_ev_sigortasiz": 3.95
+            },
+            {
+              "degerler": ["19 – 24 Ay", "%3,39", "%3,85", "%3,39", "%3,85"],
+              "vade_min": 19,
+              "vade_max": 24,
+              "ilk_ev_sigortali": 3.39,
+              "ilk_ev_sigortasiz": 3.85,
+              "ikinci_ev_sigortali": 3.39,
+              "ikinci_ev_sigortasiz": 3.85
+            },
+            {
+              "degerler": ["25 – 36 Ay", "%3,35", "%3,81", "%3,35", "%3,81"],
+              "vade_min": 25,
+              "vade_max": 36,
+              "ilk_ev_sigortali": 3.35,
+              "ilk_ev_sigortasiz": 3.81,
+              "ikinci_ev_sigortali": 3.35,
+              "ikinci_ev_sigortasiz": 3.81
+            },
+            {
+              "degerler": ["37 – 48 Ay", "%3,29", "%3,75", "%3,29", "%3,75"],
+              "vade_min": 37,
+              "vade_max": 48,
+              "ilk_ev_sigortali": 3.29,
+              "ilk_ev_sigortasiz": 3.75,
+              "ikinci_ev_sigortali": 3.29,
+              "ikinci_ev_sigortasiz": 3.75
+            },
+            {
+              "degerler": ["49 – 59 Ay", "%3,09", "%3,55", "%3,09", "%3,55"],
+              "vade_min": 49,
+              "vade_max": 59,
+              "ilk_ev_sigortali": 3.09,
+              "ilk_ev_sigortasiz": 3.55,
+              "ikinci_ev_sigortali": 3.09,
+              "ikinci_ev_sigortasiz": 3.55
+            },
+            {
+              "degerler": ["60 – 72 Ay", "%2,90", "%3,36", "%2,90", "%3,36"],
+              "vade_min": 60,
+              "vade_max": 72,
+              "ilk_ev_sigortali": 2.90,
+              "ilk_ev_sigortasiz": 3.36,
+              "ikinci_ev_sigortali": 2.90,
+              "ikinci_ev_sigortasiz": 3.36
+            },
+            {
+              "degerler": ["73 – 120 Ay", "%2,88", "%3,34", "%2,88", "%3,34"],
+              "vade_min": 73,
+              "vade_max": 120,
+              "ilk_ev_sigortali": 2.88,
+              "ilk_ev_sigortasiz": 3.34,
+              "ikinci_ev_sigortali": 2.88,
+              "ikinci_ev_sigortasiz": 3.34
+            }
+          ],
+          "notlar": [
+            "Maksimum vade 120 ay (10 yıl).",
+            "İlk ev alımlarında ekspertiz değerinin A/B sınıfında %90'ına, C sınıfında %80'ine kadar; ikinci ev alımlarında %22,5–%5 aralığında finansman uygulanır.",
+            "İlk ev alımlarında BSMV ve KKDF muafiyeti bulunur; ikinci ev alımlarında %15 BSMV uygulanır.",
+            "Ekran görüntüsündeki yaklaşık masraflar: ekspertiz 11.000 TL, ipotek 318,60 TL ve tahsis binde 5."
+          ],
+          "grafik": {
+            "baslik": "Oran tablosundaki vade üst sınırı (ay)",
+            "etiketler": ["1–3", "4–6", "7–12", "13–18", "19–24", "25–36", "37–48", "49–59", "60–72", "73–120"],
+            "degerler": [3, 6, 12, 18, 24, 36, 48, 59, 72, 120]
+          },
+          "kaynak_adi": "Türkiye Finans Konut Finansmanı",
+          "kaynak_url": "https://www.turkiyefinans.com.tr/tr-tr/bireysel/konut-finansmani/Sayfalar/konut-finansmani.aspx"
+        },
+        "arsa_isyeri": {
+          "ad": "Arsa ve İş Yeri Finansmanı",
+          "sutunlar": [
+            "Vade Dilimi",
+            "Arsa Finansmanı (Sigortalı) (%)",
+            "Arsa Finansmanı (Sigortasız) (%)",
+            "İş Yeri Finansmanı (Sigortalı) (%)",
+            "İş Yeri Finansmanı (Sigortasız) (%)"
+          ],
+          "satirlar": [
+            {
+              "degerler": ["1 – 6 Ay", "%4,30", "%4,55", "%4,09", "%4,55"],
+              "vade_min": 1,
+              "vade_max": 6,
+              "arsa_sigortali": 4.30,
+              "arsa_sigortasiz": 4.55,
+              "isyeri_sigortali": 4.09,
+              "isyeri_sigortasiz": 4.55
+            },
+            {
+              "degerler": ["7 – 12 Ay", "%4,23", "%4,48", "%4,02", "%4,48"],
+              "vade_min": 7,
+              "vade_max": 12,
+              "arsa_sigortali": 4.23,
+              "arsa_sigortasiz": 4.48,
+              "isyeri_sigortali": 4.02,
+              "isyeri_sigortasiz": 4.48
+            },
+            {
+              "degerler": ["13 – 24 Ay", "%4,10", "%4,35", "%3,89", "%4,35"],
+              "vade_min": 13,
+              "vade_max": 24,
+              "arsa_sigortali": 4.10,
+              "arsa_sigortasiz": 4.35,
+              "isyeri_sigortali": 3.89,
+              "isyeri_sigortasiz": 4.35
+            },
+            {
+              "degerler": ["25 – 36 Ay", "%4,06", "%4,31", "%3,85", "%4,31"],
+              "vade_min": 25,
+              "vade_max": 36,
+              "arsa_sigortali": 4.06,
+              "arsa_sigortasiz": 4.31,
+              "isyeri_sigortali": 3.85,
+              "isyeri_sigortasiz": 4.31
+            },
+            {
+              "degerler": ["37 – 48 Ay", "%4,00", "%4,25", "%3,79", "%4,25"],
+              "vade_min": 37,
+              "vade_max": 48,
+              "arsa_sigortali": 4.00,
+              "arsa_sigortasiz": 4.25,
+              "isyeri_sigortali": 3.79,
+              "isyeri_sigortasiz": 4.25
+            },
+            {
+              "degerler": ["49 – 59 Ay", "%3,80", "%4,05", "%3,59", "%4,05"],
+              "vade_min": 49,
+              "vade_max": 59,
+              "arsa_sigortali": 3.80,
+              "arsa_sigortasiz": 4.05,
+              "isyeri_sigortali": 3.59,
+              "isyeri_sigortasiz": 4.05
+            },
+            {
+              "degerler": ["60 Ay", "%3,61", "%3,86", "%3,40", "%3,86"],
+              "vade_min": 60,
+              "vade_max": 60,
+              "arsa_sigortali": 3.61,
+              "arsa_sigortasiz": 3.86,
+              "isyeri_sigortali": 3.40,
+              "isyeri_sigortasiz": 3.86
+            },
+            {
+              "degerler": ["61 – 84 Ay", "—", "—", "%3,40", "%3,86"],
+              "vade_min": 61,
+              "vade_max": 84,
+              "arsa_sigortali": null,
+              "arsa_sigortasiz": null,
+              "isyeri_sigortali": 3.40,
+              "isyeri_sigortasiz": 3.86
+            }
+          ],
+          "notlar": [
+            "Arsa finansmanında maksimum vade 60 ay, iş yeri finansmanında 84 aydır.",
+            "Maksimum finansman tutarı ekspertiz değerinin %50'sine kadardır."
+          ],
+          "grafik": {
+            "baslik": "Vade dilimi üst sınırı (ay)",
+            "etiketler": ["1–6", "7–12", "13–24", "25–36", "37–48", "49–59", "60", "61–84"],
+            "degerler": [6, 12, 24, 36, 48, 59, 60, 84]
+          },
+          "kaynak_adi": "Türkiye Finans Arsa Finansmanı",
+          "kaynak_url": "https://www.turkiyefinans.com.tr/tr-tr/bireysel/Sayfalar/arsa-finansmani.aspx",
+          "ek_kaynaklar": [
+            {
+              "ad": "Türkiye Finans İş Yeri Finansmanı",
+              "url": "https://www.turkiyefinans.com.tr/tr-tr/bireysel/Sayfalar/isyeri-finansmani.aspx"
+            }
+          ]
+        },
+        "banka_gayrimenkulleri": {
+          "ad": "Banka Gayrimenkulleri Finansmanı",
+          "sutunlar": [
+            "Finansman Türü",
+            "Vade Aralığı",
+            "Aylık Sabit Kâr Oranı (%)"
+          ],
+          "satirlar": [
+            {
+              "degerler": ["Banka Gayrimenkulleri Konut Finansmanı", "2 – 120 Ay", "%0,89"],
+              "vade_min": 2,
+              "vade_max": 120,
+              "kar_payi_min": 0.89,
+              "kar_payi_max": 0.89
+            },
+            {
+              "degerler": ["Banka Gayrimenkulleri Ticari Mülk Finansmanı", "2 – 120 Ay", "%0,89"],
+              "vade_min": 2,
+              "vade_max": 120,
+              "kar_payi_min": 0.89,
+              "kar_payi_max": 0.89
+            }
+          ],
+          "notlar": [
+            "Türkiye Finans'ın portföyündeki konut veya ticari mülk alımlarında uygulanan özel kampanyalı sabit orandır."
+          ],
+          "grafik": {
+            "baslik": "Finansman türüne göre azami vade (ay)",
+            "etiketler": ["Konut", "Ticari Mülk"],
+            "degerler": [120, 120]
+          },
+          "kaynak_adi": "Türkiye Finans Satılık Gayrimenkuller",
+          "kaynak_url": "https://www.turkiyefinans.com.tr/tr-tr/hakkimizda/satilik-gayrimenkuller/Sayfalar/default.aspx"
+        }
+      }
+    }
+  }
+}
