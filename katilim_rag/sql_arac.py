@@ -265,7 +265,7 @@ def calistir(soru: str) -> dict[str, Any] | None:
                                       or _esik_niyet):
         return None
 
-    # 0. Harcama esigi sorulari (aralik_mantigi / guncellik) — deterministik.
+    #  Harcama esigi sorulari (aralik_mantigi / guncellik) — deterministik.
     #    Katilim sorulari ("hangi kampanyalara girerim") aktif sete bakar;
     #    bilgi sorulari ("esik nedir") suresi dolmusu da kapsar, durumunu soyler.
     if slot.get("esik_soru") and (slot["bankalar"] or slot.get("esik_konular")):
@@ -413,7 +413,7 @@ def bulguyu_metne_cevir(b: dict) -> str:
     if b["tip"] == "karsilastirma":
         s = ["[SQL sonucu — Karşılaştırma ve Hedef Kitle Tablosu]"]
         for r in b["satirlar"]:
-            # ILKE (v2): dogrulanamayan alanin satiri hic yazilmaz (bkz. getir.py).
+            #dogrulanamayan alanin satiri hic yazilmaz
             parca = [
                 f"\n• Banka: {kisa_ad(r['banka_adi'])}",
                 f"  Ürün Türü: {URUN_ETIKET.get(r['urun_tipi'], r['urun_tipi'])}",

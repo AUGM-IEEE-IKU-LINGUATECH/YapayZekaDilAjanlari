@@ -24,8 +24,6 @@ BANKA_TAKMA = {
     "tom_katilim": ["tom katilim", "tom bank", "tombank", "tom"],
     "dunya_katilim": ["dunya katilim", "dunyakatilim", "dunya"],
     "adil_katilim": ["adil katilim", "adilkatilim", "adil"],
-    # BDDK faaliyet izni 26.02.2026 (RG 04.03.2026). Urun verisi henuz yok;
-    # sistem adi tanisin diye eklendi. "iktisat" tek basina eslenmez (genel kelime).
     "iktisat_katilim": ["iktisat katilim", "iktisatkatilim", "iktisat bankasi"],
 }
 URUN_TAKMA = {

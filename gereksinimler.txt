@@ -1,7 +1,23 @@
-sentence-transformers>=3.0
-chromadb>=0.5
-fastapi>=0.110
-uvicorn[standard]>=0.29
-requests>=2.31
-pandas>=2.0
-playwright>=1.44
+# LinguaTech tekrarlanabilir kurulum bagimliliklari
+# Desteklenen Python: 3.10, 3.11 ve 3.12 (64 bit)
+#
+# Chroma 0.6.3, teslim edilen veri/chroma indeksiyle ayni dosya/API
+# ailesidir. Ana surumu serbest birakmak hazir indeksin acilmamasina yol
+# acabilecegi icin bilerek tam surume sabitlenmistir.
+chromadb==0.6.3
+
+# RAG modelleri ve model onbellegi
+numpy>=1.26,<2
+torch>=2.2,<3
+sentence-transformers>=3.0,<4
+transformers>=4.41,<5
+huggingface-hub>=0.23,<2
+
+# API ve yerel Ollama istemcisi
+fastapi>=0.110,<1
+uvicorn[standard]>=0.29,<1
+requests>=2.31,<3
+
+# Veri hazirlama ve istege bagli tarama araclari
+pandas>=2.0,<3
+playwright>=1.44,<2

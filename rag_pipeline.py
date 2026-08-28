@@ -7,15 +7,12 @@ import pandas as pd, re, json, hashlib, unicodedata, collections
 from datetime import datetime, date
 from urllib.parse import urlparse
 
-# Yollar ve referans tarihi artik parametrik — bkz. __main__ altindaki argparse.
-# (Onceki surum, gelistirme ortaminin sabit yollarini iceriyordu ve depodan
-# calistirilamiyordu.) TODAY, kampanya aktif/suresi-dolmus ayriminin referansidir;
-# yeniden uretimde --tarih ile eski bir kesit sabitlenebilir.
+
 IN = "veri/ham_veri.csv"
 OUTDIR = "veri"
 TODAY = date.today()
 
-# ---------------------------------------------------------------- 1) BANKA NORMALIZASYONU
+#BANKA NORMALIZASYONU
 BANK_MAP = {
     "kuveyt turk": ("Kuveyt Türk Katılım Bankası A.Ş.", "kuveyt_turk"),
     "kuveyt turk katilim bankasi a.s.": ("Kuveyt Türk Katılım Bankası A.Ş.", "kuveyt_turk"),
@@ -64,7 +61,7 @@ def normalize_bank(raw, url):
         name = next(v[0] for v in BANK_MAP.values() if v[1] == code)
     return name, code, host
 
-# ---------------------------------------------------------------- 2) METIN TEMIZLEME
+#METIN TEMIZLEME
 UI_NOISE = {
     "detaylı bilgi", "devam ediyor", "kampanya detayları", "bu bağlantı yeni sekmede açılacak.",
     "site haritası", "bilgi toplumu hizmetleri", "tümünü gör", "hemen başvur", "başvur",
@@ -223,7 +220,7 @@ def cat_from_text(t):
     tl = tr_fold(t)
     return [k for k, p in CATEGORY_RULES.items() if re.search(p, tl)]
 
-# ---------------------------------------------------------------- 5) CHUNKING
+#CHUNKING
 MAX_CH, OVER, MIN_CH = 1100, 180, 250
 
 def chunk(text):
@@ -244,7 +241,7 @@ def chunk(text):
         chunks[-2] = (chunks[-2] + " " + chunks[-1])[: MAX_CH + MIN_CH]; chunks.pop()
     return chunks or [text]
 
-# ---------------------------------------------------------------- 6) PIPELINE
+#PIPELINE
 def main():
     df = pd.read_csv(IN)
     df["ham_metin"] = df["ham_metin"].astype(str)

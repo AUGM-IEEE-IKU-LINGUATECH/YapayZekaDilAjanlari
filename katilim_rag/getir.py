@@ -51,7 +51,7 @@ def _koleksiyon():
 
 
 
-# --------------------------------------------------------------- kelime tabanli yedek
+#  kelime tabanli yedek
 # Anlamsal arama nadir ozel isimlerde (Bellona, Istikbal) isabetsiz kalabiliyor.
 # Vektor bos dondugunde devreye girer. Turkce katlama: "Istikbal" ~ "İstikbal".
 DURAK = set("""ve veya ile için gibi daha çok az var yok mi mı mu mü ne nedir nasil nasıl
@@ -212,8 +212,8 @@ def veritabani_baglami_olustur(slot: dict) -> str:
     if not slot or not (slot.get("bankalar") or slot.get("urunler")):
         return ""
 
-    # Güncel, elle doğrulanmış ayrıntılı oran tablosu varsa eski SQLite
-    # özetini aynı bağlama koyma; iki farklı oran modeli yanıltmasın.
+    
+    
     from .finansman import slot_baglami
     guncel_finansman = slot_baglami(slot)
     if guncel_finansman:
@@ -251,7 +251,7 @@ def veritabani_baglami_olustur(slot: dict) -> str:
 
     blok = ["[DOĞRULANMIŞ VERİTABANI VE RESMİ ORAN BİLGİSİ (ESAS ALINACAK KESİN DEĞERLER)]"]
     for r in satirlar:
-        # ILKE (v2): dogrulanamayan alanin SATIRI HIC YAZILMAZ.
+        # dogrulanamayan alanin SATIRI HIC YAZILMAZ.
         # Ne deger uydurulur (eski %0.50 varsayilani) ne de "Belirtilmemis"
         # etiketi basilir — o etiket baglami gurultuye bogup 7B modeli temkin
         # moduna itiyor ve sayi cikarimini bozuyordu (P01-P04 vakasi, A/B kaniti).

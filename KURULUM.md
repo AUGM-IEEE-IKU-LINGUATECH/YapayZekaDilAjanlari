@@ -1,109 +1,247 @@
-# Katılım Bankacılığı RAG Sistemi
+# LinguaTech — Evrensel Kurulum Rehberi
 
-Türkiye'deki 10 katılım bankasının ürün, hesap ve kampanya verisi üzerinde çalışan,
-tamamen lokal (offline) soru-cevap sistemi. TEKNOFEST TYDA Senaryo 2 için.
+Bu sürüm Windows, Linux ve macOS üzerinde temiz bir kullanıcı hesabından
+kurulabilecek şekilde hazırlanmıştır. Kurulum proje içinde `.venv` adlı yalıtılmış
+bir Python ortamı oluşturur; bilgisayardaki diğer Python projelerini değiştirmez.
 
-## Mimari
+Kurulum aracı yalnızca desteklenen bileşenleri otomatik kurar. İşletim sistemi
+uygulaması olan **Ollama**, kullanıcı tarafından bir kez kurulmalıdır.
 
-Soru iki yoldan biriyle cevaplanır:
+## 1. Sistem gereksinimleri
 
-- **SQL yolu** — sayma, sıralama, karşılaştırma soruları. Şablon tabanlı, deterministik,
-  1114 kaydın tamamına bakar. ("En uzun vadeli konut finansmanı hangi bankada?")
-- **RAG yolu** — açıklama, koşul, tanım soruları. 2893 chunk üzerinde vektör araması.
-  ("Katılma hesabı nasıl işliyor?")
-
-Yönlendirme kural tabanlıdır (`analiz.py`), LLM'e bırakılmaz — böylece test edilebilir
-ve aynı soru hep aynı yola gider.
-
-## Sıfırdan kurulum
-
-```bash
-python kur.py --kontrol    # önce neyin eksik olduğuna bak, hiçbir şey indirmez
-python kur.py              # eksikleri tamamla
-```
-
-Script sırayla: Python sürümü ve disk alanını kontrol eder, GPU'yu tespit eder,
-CUDA'lı torch'u kurar, bağımlılıkları yükler, Ollama modelini indirir, Chroma indexini
-kurar ve sonunda durum raporu basar. Yarıda kesilirse aynı komutu tekrar çalıştır —
-tamamlanan adımları atlar.
-
-GPU yoksa: `python kur.py --cpu`
-Farklı model: `python kur.py --model llama3.1:8b`
-
-**Ollama'yı script kuramaz** (sistem kurulumu gerektiriyor). `ollama` komutu yoksa
-önce https://ollama.com/download adresinden kur, sonra scripti tekrar çalıştır.
-
-### İndirme boyutları
-
-| Ne | Boyut |
+| Gereksinim | Destek / öneri |
 |---|---|
-| CUDA'lı torch | ~2.5 GB |
-| bge-m3 (gömme) | ~2.2 GB |
-| bge-reranker-v2-m3 | ~2.2 GB |
-| qwen2.5:7b-instruct | ~4.7 GB |
-| diğer paketler | ~500 MB |
-| **toplam** | **~12 GB** |
+| İşletim sistemi | 64 bit Windows 10/11, güncel Linux veya macOS |
+| Python | 64 bit Python 3.10, 3.11 veya 3.12 |
+| Boş disk | En az 12 GB; 20 GB önerilir |
+| Bellek | 7B model için 16 GB RAM önerilir; düşük bellekte 3B model kullanılabilir |
+| İnternet | İlk kurulum ve model indirmeleri için gerekli |
+| GPU | Zorunlu değil; NVIDIA, Apple Silicon veya yalnız CPU kullanılabilir |
 
-Reranker ilk soru sorulduğunda iner; istemiyorsan `RERANK_AKTIF=0` ile atla (2.2 GB tasarruf,
-retrieval kalitesi bir miktar düşer).
+Python 3.13 bu teslim sürümünde kullanılmamalıdır. PyTorch'un resmi kurulum
+matrisi Python 3.9–3.12 aralığını temel aldığı için kurulum aracı 3.10–3.12 ile
+sınırlandırılmıştır.
 
-## Çalıştırma
+## 2. Önce Ollama'yı kurun
+
+Ollama'yı işletim sisteminize uygun paketle kurun:
+
+- <https://ollama.com/download>
+
+Kurulumdan sonra Ollama uygulamasını açın. Linux'ta servis otomatik başlamadıysa:
 
 ```bash
-uvicorn katilim_rag.api:app --port 8000     # http://localhost:8000 (panel + asistan)
-python -m katilim_rag.cli                    # terminal
-python -m katilim_rag.cli -s "soru" --detay  # hangi chunk'lar geldi, skorları ne
-python -m katilim_rag.cli -s "soru" --llmsiz # LLM'siz, sadece retrieval testi
+ollama serve
 ```
 
-## Dosyalar
+Bu komut terminali meşgul edeceği için gerekiyorsa ayrı bir terminalde çalıştırın.
 
-| Dosya | Görev |
+## 3. Tek komutla kurulum
+
+Önce bu projenin kök klasöründe terminal açın. `kur.py`, `gereksinimler.txt`,
+`katilim_rag/` ve `veri/` aynı proje kökünde bulunmalıdır.
+
+### Windows PowerShell veya Komut İstemi
+
+```powershell
+python kur.py
+```
+
+### Linux veya macOS
+
+```bash
+python3 kur.py
+```
+
+Kurulum aracı sırasıyla:
+
+1. Python sürümünü, mimariyi ve boş disk alanını kontrol eder.
+2. Proje içinde `.venv` oluşturur.
+3. Uyumlu Python paketlerini bu sanal ortama kurar.
+4. `BAAI/bge-m3` gömme modelini indirir.
+5. `BAAI/bge-reranker-v2-m3` reranker modelini indirir.
+6. Ollama'daki `qwen2.5:7b-instruct` modelini kontrol eder ve eksikse indirir.
+7. Teslim edilen Chroma indeksini gerçekten açıp kayıt okur.
+8. İndeks bozuk veya uyumsuzsa silmez; `chroma_yedek_TARIH_SAAT` adıyla
+   yedekleyip yeniden oluşturur.
+9. SQL yolu ile gömme–Chroma–reranker zincirini uçtan uca test eder.
+
+Kurulum yarıda kesilirse aynı komutu tekrar çalıştırabilirsiniz. Tamamlanmış
+adımlar yeniden kullanılacaktır.
+
+## 4. Uygulamayı çalıştırma
+
+Kurulum tamamlandıktan sonra sistem Python'u yerine proje içindeki `.venv`
+yorumlayıcısını kullanın.
+
+### Windows
+
+```powershell
+.\.venv\Scripts\python.exe -m uvicorn katilim_rag.api:app --port 8000
+```
+
+### Linux veya macOS
+
+```bash
+./.venv/bin/python -m uvicorn katilim_rag.api:app --port 8000
+```
+
+Tarayıcıdan açın:
+
+<http://localhost:8000>
+
+Terminal arayüzü için:
+
+```powershell
+# Windows
+.\.venv\Scripts\python.exe -m katilim_rag.cli
+```
+
+```bash
+# Linux veya macOS
+./.venv/bin/python -m katilim_rag.cli
+```
+
+## 5. Kurulumu doğrulama
+
+Hızlı ve salt okunur kontrol:
+
+```bash
+python kur.py --kontrol
+```
+
+Linux/macOS'ta `python` yerine `python3` kullanabilirsiniz. Gömme modeli,
+Chroma sorgusu ve reranker ile gerçek RAG testi de yapılsın:
+
+```bash
+python kur.py --kontrol --tam
+```
+
+`--kontrol` hiçbir paket indirmez, indeks oluşturmaz veya dosya değiştirmez.
+
+## 6. GPU'suz veya düşük donanımlı bilgisayar
+
+GPU zorunlu değildir. İndeksi kesin olarak CPU ile oluşturmak için:
+
+```bash
+python kur.py --cpu
+```
+
+CPU üzerinde kurulum ve cevap üretimi çalışır; ilk indeksleme ve RAG soruları daha
+uzun sürebilir. Hazır indeks sağlamsa yeniden indeksleme yapılmaz.
+
+7B model için belleği yetersiz bilgisayarda daha küçük Ollama modeli kurulabilir:
+
+```bash
+python kur.py --model qwen2.5:3b-instruct
+```
+
+Farklı model seçildiğinde uygulamayı aynı model adıyla başlatın.
+
+### Windows PowerShell
+
+```powershell
+$env:LLM_MODEL="qwen2.5:3b-instruct"
+.\.venv\Scripts\python.exe -m uvicorn katilim_rag.api:app --port 8000
+```
+
+### Linux veya macOS
+
+```bash
+LLM_MODEL=qwen2.5:3b-instruct ./.venv/bin/python -m uvicorn katilim_rag.api:app --port 8000
+```
+
+Apple Silicon'da kullanılabilir MPS aygıtı otomatik seçilir. NVIDIA bilgisayarda
+kurulu PyTorch CUDA'yı görebiliyorsa CUDA otomatik seçilir. CUDA görülmüyorsa sistem
+CPU ile çalışmaya devam eder. NVIDIA'ya özel PyTorch kurulumu gerekiyorsa güncel
+komutu <https://pytorch.org/get-started/locally/> sayfasından alın; sabit bir CUDA
+sürümünü her bilgisayara zorlamak doğru değildir.
+
+## 7. Gelişmiş seçenekler
+
+| Seçenek | Etkisi |
 |---|---|
-| `config.py` | Tüm parametreler (model, top_k, eşikler). Ortam değişkeniyle ezilir. |
-| `analiz.py` | Türkçe normalizasyon + slot çıkarımı (banka, ürün, metrik, aktiflik) |
-| `sql_arac.py` | Şablon tabanlı SQL sorguları — sıralama, sayma, karşılaştırma |
-| `index.py` | Chunk'ları gömüp Chroma'ya yazar (bir kez) |
-| `getir.py` | Filtre → vektör arama → rerank → belge çeşitliliği → top-k |
-| `llm.py` | Ollama istemcisi + prompt şablonları |
-| `boru.py` | Uçtan uca akış |
-| `api.py` | FastAPI: `/sor`, `/sor/akis`, `/panel/*`, `/saglik` |
-| `arayuz.html` | Panel (grafikler, karşılaştırma, kampanyalar) + sohbet |
-| `cli.py` | Terminal arayüzü |
+| `--kontrol` | İndirme ve değişiklik yapmadan sistemi denetler |
+| `--kontrol --tam` | Salt okunur kontrole gerçek RAG sorgusu ekler |
+| `--cpu` | İndekslemede CUDA/MPS kullanmaz |
+| `--hizli` | İlk kurulum sonunda ağır RAG testini atlar |
+| `--offline` | Yalnız daha önce indirilmiş modelleri kullanır |
+| `--indeksi-yenile` | Çalışan indeksi yedekleyip yeniden oluşturur |
+| `--model MODEL_ADI` | Kullanılacak Ollama modelini belirler |
 
-## Ayarlanabilir parametreler
-
-`config.py` içinde ya da ortam değişkeniyle:
+İlk başarılı kurulumdan sonra internet bağlantısı olmayan ortamda kontrol için:
 
 ```bash
-TOP_K_CEVAP=6 RERANK_AKTIF=0 LLM_MODEL=llama3.1:8b python -m katilim_rag.cli
+python kur.py --kontrol --tam
 ```
 
-- `TOP_K_ARAMA` (12) — vektör aramasından çekilen aday sayısı
-- `TOP_K_CEVAP` (8) — LLM'e verilen chunk sayısı
-- `DOC_BASINA_MAX` (2) — aynı belgeden en fazla kaç chunk (çeşitlilik)
-- `RERANK_AKTIF` (1) — cross-encoder yeniden sıralama
-- `MIN_SKOR` (0.0) — rerank skor eşiği
+Uygulamanın RAG katmanı çalışma zamanında Hugging Face ağına bağlanmaz; modelleri
+yalnız yerel önbellekten açar.
 
-## Ölçüm sonuçları
+## 8. ChromaDB neden 0.6.3'e sabitlendi?
 
-138 soruluk birleşik değerlendirme setinde (44 iç + 94 bağımsız) **0.875** ortalama.
-Sayısal doğruluk (`deger_dogru`) 1.000 — kampanya tutarı, taksit ve vade cevaplarının tamamı doğru.
-Soru başına ortalama 5.75 sn (RTX 3070 Ti, Qwen2.5-7B).
+Teslim edilen `veri/chroma` dizini ChromaDB 0.6.x dosya ve API yapısıyla
+oluşturulmuştur. `chromadb>=0.5` gibi üst sınırı olmayan bir tanım, ileride farklı
+bir ana sürüm kurarak hazır indeksle uyumsuzluk oluşturabilir. Bu nedenle:
 
-Gelişim: 0.748 → 0.905 (iç set) → 0.877 → 0.875 (birleşik set, veri birleştirme sonrası).
+```text
+chromadb==0.6.3
+```
 
-Ölçümle bulunup düzeltilen hatalar:
-- `doc_id` metadata'da ezildiği için LLM'e 6 yerine 2 chunk gidiyordu
-- Marka bazlı kampanya soruları SQL'e yönlenip boş dönüyordu
-- Alaka eşiği olmadığı için korpusta olmayan sorulara alakasız kaynak gösteriliyordu
-- Model süresi dolmuş kampanyaya "hâlâ geçerli" diyordu (tarih aritmetiği yerine artık
-  `DURUM` etiketi bağlama yazılıyor)
-- Bağlam zayıfladığında model Çince cevap veriyordu
+kullanılır. Kurulum ayrıca klasörün yalnızca var olmasını yeterli saymaz; koleksiyonu
+açar, kayıt sayısını okur ve diskten örnek kayıt çeker.
 
-## Bilinen eksik
+## 9. Sorun giderme
 
-**Kâr payı oranı 1.114 kaydın 178'inde vardır (%16).** Bankaların oran tablolarının
-önemli bir bölümü JavaScript ile yüklendiği için kapsam sınırlıdır. Ek tarama için
-`scrape_oranlar.py` ve `hedef_sayfalar.csv` kullanılabilir. Panel bu kapsamı
-kullanıcıya açıkça gösterir.
+### `.venv` oluşturulamıyor
+
+Linux dağıtımınızda venv bileşeni eksik olabilir. Debian/Ubuntu örneği:
+
+```bash
+sudo apt install python3-venv
+```
+
+Ardından `python3 kur.py` komutunu tekrar çalıştırın.
+
+### Ollama'ya bağlanılamıyor
+
+Ollama uygulamasını açın veya ayrı terminalde `ollama serve` çalıştırın. Kurulum
+aracı Python ve RAG bileşenlerini hazırlamaya devam eder ancak Ollama hazır değilse
+başarı kodu vermez.
+
+### Model indirilemiyor
+
+İlk kurulumda internet, güvenlik duvarı ve disk alanını kontrol edin. Kurumsal ağ
+Hugging Face veya Ollama erişimini engelliyorsa modelleri internet erişimi olan aynı
+kullanıcı hesabında bir kez indirin.
+
+### Chroma indeksi bozuk
+
+`python kur.py` komutunu tekrar çalıştırın. Araç bozuk indeksi otomatik olarak
+`veri/chroma_yedek_*` klasörüne taşır ve yenisini oluşturur. Yedek kendiliğinden
+silinmez.
+
+### Kurulum hızlı kontrolü geçti ama RAG çalışmıyor
+
+```bash
+python kur.py --kontrol --tam
+```
+
+Bu test gömme modelini, Chroma sorgusunu ve reranker modelini aynı zincirde çalıştırır
+ve hatanın gerçek kaynağını gösterir.
+
+## 10. İsteğe bağlı veri tarama araçları
+
+Ana uygulama için Playwright tarayıcı dosyaları zorunlu değildir. Yalnızca
+`scrape_oranlar.py` gibi tarama araçları kullanılacaksa sanal ortam içinden tarayıcıyı
+bir kez kurun:
+
+```powershell
+# Windows
+.\.venv\Scripts\python.exe -m playwright install chromium
+```
+
+```bash
+# Linux veya macOS
+./.venv/bin/python -m playwright install chromium
+```
